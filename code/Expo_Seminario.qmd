@@ -1,14 +1,26 @@
 ---
 title: "Expo_Seminario"
-subtitle: "Andreina, Diego, Zaith"
+author: "Andreina, Diego, Zaith"
+subtitle: "Paper"
+institute: "Universidad Nacional de Colombia"
 format:
   revealjs: 
     slide-number: true
     chalkboard: 
       buttons: false
     preview-links: auto
-    logo: images/quarto.png
+    logo: "logoUN3.png"
+    footer: Universidad Nacional de Colombia
 editor: visual
+toc: true
+toc-title: Contenido
+progress: true
 ---
 
-## 
+# Prueba titulo Grande
+
+## Subtitulo
+
+# Otra prueba bonita
+
+## Otro subtitulo

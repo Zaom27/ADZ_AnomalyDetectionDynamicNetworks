@@ -8,7 +8,7 @@
 <link href="Expo_Seminario_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="Expo_Seminario_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Expo_Seminario_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.4.550">
 
   <meta name="author" content="Andreina, Diego, Zaith">
   <title>Expo_Seminario</title>
@@ -158,7 +158,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -345,7 +346,7 @@ Andreina, Diego, Zaith
 <nav role="doc-toc"> 
 <h2 id="toc-title">Contenido</h2>
 <ul>
-<li><a href="#/prueba-titulo" id="/toc-prueba-titulo">Prueba titulo</a>
+<li><a href="#/prueba-titulo-grande" id="/toc-prueba-titulo-grande">Prueba titulo Grande</a>
 <ul>
 <li><a href="#/subtitulo" id="/toc-subtitulo">Subtitulo</a></li>
 </ul></li>
@@ -357,9 +358,9 @@ Andreina, Diego, Zaith
 </nav>
 </section>
 <section>
-<section id="prueba-titulo" class="title-slide slide level1 center">
-<h1>Prueba titulo</h1>
-
+<section id="prueba-titulo-grande" class="title-slide slide level1 center">
+<h1>Prueba titulo Grande</h1>
+<p>crack, maquina, mostro, ¿perro hijueputica? noooo jamas</p>
 </section>
 <section id="subtitulo" class="slide level2">
 <h2>Subtitulo</h2>
@@ -371,9 +372,11 @@ Andreina, Diego, Zaith
 </section>
 <section id="otro-subtitulo" class="slide level2">
 <h2>Otro subtitulo</h2>
-
-<img src="logoUN3.png" class="slide-logo r-stretch"><div class="footer footer-default">
+<div class="quarto-auto-generated-content">
+<p><img src="logoUN3.png" class="slide-logo"></p>
+<div class="footer footer-default">
 <p>Universidad Nacional de Colombia</p>
+</div>
 </div>
 </section></section>
     </div>
@@ -403,7 +406,6 @@ Andreina, Diego, Zaith
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': true,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -665,10 +667,9 @@ Andreina, Diego, Zaith
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn) {
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -678,8 +679,17 @@ Andreina, Diego, Zaith
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 

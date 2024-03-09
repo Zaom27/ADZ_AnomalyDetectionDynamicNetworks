@@ -20,7 +20,7 @@ progress: true
 # Prueba titulo Grande
 
 
-crack, maquina, mostro, ¿perro hijueputica? noooo jamas 
+crack, maquina, mostro, ¿perro sea decente, socio? noooo jamas 
 
 ## Subtitulo
 

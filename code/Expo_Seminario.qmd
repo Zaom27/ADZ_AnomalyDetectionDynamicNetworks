@@ -9,7 +9,7 @@ format:
     chalkboard: 
       buttons: false
     preview-links: auto
-    logo: "logoUN3.png"
+    logo: "logoUN3.PNG"
     footer: Universidad Nacional de Colombia
 editor: visual
 toc: true
@@ -19,8 +19,8 @@ progress: true
 
 # Prueba titulo Grande
 
-
-crack, maquina, mostro, ¿perro sea decente, socio? noooo jamas 
+crack, maquina, mostro, ¿perro sea decente, socio? noooo jamas.
+Tienen a la mejor compañera del mundo :*
 
 ## Subtitulo
 

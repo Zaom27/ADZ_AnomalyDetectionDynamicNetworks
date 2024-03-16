@@ -1,29 +1,89 @@
 ---
-title: "Expo_Seminario"
-author: "Andreina, Diego, Zaith"
-subtitle: "Paper"
+title: "Anomaly detection in dynamic networks"
+author: "Andreina Alamo, Zaith Moreno, Diego Useche"
+subtitle: "Seminario I 2024-I"
 institute: "Universidad Nacional de Colombia"
 format:
   revealjs: 
+    center: true
     slide-number: true
     chalkboard: 
       buttons: false
     preview-links: auto
     logo: "logoUN3.PNG"
-    footer: Universidad Nacional de Colombia
+    #footer: Universidad Nacional de Colombia
 editor: visual
 toc: true
 toc-title: Contenido
 progress: true
 ---
 
-# Prueba titulo Grande
+# Anomalía en redes dinámicas{.smaller}
 
-crack, maquina, mostro, ¿perro sea decente, socio? noooo jamas.
-Tienen a la mejor compañera del mundo :*
+Considere una secuencia de redes temporales $\left\{\mathcal{G}_t\right\}_{t=1}^T$ donde cada red es un grafo $\mathcal{G}_t=\left(\mathcal{V}_t \mathcal{E}_t\right)$, con $\mathcal{V}_t$ denotando los vértices y $\mathcal{E}_t$ los bordes. Estamos interesados en el proceso general o a largo plazo de generación de redes. Una anomalía se define como un punto con baja probabilidad condicional
 
-## Subtitulo
+$$
+\begin{aligned}
+p_{t \mid t-1}=\mathcal{P}\left(\mathcal{G}_t \mid \mathcal{G}_1, \ldots, \mathcal{G}_{t-1}\right). 
+\end{aligned}
+$$
+Es decir, un gráfico $\mathcal{G}_t$ es anómalo si su probabilidad de ocurrencia es baja dada la secuencia de gráficos que lo preceden.
 
-# Otra prueba bonita
+## 2.1 Mapeo del espacio de gráficos al espacio de características
 
-## Otro subtitulo
+Sea $f$ una función de cálculo de características tal que $f: \mathscr{G} \rightarrow \mathbb{R}^n$, donde $\mathscr{G}$ denota el espacio de todas las redes, y sea $x_t$ la imagen de $\mathcal{G}_t$ bajo $f$. Así, $x_t$ es un vector de $n$ características correspondientes a $\mathcal{G}_t:$
+
+$$
+x_t=f\left(\mathcal{G}_t\right),
+$$
+
+donde $x_t \in \mathbb{R}^n$. Sea $\mathcal{F}$ el codominio de $f$, al cual llamaremos espacio de características. 
+
+##
+
+Este espacio de características $\mathcal{F}$ debe retener aspectos de la distribución del espacio de gráficos $\mathscr{G}$. Así, la probabilidad condicional definida para la detección de anomalías se puede estimar como sigue:
+
+$$
+\tilde{p}_{t \mid t-1}=\mathcal{P}\left(x_t \mid x_1, \ldots, x_{t-1}\right).
+$$
+
+donde $x_t \in \mathbb{R}^n$.
+
+## Definición 2.1
+Una función $f: \mathscr{G} \rightarrow \mathbb{R}^n$ satisface la Condición de Acuerdo Total para un conjunto de gráficos $\left\{\mathcal{G}_t\right\}_{t=1}^T$, si
+
+$$
+p_{t \mid t-1}=\tilde{p}_{t \mid t-1} \quad \text { para todo } t \in\{1, \ldots, T\} .
+$$
+
+La Condición de Acuerdo Total es la forma más estricta de acuerdo entre los dos espacios $\mathscr{G}$ y $\mathcal{F}$. A continuación, se define una versión más flexible.
+
+## Definición 2.2
+
+Una función $f: \mathscr{G} \rightarrow \mathbb{R}^n$ satisface la Condición de Acuerdo Aproximado con parámetro $\epsilon$, o se dice que es $\epsilon$-aproximada para un conjunto de gráficos $\left\{\mathcal{G}_t\right\}_{t=1}^T$, si
+
+$$
+\left|p_{t \mid t-1}-\tilde{p}_{t \mid t-1}\right| \leq \epsilon \quad \text { para todo } t \in\{1, \ldots, T\} ，
+$$
+
+donde $\epsilon>0$ y es pequeño.
+
+## Definición 2.3
+
+Una función $f: \mathscr{G} \rightarrow \mathbb{R}^n$ satisface la Condición de Preservación de Anomalías con parámetro $\epsilon$, o se dice que es $\epsilon$-preservadora de anomalías para un conjunto de gráficos $\left\{\mathcal{G}_t\right\}_{t=1}^T$, si y solo si $p_{t \mid t-1} \leq \epsilon_1$ implica que existe $\epsilon_2>0$ con $\epsilon=\max \left(\epsilon_1, \epsilon_2\right)$ tal que $\tilde{p}_{t \mid t-1} \leq \epsilon_2$. Es decir,
+
+$$
+p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \epsilon_2
+$$
+
+donde tanto $\epsilon_1$ como $\epsilon_2$ son pequeños.
+
+## Lema 2.1
+Las condiciones de acuerdo están anidadas, es decir,
+Condición de Acuerdo Total $\Rightarrow$ Condición de Acuerdo Aproximado, Condición de Acuerdo Aproximado $(\epsilon / 2) \Rightarrow$ Condición de Preservación de Anomalías $(\epsilon)$.
+
+## Ejemplo
+
+<p align="center">
+<img src="ejemplo1.png" width="1000">
+</p>

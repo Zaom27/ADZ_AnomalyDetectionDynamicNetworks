@@ -18,6 +18,43 @@ toc-title: Contenido
 progress: true
 ---
 
+# Redes
+
+![Visualización de redes (gráfos)](Red1.png){fig-align="center"}
+
+$\bullet$ Red $\bullet$ Grafo $\bullet$ Objetos (vértices o nodos) $\bullet$ Conexiones (enlaces o aristas)$\bullet$ Interacciones (propiedades a nivel global)$\bullet$
+
+## Ejemplos de redes
+
+::: {layout-nrow="2"}
+![Estructuras cerebrales](brain.png){width="300" height="300"}
+
+![Redes de trenes](train.png){width="250" height="250"}
+
+![Redes eléctricas](electric.png){width="250" height="250"}
+
+![Redes sociales](social.png){width="300" height="300"}
+:::
+
+## Redes dinámicas
+
+![Redes dinámicas (componente temporal)](Red2.png)
+
+## ¿Por qué es importante la detección de anomalías?
+
+-   Accidentes, eventos sospechosos, actividad inusual que merece **investigación adicional**.
+-   Los estudios sobre la detección de anomalías en Redes Dinámicas son **limitados**.
+-   Existen estudios sobre anomalías en nodos y aristas, o en subgrafos de estructuras de interés, pero no sobre los **puntos en el tiempo** donde se producen estas anomalías.
+-   Akoglu (2015) categorizó las técnicas de detección de anomalías en Redes Dinámicas en cuatro grupos: Características, Descomposición, Agrupamiento y Ventanas.
+
+## ***oddnet***
+
+> *Series de tiempo*: tratamiento de patrones estacionales complejos que la similaridad no alcanza a capturar
+
+> *Análisis de redes*: Examinar las caracteristicas (Features) de las redes en el tiempo
+
+> *Reducción de dimensionalidad*:
+
 # Anomalía en redes dinámicas {.smaller}
 
 Considere una secuencia de redes temporales $\left\{\mathcal{G}_t\right\}_{t=1}^T$ donde cada red es un grafo $\mathcal{G}_t=\left(\mathcal{V}_t \mathcal{E}_t\right)$, con $\mathcal{V}_t$ denotando los vértices y $\mathcal{E}_t$ los bordes. Estamos interesados en el proceso general o a largo plazo de generación de redes. Una anomalía se define como un punto con baja probabilidad condicional
@@ -90,6 +127,24 @@ Las condiciones de acuerdo están anidadas, es decir, Condición de Acuerdo Tota
 
 </p>
 
+## Características
+
+Para cada red $\mathcal{G}_t$ se calculan 20 medidas teóricas de los grafos 
+
+1.   Distribución de triángulos:# de triángulos conectados a cada nodo 
+2.   Grado: # de aristas conectado a cada nodo 
+3.   Densidad: # de aristas observadas/total posibles aristas 
+4.   Total de aristas en $\mathcal{G}_t$
+5.   Transitividad (*amigos de amigos*):Proporción de nodos cuyos nodos adyacentes también están conectados
+
+## Características 
+
+6.   Asortatividad: Medición de la homofilia ^[Nodos similares tienen a conectarse entre sí] del grafo, basándose en las etiquetas de los nodos
+7.   Distancia media: calcula la media de todos los caminos entre diferentes nodos
+8.   Diámetro: Distancia más grande del grafo ^[Distancia es la caminata más corta entre dos nodos] 
+9.   Proporción de nodos no conectados
+10.   Centralidad: Mide qué tan "cerca" está un nodo a otros nodos
+ 
 
 # Reduccion de dimensionalidad y deteccion de anomalias
 
@@ -101,11 +156,8 @@ Reduccion de dos dimensiones y PCA Robusto
 
 Para nuestros escenarios de red, una PCA robusta proporcionó un mejor rendimiento en comparación con dobin, posiblemente porque dobin no manejó las correlaciones tan bien como una PCA robusta.
 
-El PCA usado utiliza una medida robusta de la varianza dada por 
-Explicar que ingresa.
-
+El PCA usado utiliza una medida robusta de la varianza dada por Explicar que ingresa.
 
 ## Deteccion de anomalias
 
-Deteccion por metodo de lookup, descrito asi: 
-
+Deteccion por metodo de lookup, descrito asi:

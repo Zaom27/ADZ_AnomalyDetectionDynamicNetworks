@@ -8,7 +8,7 @@
 <link href="Expo_Seminario_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="Expo_Seminario_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Expo_Seminario_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.550">
+  <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Andreina Alamo, Zaith Moreno, Diego Useche">
   <title>Anomaly detection in dynamic networks</title>
@@ -158,8 +158,7 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    padding-bottom: 0.5rem;
-    margin-bottom: 0;
+    margin-bottom: 0.5rem;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -346,15 +345,24 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 <nav role="doc-toc"> 
 <h2 id="toc-title">Contenido</h2>
 <ul>
+<li><a href="#/redes" id="/toc-redes">Redes</a>
+<ul>
+<li><a href="#/ejemplos-de-redes" id="/toc-ejemplos-de-redes">Ejemplos de redes</a></li>
+<li><a href="#/redes-dinámicas" id="/toc-redes-dinámicas">Redes dinámicas</a></li>
+<li><a href="#/por-qué-es-importante-la-detección-de-anomalías" id="/toc-por-qué-es-importante-la-detección-de-anomalías">¿Por qué es importante la detección de anomalías?</a></li>
+<li><a href="#/oddnet" id="/toc-oddnet"><strong><em>oddnet</em></strong></a></li>
+</ul></li>
 <li><a href="#/anomalía-en-redes-dinámicas" id="/toc-anomalía-en-redes-dinámicas">Anomalía en redes dinámicas</a>
 <ul>
 <li><a href="#/mapeo-del-espacio-de-gráficos-al-espacio-de-características" id="/toc-mapeo-del-espacio-de-gráficos-al-espacio-de-características">2.1 Mapeo del espacio de gráficos al espacio de características</a></li>
-
+<li><a href="#/section" id="/toc-section"></a></li>
 <li><a href="#/definición-2.1" id="/toc-definición-2.1">Definición 2.1</a></li>
 <li><a href="#/definición-2.2" id="/toc-definición-2.2">Definición 2.2</a></li>
 <li><a href="#/definición-2.3" id="/toc-definición-2.3">Definición 2.3</a></li>
 <li><a href="#/lema-2.1" id="/toc-lema-2.1">Lema 2.1</a></li>
 <li><a href="#/ejemplo" id="/toc-ejemplo">Ejemplo</a></li>
+<li><a href="#/características" id="/toc-características">Características</a></li>
+<li><a href="#/características-1" id="/toc-características-1">Características</a></li>
 </ul></li>
 <li><a href="#/reduccion-de-dimensionalidad-y-deteccion-de-anomalias" id="/toc-reduccion-de-dimensionalidad-y-deteccion-de-anomalias">Reduccion de dimensionalidad y deteccion de anomalias</a>
 <ul>
@@ -364,6 +372,78 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 </ul>
 </nav>
 </section>
+<section>
+<section id="redes" class="title-slide slide level1 center">
+<h1>Redes</h1>
+
+<img data-src="Red1.png" class="r-stretch quarto-figure-center"><p class="caption">Visualización de redes (gráfos)</p><p><span class="math inline">\(\bullet\)</span> Red <span class="math inline">\(\bullet\)</span> Grafo <span class="math inline">\(\bullet\)</span> Objetos (vértices o nodos) <span class="math inline">\(\bullet\)</span> Conexiones (enlaces o aristas)<span class="math inline">\(\bullet\)</span> Interacciones (propiedades a nivel global)<span class="math inline">\(\bullet\)</span></p>
+</section>
+<section id="ejemplos-de-redes" class="slide level2 center">
+<h2>Ejemplos de redes</h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 54.5%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="brain.png" width="300"></p>
+<figcaption>Estructuras cerebrales</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 45.5%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="train.png" width="250"></p>
+<figcaption>Redes de trenes</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 45.5%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="electric.png" width="250"></p>
+<figcaption>Redes eléctricas</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 54.5%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="social.png" width="300"></p>
+<figcaption>Redes sociales</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="redes-dinámicas" class="slide level2 center">
+<h2>Redes dinámicas</h2>
+
+<img data-src="Red2.png" class="r-stretch quarto-figure-center"><p class="caption">Redes dinámicas (componente temporal)</p></section>
+<section id="por-qué-es-importante-la-detección-de-anomalías" class="slide level2 center">
+<h2>¿Por qué es importante la detección de anomalías?</h2>
+<ul>
+<li>Accidentes, eventos sospechosos, actividad inusual que merece <strong>investigación adicional</strong>.</li>
+<li>Los estudios sobre la detección de anomalías en Redes Dinámicas son <strong>limitados</strong>.</li>
+<li>Existen estudios sobre anomalías en nodos y aristas, o en subgrafos de estructuras de interés, pero no sobre los <strong>puntos en el tiempo</strong> donde se producen estas anomalías.</li>
+<li>Akoglu (2015) categorizó las técnicas de detección de anomalías en Redes Dinámicas en cuatro grupos: Características, Descomposición, Agrupamiento y Ventanas.</li>
+</ul>
+</section>
+<section id="oddnet" class="slide level2 center">
+<h2><strong><em>oddnet</em></strong></h2>
+<blockquote>
+<p><em>Series de tiempo</em>: tratamiento de patrones estacionales complejos que la similaridad no alcanza a capturar</p>
+</blockquote>
+<blockquote>
+<p><em>Análisis de redes</em>: Examinar las caracteristicas (Features) de las redes en el tiempo</p>
+</blockquote>
+<blockquote>
+<p><em>Reducción de dimensionalidad</em>:</p>
+</blockquote>
+</section></section>
 <section>
 <section id="anomalía-en-redes-dinámicas" class="title-slide slide level1 smaller center">
 <h1>Anomalía en redes dinámicas</h1>
@@ -423,7 +503,28 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 <p align="center">
 </p>
 <img src="ejemplo1.png" width="1000" class="r-stretch"><p></p>
-</section></section>
+</section>
+<section id="características" class="slide level2 center">
+<h2>Características</h2>
+<p>Para cada red <span class="math inline">\(\mathcal{G}_t\)</span> se calculan 20 medidas teóricas de los grafos</p>
+<ol type="1">
+<li>Distribución de triángulos</li>
+<li>Grado: # de aristas conectado a cada nodo</li>
+<li>Densidad: # de aristas observadas/total posibles aristas)</li>
+<li>Total de aristas en <span class="math inline">\(\mathcal{G}_t\)</span></li>
+<li>Transitividad (<em>amigos de amigos</em>):Proporción de nodos cuyos nodos adyacentes también están conectados:</li>
+</ol>
+</section>
+<section id="características-1" class="slide level2 center">
+<h2>Características</h2>
+<ol start="6" type="1">
+<li>Asortatividad: Medicion de la homofilia <sup>1</sup> del grafo, basándose en las etiquetas de los nodos</li>
+<li>Distancia media</li>
+<li>Diámetro: Distancia más grande del grafo <sup>2</sup></li>
+<li>Proporción de nodos no conectados</li>
+<li>Centralidad: Mide qué tan “cerca” está un nodo a otros nodos</li>
+</ol>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>Nodos similares tienen a conectarse entre sí</p></li><li id="fn2"><p>Distancia caminata más corta entre dos nodos</p></li></ol></aside></section></section>
 <section>
 <section id="reduccion-de-dimensionalidad-y-deteccion-de-anomalias" class="title-slide slide level1 center">
 <h1>Reduccion de dimensionalidad y deteccion de anomalias</h1>
@@ -438,13 +539,12 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 <section id="deteccion-de-anomalias" class="slide level2 center">
 <h2>Deteccion de anomalias</h2>
 <p>Deteccion por metodo de lookup, descrito asi:</p>
-<div class="quarto-auto-generated-content">
-<p><img src="logoUN3.PNG" class="slide-logo"></p>
-<div class="footer footer-default">
+
+<img src="logoUN3.PNG" class="slide-logo r-stretch"><div class="footer footer-default">
 
 </div>
-</div>
 </section></section>
+
     </div>
   </div>
 
@@ -472,6 +572,7 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': true,
+'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -733,9 +834,10 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      function tippyHover(el, contentFn) {
         const config = {
           allowHTML: true,
+          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -745,17 +847,8 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start',
+          placement: 'bottom-start'
         };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 

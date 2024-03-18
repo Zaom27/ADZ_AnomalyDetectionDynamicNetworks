@@ -18,7 +18,7 @@ toc-title: Contenido
 progress: true
 ---
 
-# Anomalía en redes dinámicas{.smaller}
+# Anomalía en redes dinámicas {.smaller}
 
 Considere una secuencia de redes temporales $\left\{\mathcal{G}_t\right\}_{t=1}^T$ donde cada red es un grafo $\mathcal{G}_t=\left(\mathcal{V}_t \mathcal{E}_t\right)$, con $\mathcal{V}_t$ denotando los vértices y $\mathcal{E}_t$ los bordes. Estamos interesados en el proceso general o a largo plazo de generación de redes. Una anomalía se define como un punto con baja probabilidad condicional
 
@@ -26,8 +26,7 @@ $$
 \begin{aligned}
 p_{t \mid t-1}=\mathcal{P}\left(\mathcal{G}_t \mid \mathcal{G}_1, \ldots, \mathcal{G}_{t-1}\right). 
 \end{aligned}
-$$
-Es decir, un gráfico $\mathcal{G}_t$ es anómalo si su probabilidad de ocurrencia es baja dada la secuencia de gráficos que lo preceden.
+$$ Es decir, un gráfico $\mathcal{G}_t$ es anómalo si su probabilidad de ocurrencia es baja dada la secuencia de gráficos que lo preceden.
 
 ## 2.1 Mapeo del espacio de gráficos al espacio de características
 
@@ -37,9 +36,9 @@ $$
 x_t=f\left(\mathcal{G}_t\right),
 $$
 
-donde $x_t \in \mathbb{R}^n$. Sea $\mathcal{F}$ el codominio de $f$, al cual llamaremos espacio de características. 
+donde $x_t \in \mathbb{R}^n$. Sea $\mathcal{F}$ el codominio de $f$, al cual llamaremos espacio de características.
 
-##
+## 
 
 Este espacio de características $\mathcal{F}$ debe retener aspectos de la distribución del espacio de gráficos $\mathscr{G}$. Así, la probabilidad condicional definida para la detección de anomalías se puede estimar como sigue:
 
@@ -50,6 +49,7 @@ $$
 donde $x_t \in \mathbb{R}^n$.
 
 ## Definición 2.1
+
 Una función $f: \mathscr{G} \rightarrow \mathbb{R}^n$ satisface la Condición de Acuerdo Total para un conjunto de gráficos $\left\{\mathcal{G}_t\right\}_{t=1}^T$, si
 
 $$
@@ -79,11 +79,33 @@ $$
 donde tanto $\epsilon_1$ como $\epsilon_2$ son pequeños.
 
 ## Lema 2.1
-Las condiciones de acuerdo están anidadas, es decir,
-Condición de Acuerdo Total $\Rightarrow$ Condición de Acuerdo Aproximado, Condición de Acuerdo Aproximado $(\epsilon / 2) \Rightarrow$ Condición de Preservación de Anomalías $(\epsilon)$.
+
+Las condiciones de acuerdo están anidadas, es decir, Condición de Acuerdo Total $\Rightarrow$ Condición de Acuerdo Aproximado, Condición de Acuerdo Aproximado $(\epsilon / 2) \Rightarrow$ Condición de Preservación de Anomalías $(\epsilon)$.
 
 ## Ejemplo
 
 <p align="center">
-<img src="ejemplo1.png" width="1000">
+
+<img src="ejemplo1.png" width="1000"/>
+
 </p>
+
+
+# Reduccion de dimensionalidad y deteccion de anomalias
+
+Es difícil identificar anomalías en dimensiones altas porque los puntos están muy lejos unos de otros y muchos puntos residen en regiones de baja densidad. Además, se pueden correlacionar errores de diferentes características.
+
+## Metodos de reduccion
+
+Reduccion de dos dimensiones y PCA Robusto
+
+Para nuestros escenarios de red, una PCA robusta proporcionó un mejor rendimiento en comparación con dobin, posiblemente porque dobin no manejó las correlaciones tan bien como una PCA robusta.
+
+El PCA usado utiliza una medida robusta de la varianza dada por 
+Explicar que ingresa.
+
+
+## Deteccion de anomalias
+
+Deteccion por metodo de lookup, descrito asi: 
+

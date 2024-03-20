@@ -196,6 +196,7 @@ Así, queda demostrado que los grafos anómalos quedan representados por residua
 <img src="figure_5.png" width="1000"/>
 
 </p>
+
 =======
 >>>>>>> 35a9c3d8ba8ddfc6148d5196aab468ba9ced0a43
 

@@ -40,7 +40,7 @@ $\bullet$ Red $\bullet$ Grafo $\bullet$ Objetos (vértices o nodos) $\bullet$ Co
 
 ![Redes dinámicas (componente temporal)](Red2.png)
 
-## ¿Por qué es importante la detección de anomalías?{.smaller}
+## ¿Por qué es importante la detección de anomalías? {.smaller}
 
 -   Accidentes, eventos sospechosos, actividad inusual que merece **investigación adicional**.
 -   Los estudios sobre la detección de anomalías en Redes Dinámicas son **limitados**.
@@ -143,18 +143,17 @@ Para cada red $\mathcal{G}_t$ se calculan 20 medidas teóricas de los grafos
 7.  Distancia media: calcula la media de todos los caminos entre diferentes nodos
 8.  Diámetro: Distancia más grande del grafo [^2]
 9.  Proporción de nodos no conectados
-10. Centralidad: Mide qué tan "cerca" está un nodo a otros nodos
-<<<<<<< HEAD
+10. Centralidad: Mide qué tan "cerca" está un nodo a otros nodos \<\<\<\<\<\<\< HEAD
 
 [^1]: Nodos similares tienen a conectarse entre sí
 
 [^2]: Distancia es la caminata más corta entre dos nodos
 
-# Proceso de generación de red{.smaller}
+# Proceso de generación de red {.smaller}
 
 El proceso que genera la red puede crear dependencias temporales dentro del espacio de características. Por ejemplo, si el número de conexiones en una red aumenta con el tiempo, una disminución repentina en el número de conexiones en un punto específico del tiempo se consideraría una anomalía. Es crucial capturar este comportamiento. Simplemente identificar anomalías en el espacio de características no nos permitiría señalar esa anomalía en particular, como se ilustra en la Figura 4.
 
------
+------------------------------------------------------------------------
 
 <p align="center">
 
@@ -162,15 +161,15 @@ El proceso que genera la red puede crear dependencias temporales dentro del espa
 
 </p>
 
------
+------------------------------------------------------------------------
 
 Para modelar el comportamiento temporal, utilizamos métodos para pronósticar series de tiempo sobre las características de la red.
 
-Sea $x_{\cdot, i}=\left\{x_{t, i}\right\}_{t=1}^T$ el conjunto de series temporales univariadas de la $i$-ésima característica. 
+Sea $x_{\cdot, i}=\left\{x_{t, i}\right\}_{t=1}^T$ el conjunto de series temporales univariadas de la $i$-ésima característica.
 
-- Se ajustan modelos ARIMA a cada serie temporal de características $x_{\cdot, i}$ para $i \in \{1, \ldots, n\}$.
+-   Se ajustan modelos ARIMA a cada serie temporal de características $x_{\cdot, i}$ para $i \in \{1, \ldots, n\}$.
 
-- Si el modelo ha capturado adecuadamente la dependencia temporal, entonces $e_{t, i} \sim \mathcal{NID}\left(0, \sigma^2\right)$ y los residuos no mostrarán correlación temporal.
+-   Si el modelo ha capturado adecuadamente la dependencia temporal, entonces $e_{t, i} \sim \mathcal{NID}\left(0, \sigma^2\right)$ y los residuos no mostrarán correlación temporal.
 
 ## Definición 2.4.
 
@@ -178,31 +177,23 @@ Los modelos ARIMA aproximan el proceso generador de la red con el parámetro $\d
 
 $$
 \tilde{p}_{t \mid t-1} \geq \delta \Longleftrightarrow \left\| \boldsymbol{e}_t \right\| \leq c(\delta),
-$$
-para valores pequeños de $\delta$. Esto asegura que los modelos ARIMA capturan los patrones generales, incluyendo la tendencia y la estacionalidad en el espacio de características, al mapear puntos de alta densidad en la distribución condicional $f\left(\mathcal{G}_t\right) \mid \mathcal{G}_1, \ldots, \mathcal{G}_{t-1}$ a residuos pequeños.
+$$ para valores pequeños de $\delta$. Esto asegura que los modelos ARIMA capturan los patrones generales, incluyendo la tendencia y la estacionalidad en el espacio de características, al mapear puntos de alta densidad en la distribución condicional $f\left(\mathcal{G}_t\right) \mid \mathcal{G}_1, \ldots, \mathcal{G}_{t-1}$ a residuos pequeños.
 
 ## Proposición 2.1.
 
 Si una función $f$ satisface la Condición de Preservación de Anomalías con parámetro $\epsilon$, y si los modelos ARIMA aproximan el proceso generador de la red con parámetro $\delta$ con $\delta \geq \epsilon$, entonces un grafo anómalo $\mathcal{G}_t$ da lugar a una anomalía en el espacio de residuos de ARIMA, es decir, existe un valor pequeño $\xi$ tal que $\mathcal{P}\left(\boldsymbol{e}_t\right) \leq \xi$, donde $\xi=\xi(\delta)$ y $\boldsymbol{e}_t$ es el residuo correspondiente al grafo $\mathcal{G}_t$.
 
------
+------------------------------------------------------------------------
 
 Así, queda demostrado que los grafos anómalos quedan representados por residuales de valores grandes resultantes del ajuste del modelo ARIMA.
 
-----
+------------------------------------------------------------------------
 
 <p align="center">
 
 <img src="figure_5.png" width="1000"/>
 
 </p>
-
-=======
->>>>>>> 35a9c3d8ba8ddfc6148d5196aab468ba9ced0a43
-
-[^1]: Nodos similares tienen a conectarse entre sí
-
-[^2]: Distancia es la caminata más corta entre dos nodos
 
 ## Reduccion de dimensionalidad y deteccion de anomalias
 
@@ -222,18 +213,90 @@ $$ MAD(z_1,...,z_n) = 1.48med_j\|z_j - med_i(z_i)\| $$
 
 El ultimo paso es la deteccion de anomalias en el espacio reducido a dos dimensiones, mediante el algoritmo Lookup, ingresando una matriz de datos $X$ y un valor $\alpha$, se retornan las anomalias y las probabilidades de estar por debajo de $\alpha$
 
+El proceso general del algoritmo oddnet se puede describir con el siguiente diagrama:
 
-El proceso general del algoritmo oddnet se puede describir con el siguiente diagrama: 
+<p align="center">
 
-![](images/proceso general.png)
+<img src="proceso general.png" width="1000"/>
 
+</p>
 
-## Resultados 
+## Resultados
 
 ### Ejercicios de simulacion
 
-Para contrastar los resultados del algoritmo oddnet, para la deteccion de anomalias, al ser comparado con los metodos Laplacian Anomaly Detection (LAD) y Tensorsplat. 
+Para contrastar los resultados del algoritmo oddnet, para la deteccion de anomalias, al ser comparado con los metodos Laplacian Anomaly Detection (LAD) y Tensorsplat.
 
-Se emplean 4 modelos de generacion de redes, de los cuales se simula una serie temporal de 100 redes, con 100 nodos. 
+Se emplean 4 modelos de generacion de redes, de los cuales se simula una serie temporal de 100 redes, con 100 nodos.
+
+
 
 # 
+
+<div class="grid-container">
+  
+  <div class="grid-item">
+  
+  <img src="RED 1.png" alt="Imagen 1">
+  
+  </div>
+  
+  <div class="grid-item">
+    
+  <img src="RED 2.png">
+    
+  </div>
+  
+  <div class="grid-item">
+  
+  <img src="RED 3.png">
+  
+  </div>
+  
+  <div class="grid-item">
+    
+  <img src="RED 4.png">
+  
+  </div>
+  
+</div>
+<style>
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+}
+
+.grid-item img {
+    max-width: 100%;
+    height: auto;
+}
+</style>
+
+-------------------------------------------------------------
+
+### Ejercicio datos reales
+
+Redes de Co-votación del Senado de EE.UU: Incluye las redes de co-votación en el Senado de EE.UU. desde el 40° hasta el 113°
+Congreso, donde los nodos representan a los senadores y las aristas indican co-votaciones entre
+ellos.
+
+---------------------------------------------------------------
+
+
+<p align="center">
+
+<img src="congreso USA.png" width="800"/>
+
+</p>
+
+------
+
+<p align="center">
+
+<img src="congreso anomalias.png" width="1000"/>
+
+</p>
+
+
+

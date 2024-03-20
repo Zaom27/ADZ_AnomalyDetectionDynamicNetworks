@@ -13,7 +13,7 @@ format:
     logo: "logoUN3.PNG"
     #footer: Universidad Nacional de Colombia
 editor: visual
-toc: true
+# toc: true
 toc-title: Contenido
 progress: true
 ---
@@ -40,7 +40,7 @@ $\bullet$ Red $\bullet$ Grafo $\bullet$ Objetos (vértices o nodos) $\bullet$ Co
 
 ![Redes dinámicas (componente temporal)](Red2.png)
 
-## ¿Por qué es importante la detección de anomalías?
+## ¿Por qué es importante la detección de anomalías?{.smaller}
 
 -   Accidentes, eventos sospechosos, actividad inusual que merece **investigación adicional**.
 -   Los estudios sobre la detección de anomalías en Redes Dinámicas son **limitados**.
@@ -129,22 +129,53 @@ Las condiciones de acuerdo están anidadas, es decir, Condición de Acuerdo Tota
 
 ## Características
 
-Para cada red $\mathcal{G}_t$ se calculan 20 medidas teóricas de los grafos 
+Para cada red $\mathcal{G}_t$ se calculan 20 medidas teóricas de los grafos
 
-1.   Distribución de triángulos:# de triángulos conectados a cada nodo 
-2.   Grado: # de aristas conectado a cada nodo 
-3.   Densidad: # de aristas observadas/total posibles aristas 
-4.   Total de aristas en $\mathcal{G}_t$
-5.   Transitividad (*amigos de amigos*):Proporción de nodos cuyos nodos adyacentes también están conectados
+1.  Distribución de triángulos:# de triángulos conectados a cada nodo
+2.  Grado: \# de aristas conectado a cada nodo
+3.  Densidad: \# de aristas observadas/total posibles aristas
+4.  Total de aristas en $\mathcal{G}_t$
+5.  Transitividad (*amigos de amigos*):Proporción de nodos cuyos nodos adyacentes también están conectados
 
-## Características 
+## Características
 
-6.   Asortatividad: Medición de la homofilia ^[Nodos similares tienen a conectarse entre sí] del grafo, basándose en las etiquetas de los nodos
-7.   Distancia media: calcula la media de todos los caminos entre diferentes nodos
-8.   Diámetro: Distancia más grande del grafo ^[Distancia es la caminata más corta entre dos nodos] 
-9.   Proporción de nodos no conectados
-10.   Centralidad: Mide qué tan "cerca" está un nodo a otros nodos
- 
+6.  Asortatividad: Medición de la homofilia [^1] del grafo, basándose en las etiquetas de los nodos
+7.  Distancia media: calcula la media de todos los caminos entre diferentes nodos
+8.  Diámetro: Distancia más grande del grafo [^2]
+9.  Proporción de nodos no conectados
+10. Centralidad: Mide qué tan "cerca" está un nodo a otros nodos
+
+[^1]: Nodos similares tienen a conectarse entre sí
+
+[^2]: Distancia es la caminata más corta entre dos nodos
+
+# Proceso de generación de red{.smaller}
+
+El proceso que genera la red puede crear dependencias temporales dentro del espacio de características. Por ejemplo, si el número de conexiones en una red aumenta con el tiempo, una disminución repentina en el número de conexiones en un punto específico del tiempo se consideraría una anomalía. Es crucial capturar este comportamiento. Simplemente identificar anomalías en el espacio de características no nos permitiría señalar esa anomalía en particular, como se ilustra en la Figura 4.
+
+-----
+
+<p align="center">
+
+<img src="figure_4.png" width="1000"/>
+
+</p>
+
+## Definición 2.4.
+
+Los modelos ARIMA aproximan el proceso generador de la red con el parámetro $\delta$, si
+
+$$
+\tilde{p}_{t \mid t-1} \geq \delta \Longleftrightarrow \left\| \boldsymbol{e}_t \right\| \leq c(\delta),
+$$
+
+para valores pequeños de $\delta$. Esto asegura que los modelos ARIMA capturen los patrones generales, incluyendo la tendencia y la estacionalidad en el espacio de características, al mapear puntos de alta densidad en la distribución condicional $f\left(\mathcal{G}_t\right) \mid \mathcal{G}_1, \ldots, \mathcal{G}_{t-1}$ a residuos pequeños.
+
+## Proposición 2.1.
+
+Si una función $f$ satisface la Condición de Preservación de Anomalías con parámetro $\epsilon$, y si los modelos ARIMA aproximan el proceso generador de la red con parámetro $\delta$ con $\delta \geq \epsilon$, entonces un grafo anómalo $\mathcal{G}_t$ da lugar a una anomalía en el espacio de residuos de ARIMA, es decir, existe un valor pequeño $\xi$ tal que $\mathcal{P}\left(\boldsymbol{e}_t\right) \leq \xi$, donde $\xi=\xi(\delta)$ y $\boldsymbol{e}_t$ es el residuo correspondiente al grafo $\mathcal{G}_t$.
+
+## 
 
 # Reduccion de dimensionalidad y deteccion de anomalias
 

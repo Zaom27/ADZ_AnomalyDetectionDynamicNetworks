@@ -341,36 +341,6 @@ Andreina Alamo, Zaith Moreno, Diego Useche
     </div>
 </div>
 
-</section><section id="TOC">
-<nav role="doc-toc"> 
-<h2 id="toc-title">Contenido</h2>
-<ul>
-<li><a href="#/redes" id="/toc-redes">Redes</a>
-<ul>
-<li><a href="#/ejemplos-de-redes" id="/toc-ejemplos-de-redes">Ejemplos de redes</a></li>
-<li><a href="#/redes-dinámicas" id="/toc-redes-dinámicas">Redes dinámicas</a></li>
-<li><a href="#/por-qué-es-importante-la-detección-de-anomalías" id="/toc-por-qué-es-importante-la-detección-de-anomalías">¿Por qué es importante la detección de anomalías?</a></li>
-<li><a href="#/oddnet" id="/toc-oddnet"><strong><em>oddnet</em></strong></a></li>
-</ul></li>
-<li><a href="#/anomalía-en-redes-dinámicas" id="/toc-anomalía-en-redes-dinámicas">Anomalía en redes dinámicas</a>
-<ul>
-<li><a href="#/mapeo-del-espacio-de-gráficos-al-espacio-de-características" id="/toc-mapeo-del-espacio-de-gráficos-al-espacio-de-características">2.1 Mapeo del espacio de gráficos al espacio de características</a></li>
-<li><a href="#/section" id="/toc-section"></a></li>
-<li><a href="#/definición-2.1" id="/toc-definición-2.1">Definición 2.1</a></li>
-<li><a href="#/definición-2.2" id="/toc-definición-2.2">Definición 2.2</a></li>
-<li><a href="#/definición-2.3" id="/toc-definición-2.3">Definición 2.3</a></li>
-<li><a href="#/lema-2.1" id="/toc-lema-2.1">Lema 2.1</a></li>
-<li><a href="#/ejemplo" id="/toc-ejemplo">Ejemplo</a></li>
-<li><a href="#/características" id="/toc-características">Características</a></li>
-<li><a href="#/características-1" id="/toc-características-1">Características</a></li>
-</ul></li>
-<li><a href="#/reduccion-de-dimensionalidad-y-deteccion-de-anomalias" id="/toc-reduccion-de-dimensionalidad-y-deteccion-de-anomalias">Reduccion de dimensionalidad y deteccion de anomalias</a>
-<ul>
-<li><a href="#/metodos-de-reduccion" id="/toc-metodos-de-reduccion">Metodos de reduccion</a></li>
-<li><a href="#/deteccion-de-anomalias" id="/toc-deteccion-de-anomalias">Deteccion de anomalias</a></li>
-</ul></li>
-</ul>
-</nav>
 </section>
 <section>
 <section id="redes" class="title-slide slide level1 center">
@@ -423,7 +393,7 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 <h2>Redes dinámicas</h2>
 
 <img data-src="Red2.png" class="r-stretch quarto-figure-center"><p class="caption">Redes dinámicas (componente temporal)</p></section>
-<section id="por-qué-es-importante-la-detección-de-anomalías" class="slide level2 center">
+<section id="por-qué-es-importante-la-detección-de-anomalías" class="slide level2 smaller center">
 <h2>¿Por qué es importante la detección de anomalías?</h2>
 <ul>
 <li>Accidentes, eventos sospechosos, actividad inusual que merece <strong>investigación adicional</strong>.</li>
@@ -508,23 +478,46 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 <h2>Características</h2>
 <p>Para cada red <span class="math inline">\(\mathcal{G}_t\)</span> se calculan 20 medidas teóricas de los grafos</p>
 <ol type="1">
-<li>Distribución de triángulos</li>
+<li>Distribución de triángulos:# de triángulos conectados a cada nodo</li>
 <li>Grado: # de aristas conectado a cada nodo</li>
-<li>Densidad: # de aristas observadas/total posibles aristas)</li>
+<li>Densidad: # de aristas observadas/total posibles aristas</li>
 <li>Total de aristas en <span class="math inline">\(\mathcal{G}_t\)</span></li>
-<li>Transitividad (<em>amigos de amigos</em>):Proporción de nodos cuyos nodos adyacentes también están conectados:</li>
+<li>Transitividad (<em>amigos de amigos</em>):Proporción de nodos cuyos nodos adyacentes también están conectados</li>
 </ol>
 </section>
 <section id="características-1" class="slide level2 center">
 <h2>Características</h2>
 <ol start="6" type="1">
-<li>Asortatividad: Medicion de la homofilia <sup>1</sup> del grafo, basándose en las etiquetas de los nodos</li>
-<li>Distancia media</li>
+<li>Asortatividad: Medición de la homofilia <sup>1</sup> del grafo, basándose en las etiquetas de los nodos</li>
+<li>Distancia media: calcula la media de todos los caminos entre diferentes nodos</li>
 <li>Diámetro: Distancia más grande del grafo <sup>2</sup></li>
 <li>Proporción de nodos no conectados</li>
 <li>Centralidad: Mide qué tan “cerca” está un nodo a otros nodos</li>
 </ol>
-<aside><ol class="aside-footnotes"><li id="fn1"><p>Nodos similares tienen a conectarse entre sí</p></li><li id="fn2"><p>Distancia caminata más corta entre dos nodos</p></li></ol></aside></section></section>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>Nodos similares tienen a conectarse entre sí</p></li><li id="fn2"><p>Distancia es la caminata más corta entre dos nodos</p></li></ol></aside></section></section>
+<section>
+<section id="proceso-de-generación-de-red" class="title-slide slide level1 smaller center">
+<h1>Proceso de generación de red</h1>
+<p>El proceso que genera la red puede crear dependencias temporales dentro del espacio de características. Por ejemplo, si el número de conexiones en una red aumenta con el tiempo, una disminución repentina en el número de conexiones en un punto específico del tiempo se consideraría una anomalía. Es crucial capturar este comportamiento. Simplemente identificar anomalías en el espacio de características no nos permitiría señalar esa anomalía en particular, como se ilustra en la Figura 4.</p>
+</section>
+<section class="slide level2 center">
+
+<p align="center">
+</p>
+<img src="figure_4.png" width="1000" class="r-stretch"><p></p>
+</section>
+<section id="definición-2.4." class="slide level2 center">
+<h2>Definición 2.4.</h2>
+<p>Los modelos ARIMA aproximan el proceso generador de la red con el parámetro <span class="math inline">\(\delta\)</span>, si</p>
+<p><span class="math display">\[
+\tilde{p}_{t \mid t-1} \geq \delta \Longleftrightarrow \left\| \boldsymbol{e}_t \right\| \leq c(\delta),
+\]</span></p>
+<p>para valores pequeños de <span class="math inline">\(\delta\)</span>. Esto asegura que los modelos ARIMA capturen los patrones generales, incluyendo la tendencia y la estacionalidad en el espacio de características, al mapear puntos de alta densidad en la distribución condicional <span class="math inline">\(f\left(\mathcal{G}_t\right) \mid \mathcal{G}_1, \ldots, \mathcal{G}_{t-1}\)</span> a residuos pequeños.</p>
+</section>
+<section id="proposición-2.1." class="slide level2 center">
+<h2>Proposición 2.1.</h2>
+<p>Si una función <span class="math inline">\(f\)</span> satisface la Condición de Preservación de Anomalías con parámetro <span class="math inline">\(\epsilon\)</span>, y si los modelos ARIMA aproximan el proceso generador de la red con parámetro <span class="math inline">\(\delta\)</span> con <span class="math inline">\(\delta \geq \epsilon\)</span>, entonces un grafo anómalo <span class="math inline">\(\mathcal{G}_t\)</span> da lugar a una anomalía en el espacio de residuos de ARIMA, es decir, existe un valor pequeño <span class="math inline">\(\xi\)</span> tal que <span class="math inline">\(\mathcal{P}\left(\boldsymbol{e}_t\right) \leq \xi\)</span>, donde <span class="math inline">\(\xi=\xi(\delta)\)</span> y <span class="math inline">\(\boldsymbol{e}_t\)</span> es el residuo correspondiente al grafo <span class="math inline">\(\mathcal{G}_t\)</span>.</p>
+</section></section>
 <section>
 <section id="reduccion-de-dimensionalidad-y-deteccion-de-anomalias" class="title-slide slide level1 center">
 <h1>Reduccion de dimensionalidad y deteccion de anomalias</h1>

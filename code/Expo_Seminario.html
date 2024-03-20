@@ -506,17 +506,35 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 </p>
 <img src="figure_4.png" width="1000" class="r-stretch"><p></p>
 </section>
+<section class="slide level2 center">
+
+<p>Para modelar el comportamiento temporal, utilizamos métodos para pronósticar series de tiempo sobre las características de la red.</p>
+<p>Sea <span class="math inline">\(x_{\cdot, i}=\left\{x_{t, i}\right\}_{t=1}^T\)</span> el conjunto de series temporales univariadas de la <span class="math inline">\(i\)</span>-ésima característica.</p>
+<ul>
+<li><p>Se ajustan modelos ARIMA a cada serie temporal de características <span class="math inline">\(x_{\cdot, i}\)</span> para <span class="math inline">\(i \in \{1, \ldots, n\}\)</span>.</p></li>
+<li><p>Si el modelo ha capturado adecuadamente la dependencia temporal, entonces <span class="math inline">\(e_{t, i} \sim \mathcal{NID}\left(0, \sigma^2\right)\)</span> y los residuos no mostrarán correlación temporal.</p></li>
+</ul>
+</section>
 <section id="definición-2.4." class="slide level2 center">
 <h2>Definición 2.4.</h2>
 <p>Los modelos ARIMA aproximan el proceso generador de la red con el parámetro <span class="math inline">\(\delta\)</span>, si</p>
 <p><span class="math display">\[
 \tilde{p}_{t \mid t-1} \geq \delta \Longleftrightarrow \left\| \boldsymbol{e}_t \right\| \leq c(\delta),
-\]</span></p>
-<p>para valores pequeños de <span class="math inline">\(\delta\)</span>. Esto asegura que los modelos ARIMA capturen los patrones generales, incluyendo la tendencia y la estacionalidad en el espacio de características, al mapear puntos de alta densidad en la distribución condicional <span class="math inline">\(f\left(\mathcal{G}_t\right) \mid \mathcal{G}_1, \ldots, \mathcal{G}_{t-1}\)</span> a residuos pequeños.</p>
+\]</span> para valores pequeños de <span class="math inline">\(\delta\)</span>. Esto asegura que los modelos ARIMA capturan los patrones generales, incluyendo la tendencia y la estacionalidad en el espacio de características, al mapear puntos de alta densidad en la distribución condicional <span class="math inline">\(f\left(\mathcal{G}_t\right) \mid \mathcal{G}_1, \ldots, \mathcal{G}_{t-1}\)</span> a residuos pequeños.</p>
 </section>
 <section id="proposición-2.1." class="slide level2 center">
 <h2>Proposición 2.1.</h2>
 <p>Si una función <span class="math inline">\(f\)</span> satisface la Condición de Preservación de Anomalías con parámetro <span class="math inline">\(\epsilon\)</span>, y si los modelos ARIMA aproximan el proceso generador de la red con parámetro <span class="math inline">\(\delta\)</span> con <span class="math inline">\(\delta \geq \epsilon\)</span>, entonces un grafo anómalo <span class="math inline">\(\mathcal{G}_t\)</span> da lugar a una anomalía en el espacio de residuos de ARIMA, es decir, existe un valor pequeño <span class="math inline">\(\xi\)</span> tal que <span class="math inline">\(\mathcal{P}\left(\boldsymbol{e}_t\right) \leq \xi\)</span>, donde <span class="math inline">\(\xi=\xi(\delta)\)</span> y <span class="math inline">\(\boldsymbol{e}_t\)</span> es el residuo correspondiente al grafo <span class="math inline">\(\mathcal{G}_t\)</span>.</p>
+</section>
+<section class="slide level2 center">
+
+<p>Así, queda demostrado que los grafos anómalos quedan representados por residuales de valores grandes resultantes del ajuste del modelo ARIMA.</p>
+</section>
+<section class="slide level2 center">
+
+<p align="center">
+</p>
+<img src="figure_5.png" width="1000" class="r-stretch"><p></p>
 </section></section>
 <section>
 <section id="reduccion-de-dimensionalidad-y-deteccion-de-anomalias" class="title-slide slide level1 center">

@@ -129,35 +129,42 @@ Las condiciones de acuerdo están anidadas, es decir, Condición de Acuerdo Tota
 
 ## Características
 
-Para cada red $\mathcal{G}_t$ se calculan 20 medidas teóricas de los grafos 
+Para cada red $\mathcal{G}_t$ se calculan 20 medidas teóricas de los grafos
 
-1.   Distribución de triángulos:# de triángulos conectados a cada nodo 
-2.   Grado: # de aristas conectado a cada nodo 
-3.   Densidad: # de aristas observadas/total posibles aristas 
-4.   Total de aristas en $\mathcal{G}_t$
-5.   Transitividad (*amigos de amigos*):Proporción de nodos cuyos nodos adyacentes también están conectados
+1.  Distribución de triángulos:# de triángulos conectados a cada nodo
+2.  Grado: \# de aristas conectado a cada nodo
+3.  Densidad: \# de aristas observadas/total posibles aristas
+4.  Total de aristas en $\mathcal{G}_t$
+5.  Transitividad (*amigos de amigos*):Proporción de nodos cuyos nodos adyacentes también están conectados
 
-## Características 
+## Características
 
-6.   Asortatividad: Medición de la homofilia ^[Nodos similares tienen a conectarse entre sí] del grafo, basándose en las etiquetas de los nodos
-7.   Distancia media: calcula la media de todos los caminos entre diferentes nodos
-8.   Diámetro: Distancia más grande del grafo ^[Distancia es la caminata más corta entre dos nodos] 
-9.   Proporción de nodos no conectados
-10.   Centralidad: Mide qué tan "cerca" está un nodo a otros nodos
- 
+6.  Asortatividad: Medición de la homofilia [^1] del grafo, basándose en las etiquetas de los nodos
+7.  Distancia media: calcula la media de todos los caminos entre diferentes nodos
+8.  Diámetro: Distancia más grande del grafo [^2]
+9.  Proporción de nodos no conectados
+10. Centralidad: Mide qué tan "cerca" está un nodo a otros nodos
 
-# Reduccion de dimensionalidad y deteccion de anomalias
+[^1]: Nodos similares tienen a conectarse entre sí
 
-Es difícil identificar anomalías en dimensiones altas porque los puntos están muy lejos unos de otros y muchos puntos residen en regiones de baja densidad. Además, se pueden correlacionar errores de diferentes características.
+[^2]: Distancia es la caminata más corta entre dos nodos
 
-## Metodos de reduccion
+## Reduccion de dimensionalidad y deteccion de anomalias
 
-Reduccion de dos dimensiones y PCA Robusto
+Identificar anomalías en dimensiones altas supone una dificultad, dado que los puntos pueden estar muy lejos unos de otros y muchos puntos residen en regiones de baja densidad. Además, se pueden correlacionar errores de diferentes características.
 
-Para nuestros escenarios de red, una PCA robusta proporcionó un mejor rendimiento en comparación con dobin, posiblemente porque dobin no manejó las correlaciones tan bien como una PCA robusta.
+**¿Como? -\>** Reduccion de dos dimensiones, dobin, ó PCA robusto.
 
-El PCA usado utiliza una medida robusta de la varianza dada por Explicar que ingresa.
+## 
+
+Para nuestros escenarios de red, una PCA robusta proporcionó un mejor rendimiento en comparación con dobin, posiblemente porque dobin no manejó las correlaciones tan bien como un PCA robusto
+
+El PCA usado utiliza una estimacion robusta de la varianza dada por la desviacion absoluta mediana al cuadrado
+
+$$ MAD(z_1,...,z_n) = 1.48med_j\|z_j - med_i(z_i)\| $$
 
 ## Deteccion de anomalias
 
-Deteccion por metodo de lookup, descrito asi:
+El ultimo paso es la deteccion de anomalias en el espacio reducido a dos dimensiones, mediante el algoritmo Lookup, ingresando una matriz de datos $X$ y un valor $\alpha$, se retornan las anomalias y las probabilidades de estar por debajo de $\alpha$
+
+## ![](images/proceso general.png)

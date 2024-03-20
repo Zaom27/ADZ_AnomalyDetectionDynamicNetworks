@@ -222,4 +222,18 @@ $$ MAD(z_1,...,z_n) = 1.48med_j\|z_j - med_i(z_i)\| $$
 
 El ultimo paso es la deteccion de anomalias en el espacio reducido a dos dimensiones, mediante el algoritmo Lookup, ingresando una matriz de datos $X$ y un valor $\alpha$, se retornan las anomalias y las probabilidades de estar por debajo de $\alpha$
 
-## ![](images/proceso general.png)
+
+El proceso general del algoritmo oddnet se puede describir con el siguiente diagrama: 
+
+![](images/proceso general.png)
+
+
+## Resultados 
+
+### Ejercicios de simulacion
+
+Para contrastar los resultados del algoritmo oddnet, para la deteccion de anomalias, al ser comparado con los metodos Laplacian Anomaly Detection (LAD) y Tensorsplat. 
+
+Se emplean 4 modelos de generacion de redes, de los cuales se simula una serie temporal de 100 redes, con 100 nodos. 
+
+# 

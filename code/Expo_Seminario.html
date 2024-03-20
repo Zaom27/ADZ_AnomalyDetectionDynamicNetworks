@@ -8,7 +8,7 @@
 <link href="Expo_Seminario_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="Expo_Seminario_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Expo_Seminario_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.4.550">
 
   <meta name="author" content="Andreina Alamo, Zaith Moreno, Diego Useche">
   <title>Anomaly detection in dynamic networks</title>
@@ -158,7 +158,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -346,42 +347,42 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 <section id="redes" class="title-slide slide level1 center">
 <h1>Redes</h1>
 
-<img data-src="Red1.png" class="r-stretch quarto-figure-center"><p class="caption">Visualización de redes (gráfos)</p><p><span class="math inline">\(\bullet\)</span> Red <span class="math inline">\(\bullet\)</span> Grafo <span class="math inline">\(\bullet\)</span> Objetos (vértices o nodos) <span class="math inline">\(\bullet\)</span> Conexiones (enlaces o aristas)<span class="math inline">\(\bullet\)</span> Interacciones (propiedades a nivel global)<span class="math inline">\(\bullet\)</span></p>
+<img data-src="Red1.png" class="quarto-figure quarto-figure-center r-stretch"><p class="caption">Visualización de redes (gráfos)</p><p><span class="math inline">\(\bullet\)</span> Red <span class="math inline">\(\bullet\)</span> Grafo <span class="math inline">\(\bullet\)</span> Objetos (vértices o nodos) <span class="math inline">\(\bullet\)</span> Conexiones (enlaces o aristas)<span class="math inline">\(\bullet\)</span> Interacciones (propiedades a nivel global)<span class="math inline">\(\bullet\)</span></p>
 </section>
 <section id="ejemplos-de-redes" class="slide level2 center">
 <h2>Ejemplos de redes</h2>
-<div class="quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 54.5%;justify-content: center;">
+<div class="quarto-layout-panel" data-layout-nrow="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="brain.png" width="300"></p>
+<p><img data-src="brain.png" width="300" height="300"></p>
 <figcaption>Estructuras cerebrales</figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 45.5%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="train.png" width="250"></p>
+<p><img data-src="train.png" width="250" height="250"></p>
 <figcaption>Redes de trenes</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 45.5%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="electric.png" width="250"></p>
+<p><img data-src="electric.png" width="250" height="250"></p>
 <figcaption>Redes eléctricas</figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 54.5%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="social.png" width="300"></p>
+<p><img data-src="social.png" width="300" height="300"></p>
 <figcaption>Redes sociales</figcaption>
 </figure>
 </div>
@@ -551,14 +552,25 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 <section id="deteccion-de-anomalias" class="slide level2 center">
 <h2>Deteccion de anomalias</h2>
 <p>El ultimo paso es la deteccion de anomalias en el espacio reducido a dos dimensiones, mediante el algoritmo Lookup, ingresando una matriz de datos <span class="math inline">\(X\)</span> y un valor <span class="math inline">\(\alpha\)</span>, se retornan las anomalias y las probabilidades de estar por debajo de <span class="math inline">\(\alpha\)</span></p>
-</section>
-<section id="section-2" class="slide level2 center">
-<h2><img data-src="images/proceso%20general.png"></h2>
+<p>El proceso general del algoritmo oddnet se puede describir con el siguiente diagrama:</p>
+
+<img data-src="images/proceso%20general.png" class="r-stretch"></section>
+<section id="resultados" class="slide level2 center">
+<h2>Resultados</h2>
+<h3 id="ejercicios-de-simulacion">Ejercicios de simulacion</h3>
+<p>Para contrastar los resultados del algoritmo oddnet, para la deteccion de anomalias, al ser comparado con los metodos Laplacian Anomaly Detection (LAD) y Tensorsplat.</p>
+<p>Se emplean 4 modelos de generacion de redes, de los cuales se simula una serie temporal de 100 redes, con 100 nodos.</p>
+</section></section>
+<section id="section-2" class="title-slide slide level1 center">
+<h1></h1>
+<div class="quarto-auto-generated-content">
 <p><img src="logoUN3.PNG" class="slide-logo"></p>
 <div class="footer footer-default">
 
 </div>
-</section></section>
+</div>
+</section>
+
 
     </div>
   </div>
@@ -587,7 +599,6 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': true,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -849,10 +860,9 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn) {
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -862,8 +872,17 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 

@@ -1,0 +1,4 @@
+- source: Expo_Seminario.qmd
+  quarto-pub:
+    - id: b31b63b5-68cf-4693-9d97-c140296f940f
+      url: 'https://aalamo.quarto.pub/anomaly-detection-in-dynamic-networks'

@@ -24,7 +24,7 @@ progress: true
 
 $\bullet$ Red $\bullet$ Grafo $\bullet$ Objetos (vértices o nodos) $\bullet$ Conexiones (enlaces o aristas)$\bullet$ Interacciones (propiedades a nivel global)$\bullet$
 
-## Ejemplos de redes
+## Ejemplos de redes{.smaller}
 
 ::: {layout-nrow="2"}
 ![Estructuras cerebrales](brain.png){width="300" height="300"}

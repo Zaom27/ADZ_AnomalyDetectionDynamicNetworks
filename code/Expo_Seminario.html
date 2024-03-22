@@ -348,7 +348,7 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 
 <img data-src="Red1.png" class="r-stretch quarto-figure-center"><p class="caption">Visualización de redes (gráfos)</p><p><span class="math inline">\(\bullet\)</span> Red <span class="math inline">\(\bullet\)</span> Grafo <span class="math inline">\(\bullet\)</span> Objetos (vértices o nodos) <span class="math inline">\(\bullet\)</span> Conexiones (enlaces o aristas)<span class="math inline">\(\bullet\)</span> Interacciones (propiedades a nivel global)<span class="math inline">\(\bullet\)</span></p>
 </section>
-<section id="ejemplos-de-redes" class="slide level2 center">
+<section id="ejemplos-de-redes" class="slide level2 smaller center">
 <h2>Ejemplos de redes</h2>
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
@@ -411,7 +411,7 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 <p><em>Análisis de redes</em>: Examinar las caracteristicas (Features) de las redes en el tiempo</p>
 </blockquote>
 <blockquote>
-<p><em>Reducción de dimensionalidad</em>:</p>
+<p><em>Reducción de dimensionalidad</em>:recolectar la mayor cantidad de información de las caracteristicas en en plano</p>
 </blockquote>
 </section></section>
 <section>
@@ -425,7 +425,7 @@ p_{t \mid t-1}=\mathcal{P}\left(\mathcal{G}_t \mid \mathcal{G}_1, \ldots, \mathc
 \]</span> Es decir, un grafo <span class="math inline">\(\mathcal{G}_t\)</span> es anómalo si su probabilidad de ocurrencia es baja dada la secuencia de gráficos que lo preceden.</p>
 </section>
 <section id="mapeo-del-espacio-de-gráficos-al-espacio-de-características" class="slide level2 center">
-<h2>2.1 Mapeo del espacio de gráficos al espacio de características</h2>
+<h2>Mapeo del espacio de gráficos al espacio de características</h2>
 <p>Sea <span class="math inline">\(f\)</span> una función de cálculo de características tal que <span class="math inline">\(f: \mathscr{G} \rightarrow \mathbb{R}^n\)</span>, donde <span class="math inline">\(\mathscr{G}\)</span> denota el espacio de todas las redes, y sea <span class="math inline">\(x_t\)</span> la imagen de <span class="math inline">\(\mathcal{G}_t\)</span> bajo <span class="math inline">\(f\)</span>. Así, <span class="math inline">\(x_t\)</span> es un vector de <span class="math inline">\(n\)</span> características correspondientes a <span class="math inline">\(\mathcal{G}_t:\)</span></p>
 <p><span class="math display">\[
 x_t=f\left(\mathcal{G}_t\right),
@@ -491,8 +491,9 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 <li>Asortatividad: Medición de la homofilia <sup>1</sup> del grafo, basándose en las etiquetas de los nodos</li>
 <li>Distancia media: calcula la media de todos los caminos entre diferentes nodos</li>
 <li>Diámetro: Distancia más grande del grafo <sup>2</sup></li>
-<li>Proporción de nodos no conectados</li>
-<li>Centralidad: Mide qué tan “cerca” está un nodo a otros nodos</li>
+<li>Proporción de nodos no conectados &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</li>
+<li><h1 id="centralidad-mide-qué-tan-cerca-está-un-nodo-a-otros-nodos">Centralidad: Mide qué tan “cerca” está un nodo a otros nodos</h1></li>
+<li>Centralidad: Mide qué tan “cerca” está un nodo a otros nodos &gt;&gt;&gt;&gt;&gt;&gt;&gt; 4f059ed17cc78be898638e9dafaa3681cf441de2</li>
 </ol>
 <aside><ol class="aside-footnotes"><li id="fn1"><p>Nodos similares tienen a conectarse entre sí</p></li><li id="fn2"><p>Distancia es la caminata más corta entre dos nodos</p></li></ol></aside></section></section>
 <section>
@@ -536,8 +537,9 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 </p>
 <img src="figure_5.png" width="1000" class="r-stretch"><p></p>
 </section>
-<section id="reduccion-de-dimensionalidad-y-deteccion-de-anomalias" class="slide level2 center">
-<h2>Reduccion de dimensionalidad y deteccion de anomalias</h2>
+<section id="head" class="slide level2 center">
+<h2>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</h2>
+<p>======= &gt;&gt;&gt;&gt;&gt;&gt;&gt; 4f059ed17cc78be898638e9dafaa3681cf441de2 ## Reduccion de dimensionalidad y deteccion de anomalias</p>
 <p>Identificar anomalías en dimensiones altas supone una dificultad, dado que los puntos pueden estar muy lejos unos de otros y muchos puntos residen en regiones de baja densidad. Además, se pueden correlacionar errores de diferentes características.</p>
 <p><strong>¿Como? -&gt;</strong> Reduccion de dos dimensiones, dobin, ó PCA robusto.</p>
 </section>
@@ -550,10 +552,10 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 <section id="deteccion-de-anomalias" class="slide level2 center">
 <h2>Deteccion de anomalias</h2>
 <p>El ultimo paso es la deteccion de anomalias en el espacio reducido a dos dimensiones, mediante el algoritmo Lookup, ingresando una matriz de datos <span class="math inline">\(X\)</span> y un valor <span class="math inline">\(\alpha\)</span>, se retornan las anomalias y las probabilidades de estar por debajo de <span class="math inline">\(\alpha\)</span></p>
-<p>El proceso general del algoritmo oddnet se puede describir con el siguiente diagrama:</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD ## <img data-src="images/proceso%20general.png"> ======= El proceso general del algoritmo oddnet se puede describir con el siguiente diagrama:</p>
 <p align="center">
-</p>
-<img src="proceso general.png" width="1000" class="r-stretch"><p></p>
+</p><p><img src="proceso general.png" width="1000"></p>
+<p></p>
 </section>
 <section id="resultados" class="slide level2 center">
 <h2>Resultados</h2>
@@ -607,6 +609,21 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 <p align="center">
 </p><p><img src="congreso anomalias.png" width="1000"></p>
 <p></p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>4f059ed17cc78be898638e9dafaa3681cf441de2</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
 <p><img src="logoUN3.PNG" class="slide-logo"></p>
 <div class="footer footer-default">
 

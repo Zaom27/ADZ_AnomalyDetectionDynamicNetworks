@@ -53,7 +53,7 @@ $\bullet$ Red $\bullet$ Grafo $\bullet$ Objetos (vértices o nodos) $\bullet$ Co
 
 > *Análisis de redes*: Examinar las caracteristicas (Features) de las redes en el tiempo
 
-> *Reducción de dimensionalidad*:
+> *Reducción de dimensionalidad*:recolectar la mayor cantidad de información de las caracteristicas en en plano
 
 # Anomalía en redes dinámicas {.smaller}
 
@@ -65,7 +65,7 @@ p_{t \mid t-1}=\mathcal{P}\left(\mathcal{G}_t \mid \mathcal{G}_1, \ldots, \mathc
 \end{aligned}
 $$ Es decir, un grafo $\mathcal{G}_t$ es anómalo si su probabilidad de ocurrencia es baja dada la secuencia de gráficos que lo preceden.
 
-## 2.1 Mapeo del espacio de gráficos al espacio de características
+## Mapeo del espacio de gráficos al espacio de características
 
 Sea $f$ una función de cálculo de características tal que $f: \mathscr{G} \rightarrow \mathbb{R}^n$, donde $\mathscr{G}$ denota el espacio de todas las redes, y sea $x_t$ la imagen de $\mathcal{G}_t$ bajo $f$. Así, $x_t$ es un vector de $n$ características correspondientes a $\mathcal{G}_t:$
 
@@ -143,7 +143,11 @@ Para cada red $\mathcal{G}_t$ se calculan 20 medidas teóricas de los grafos
 7.  Distancia media: calcula la media de todos los caminos entre diferentes nodos
 8.  Diámetro: Distancia más grande del grafo [^2]
 9.  Proporción de nodos no conectados
+<<<<<<< HEAD
 10. Centralidad: Mide qué tan "cerca" está un nodo a otros nodos
+=======
+10. Centralidad: Mide qué tan "cerca" está un nodo a otros nodos 
+>>>>>>> 4f059ed17cc78be898638e9dafaa3681cf441de2
 
 [^1]: Nodos similares tienen a conectarse entre sí
 
@@ -195,8 +199,11 @@ Así, queda demostrado que los grafos anómalos quedan representados por residua
 
 </p>
 
+<<<<<<< HEAD
 ------------------------------------------------------------------------
 
+=======
+>>>>>>> 4f059ed17cc78be898638e9dafaa3681cf441de2
 ## Reduccion de dimensionalidad y deteccion de anomalias
 
 Identificar anomalías en dimensiones altas supone una dificultad, dado que los puntos pueden estar muy lejos unos de otros y muchos puntos residen en regiones de baja densidad. Además, se pueden correlacionar errores de diferentes características.
@@ -215,4 +222,94 @@ $$ MAD(z_1,...,z_n) = 1.48med_j\|z_j - med_i(z_i)\| $$
 
 El ultimo paso es la deteccion de anomalias en el espacio reducido a dos dimensiones, mediante el algoritmo Lookup, ingresando una matriz de datos $X$ y un valor $\alpha$, se retornan las anomalias y las probabilidades de estar por debajo de $\alpha$
 
+<<<<<<< HEAD
 ## ![](images/proceso%20general.png)
+=======
+El proceso general del algoritmo oddnet se puede describir con el siguiente diagrama:
+
+<p align="center">
+
+<img src="proceso general.png" width="1000"/>
+
+</p>
+
+## Resultados
+
+### Ejercicios de simulacion
+
+Para contrastar los resultados del algoritmo oddnet, para la deteccion de anomalias, al ser comparado con los metodos Laplacian Anomaly Detection (LAD) y Tensorsplat.
+
+Se emplean 4 modelos de generacion de redes, de los cuales se simula una serie temporal de 100 redes, con 100 nodos.
+
+
+
+# 
+
+<div class="grid-container">
+  
+  <div class="grid-item">
+  
+  <img src="RED 1.png" alt="Imagen 1">
+  
+  </div>
+  
+  <div class="grid-item">
+    
+  <img src="RED 2.png">
+    
+  </div>
+  
+  <div class="grid-item">
+  
+  <img src="RED 3.png">
+  
+  </div>
+  
+  <div class="grid-item">
+    
+  <img src="RED 4.png">
+  
+  </div>
+  
+</div>
+<style>
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+}
+
+.grid-item img {
+    max-width: 100%;
+    height: auto;
+}
+</style>
+
+-------------------------------------------------------------
+
+### Ejercicio datos reales
+
+Redes de Co-votación del Senado de EE.UU: Incluye las redes de co-votación en el Senado de EE.UU. desde el 40° hasta el 113°
+Congreso, donde los nodos representan a los senadores y las aristas indican co-votaciones entre
+ellos.
+
+---------------------------------------------------------------
+
+
+<p align="center">
+
+<img src="congreso USA.png" width="800"/>
+
+</p>
+
+------
+
+<p align="center">
+
+<img src="congreso anomalias.png" width="1000"/>
+
+</p>
+
+
+
+>>>>>>> 4f059ed17cc78be898638e9dafaa3681cf441de2

@@ -342,6 +342,25 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 </div>
 
 </section>
+<section class="slide level2 center">
+
+<!-- Empieza Zaith -->
+</section>
+<section id="introducción" class="title-slide slide level1 center">
+<h1>Introducción</h1>
+
+</section>
+
+<section id="objetivos" class="title-slide slide level1 center">
+<h1>Objetivos</h1>
+
+</section>
+
+<section id="conceptos-previos" class="title-slide slide level1 center">
+<h1>Conceptos Previos</h1>
+
+</section>
+
 <section>
 <section id="redes" class="title-slide slide level1 center">
 <h1>Redes</h1>
@@ -419,11 +438,13 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 <section id="algoritmo-oddnet" class="slide level2 center">
 <h2>Algoritmo <strong><em>oddnet</em></strong></h2>
 
+<!-- Termina Zaith -->
+<!-- Empieza Andreina -->
 <img data-src="algoritmo.PNG" class="r-stretch"></section></section>
 <section>
 <section id="anomalía-en-redes-dinámicas" class="title-slide slide level1 smaller center">
 <h1>Anomalía en redes dinámicas</h1>
-<p>Considere una secuencia de redes temporales <span class="math inline">\(\left\{\mathcal{G}_t\right\}_{t=1}^T\)</span> donde cada red es un grafo <span class="math inline">\(\mathcal{G}_t=\left(\mathcal{V}_t \mathcal{E}_t\right)\)</span>, con <span class="math inline">\(\mathcal{V}_t\)</span> denotando los vértices y <span class="math inline">\(\mathcal{E}_t\)</span> los bordes. Estamos interesados en el proceso general o a largo plazo de generación de redes. Una anomalía se define como un punto con baja probabilidad condicional</p>
+<p>Considere una secuencia de redes temporales <span class="math inline">\(\left\{\mathcal{G}_t\right\}_{t=1}^T\)</span> donde cada red es un grafo <span class="math inline">\(\mathcal{G}_t=\left(\mathcal{V}_t, \mathcal{E}_t\right)\)</span>, con <span class="math inline">\(\mathcal{V}_t\)</span> denotando los vértices y <span class="math inline">\(\mathcal{E}_t\)</span> los bordes. Estamos interesados en el proceso general o a largo plazo de generación de redes. Una anomalía se define como un punto con baja probabilidad condicional</p>
 <p><span class="math display">\[
 \begin{aligned}
 p_{t \mid t-1}=\mathcal{P}\left(\mathcal{G}_t \mid \mathcal{G}_1, \ldots, \mathcal{G}_{t-1}\right).
@@ -479,6 +500,8 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 <p align="center">
 </p>
 <img src="ejemplo1.png" width="1000" class="r-stretch"><p></p>
+<!-- Termina Andreina -->
+<!-- Empieza Zaith -->
 </section>
 <section id="características" class="slide level2 center">
 <h2>Características</h2>
@@ -494,12 +517,24 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 <section id="características-1" class="slide level2 center">
 <h2>Características</h2>
 <ol start="6" type="1">
-<li>Asortatividad: Medición de la homofilia <sup>1</sup> del grafo, basándose en las etiquetas de los nodos</li>
-<li>Distancia media: calcula la media de todos los caminos entre diferentes nodos</li>
-<li>Diámetro: Distancia más grande del grafo <sup>2</sup></li>
-<li>Proporción de nodos no conectados</li>
-<li>Centralidad: Mide qué tan “cerca” está un nodo a otros nodos</li>
+<li><p>Asortatividad: Medición de la homofilia <sup>1</sup> del grafo, basándose en las etiquetas de los nodos</p></li>
+<li><p>Distancia media: calcula la media de todos los caminos entre diferentes nodos</p></li>
+<li><p>Diámetro: Distancia más grande del grafo <sup>2</sup></p></li>
+<li><p>Proporción de nodos no conectados</p></li>
+<li><p>Centralidad: Mide qué tan “cerca” está un nodo a otros nodos</p></li>
+<li><p>The vertex connectivity gives the minimum number of vertices/nodes that needs to be removed to make the graph not strongly connected. A graph is a strongly connected if any vertex can be reached by any other vertex.</p></li>
+<li><p>The global efficiency is defined as the average inverse pairwise distances between all pairs of nodes.</p></li>
+<li><p>We extract two features from the connected components in the network. From the distribution of the number of nodes in each connected component we use the <span class="math inline">\(99^{\text {th }}\)</span> quantile as our feature.</p></li>
+<li><p>The number of connected components is also included.</p></li>
+<li><p>Centrality is a key aspect of network analysis. Closeness centrality of a vertex measures how close that vertex is to other vertices in the graph. It is defined as the inverse of the sum of distances to all vertices. We compute the closeness centrality for all vertices and include the proportion of vertices with closeness <span class="math inline">\(\geq 0.8\)</span> in the feature vector. For this feature, we do not use the <span class="math inline">\(99^{\text {th }}\)</span> quantile because closeness centrality lies between 0 and 1 and for most graphs the <span class="math inline">\(99^{\text {th }}\)</span> quantile is equal to 1 , making it a non-informative measure.</p></li>
+<li><p>Another important centrality measure is betweenness centrality. Betweenness measures how much a node connects other nodes by being a go-between. Suppose node A connects two groups of nodes, which otherwise would not be connected. In this case, node A has high betweenness centrality. It is defined as the number of shortest paths going through a node. Again, we compute the distribution for all nodes and take the <span class="math inline">\(99^{\text {th }}\)</span> quantile as our feature.</p></li>
+<li><p>PageRank is another measure of node importance. We compute the PageRank of all vertices and take the <span class="math inline">\(99^{\text {th }}\)</span> quantile.</p></li>
+<li><p>Hub scores also compute node importance. The hub scores of the vertices are defined as the principal eigenvector of <span class="math inline">\(A A^T\)</span> where <span class="math inline">\(A\)</span> denotes the adjacency matrix. We use the principal eigenvalue corresponding to the hub scores as a feature.</p></li>
+<li><p>Authority scores provide another measure of node importance. The authority scores of the vertices are the principal eigenvector of <span class="math inline">\(A^T A\)</span>. We include the principal eigenvalue corresponding to the authority scores as a feature. The hub score and authority score features are identical for undirected graphs, but are different for directed graphs.</p></li>
+<li><p>Cores describe group/community aspects in a graph. The <span class="math inline">\(k\)</span>-core of a graph is a maximal subgraph with minimum degree at least <span class="math inline">\(k\)</span>. That is, each vertex in a <span class="math inline">\(k\)</span>-core has degree greater than equal to <span class="math inline">\(k\)</span>. For example, if a group of friends are in a <span class="math inline">\(k\)</span>-core, each person in the group knows at least <span class="math inline">\(k\)</span> other people. The coreness of a vertex is defined as <span class="math inline">\(k\)</span> if it belongs to a <span class="math inline">\(k\)</span>-core, not to a <span class="math inline">\((k+1)\)</span>-core. We compute the coreness for all vertices and include the <span class="math inline">\(99^{\text {th }}\)</span> quantile.</p></li>
 </ol>
+<!-- Termina Zaith -->
+<!-- Empieza Andreina -->
 <aside><ol class="aside-footnotes"><li id="fn1"><p>Nodos similares tienen a conectarse entre sí</p></li><li id="fn2"><p>Distancia es la caminata más corta entre dos nodos</p></li></ol></aside></section></section>
 <section>
 <section id="proceso-de-generación-de-red" class="title-slide slide level1 smaller center">
@@ -542,6 +577,11 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 </p>
 <img src="figure_5.png" width="1000" class="r-stretch"><p></p>
 </section>
+<section class="slide level2 center">
+
+<!-- Terminar Andreina -->
+<!-- Empieza Diego -->
+</section>
 <section id="reduccion-de-dimensionalidad-y-deteccion-de-anomalias" class="slide level2 center">
 <h2>Reduccion de dimensionalidad y deteccion de anomalias</h2>
 <p>Identificar anomalías en dimensiones altas supone una dificultad, dado que los puntos pueden estar muy lejos unos de otros y muchos puntos residen en regiones de baja densidad. Además, se pueden correlacionar errores de diferentes características.</p>
@@ -551,24 +591,50 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 <h2></h2>
 <p>Para nuestros escenarios de red, una PCA robusta proporcionó un mejor rendimiento en comparación con dobin, posiblemente porque dobin no manejó las correlaciones tan bien como un PCA robusto</p>
 <p>El PCA usado utiliza una estimacion robusta de la varianza dada por la desviacion absoluta mediana al cuadrado</p>
-<p><span class="math display">\[ MAD(z_1,...,z_n) = 1.48med_j\|z_j - med_i(z_i)\| \]</span></p>
+<p><span class="math display">\[ \operatorname{MAD}\left(z_1, \ldots, z_n\right)=1.48 \operatorname{med}_j\left|z_j-\operatorname{med}_i z_i\right| \]</span></p>
+<!-- Termina Diego -->
+<!-- Empieza Andreina -->
 </section>
 <section id="deteccion-de-anomalias" class="slide level2 center">
 <h2>Deteccion de anomalias</h2>
 <p>El ultimo paso es la deteccion de anomalias en el espacio reducido a dos dimensiones, mediante el algoritmo Lookup, ingresando una matriz de datos <span class="math inline">\(X\)</span> y un valor <span class="math inline">\(\alpha\)</span>, se retornan las anomalias y las probabilidades de estar por debajo de <span class="math inline">\(\alpha\)</span></p>
-<p>El proceso general del algoritmo oddnet se puede describir con el siguiente diagrama:</p>
-<p align="center">
-</p>
-<img src="proceso general.png" width="1000" class="r-stretch"><p></p>
-</section>
-<section id="resultados" class="slide level2 center">
-<h2>Resultados</h2>
-<h3 id="ejercicios-de-simulacion">Ejercicios de simulacion</h3>
-<p>Para contrastar los resultados del algoritmo oddnet, para la deteccion de anomalias, al ser comparado con los metodos Laplacian Anomaly Detection (LAD) y Tensorsplat.</p>
-<p>Se emplean 4 modelos de generacion de redes, de los cuales se simula una serie temporal de 100 redes, con 100 nodos. En todas las simulaciones se introduce una anomalia en el tiempo <span class="math inline">\(t=50\)</span> y se consideran diferentes variaciones de la probabilidad <span class="math inline">\(p\)</span> de conexion entre nodos.</p>
-</section>
-<section class="slide level2 center">
-
+<table style="width:10%;">
+<colgroup>
+<col style="width: 9%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><!-- Termina Andreina --> <!-- Empieza Diego --></td>
+</tr>
+<tr class="even">
+<td>## Proceso general del algoritmo</td>
+</tr>
+<tr class="odd">
+<td>El proceso general del algoritmo <strong>oddnet</strong> se puede describir con el siguiente diagrama:</td>
+</tr>
+<tr class="even">
+<td></td>
+</tr>
+<tr class="odd">
+<td><img src="proceso general.png" width="1000"></td>
+</tr>
+<tr class="even">
+<td></td>
+</tr>
+<tr class="odd">
+<td>## Resultados</td>
+</tr>
+<tr class="even">
+<td>### Ejercicios de simulacion</td>
+</tr>
+<tr class="odd">
+<td>Para contrastar los resultados del algoritmo oddnet, para la deteccion de anomalias, al ser comparado con los metodos Laplacian Anomaly Detection (LAD) y Tensorsplat.</td>
+</tr>
+<tr class="even">
+<td>Se emplean 4 modelos de generacion de redes, de los cuales se simula una serie temporal de 100 redes, con 100 nodos. En todas las simulaciones se introduce una anomalia en el tiempo <span class="math inline">\(t=50\)</span> y se consideran diferentes variaciones de la probabilidad <span class="math inline">\(p\)</span> de conexion entre nodos.</td>
+</tr>
+</tbody>
+</table>
 <ol type="1">
 <li><p>Redes de Erdős-Rényi con una probabilidad <span class="math inline">\(p=0,05\)</span> constante de conexión entre nodos, en <span class="math inline">\(t=50\)</span> se tiene <span class="math inline">\(p=p_*\)</span> con <span class="math inline">\(p_* \in \{0.1, 0.15, 0.2, 0.25\}\)</span></p></li>
 <li><p>Redes de Erdős-Rényi Dinámicas, donde la probabilidad de conexión entre los nodos aumenta linealmente a lo largo del tiempo, en <span class="math inline">\(t=50\)</span> <span class="math inline">\(p = 0.2727 + p_*\)</span>, con <span class="math inline">\(p_* \in \{0.05, 0.1, 0.15, 0.2\}\)</span></p></li>
@@ -627,9 +693,27 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 <p align="center">
 </p>
 <img src="congreso anomalias.png" width="1000" class="r-stretch"><p></p>
+<!-- Termina Diego -->
+<!-- Empieza Zaith -->
 </section></section>
+<section id="conclusiones" class="title-slide slide level1 center">
+<h1>Conclusiones</h1>
+
+</section>
+
+<section id="limitaciones" class="title-slide slide level1 center">
+<h1>Limitaciones</h1>
+
+</section>
+
+<section id="bibliografía" class="title-slide slide level1 center">
+<h1>Bibliografía</h1>
+
+</section>
+
 <section id="gracias" class="title-slide slide level1 center">
 <h1>Gracias</h1>
+<!-- Termina Zaith -->
 
 <img src="logoUN3.PNG" class="slide-logo r-stretch"><div class="footer footer-default">
 

@@ -153,6 +153,10 @@ Las condiciones de acuerdo están anidadas, es decir, Condición de Acuerdo Tota
 
 </p>
 
+<!-- Termina Andreina -->
+
+<!-- Empieza Zaith -->
+
 ## Características
 
 Para cada red $\mathcal{G}_t$ se calculan 20 medidas teóricas de los grafos
@@ -185,6 +189,9 @@ Para cada red $\mathcal{G}_t$ se calculan 20 medidas teóricas de los grafos
 [^1]: Nodos similares tienen a conectarse entre sí
 
 [^2]: Distancia es la caminata más corta entre dos nodos
+
+<!-- Termina Zaith -->
+<!-- Empieza Andreina -->
 
 # Proceso de generación de red {.smaller}
 
@@ -234,6 +241,9 @@ Así, queda demostrado que los grafos anómalos quedan representados por residua
 
 ------------------------------------------------------------------------
 
+<!-- Terminar Andreina -->
+<!-- Empieza Diego -->
+
 ## Reduccion de dimensionalidad y deteccion de anomalias
 
 Identificar anomalías en dimensiones altas supone una dificultad, dado que los puntos pueden estar muy lejos unos de otros y muchos puntos residen en regiones de baja densidad. Además, se pueden correlacionar errores de diferentes características.
@@ -246,19 +256,29 @@ Para nuestros escenarios de red, una PCA robusta proporcionó un mejor rendimien
 
 El PCA usado utiliza una estimacion robusta de la varianza dada por la desviacion absoluta mediana al cuadrado
 
-$$ MAD(z_1,...,z_n) = 1.48med_j\|z_j - med_i(z_i)\| $$
+$$ \operatorname{MAD}\left(z_1, \ldots, z_n\right)=1.48 \operatorname{med}_j\left|z_j-\operatorname{med}_i z_i\right| $$
+
+<!-- Termina Diego -->
+<!-- Empieza Andreina -->
 
 ## Deteccion de anomalias
 
 El ultimo paso es la deteccion de anomalias en el espacio reducido a dos dimensiones, mediante el algoritmo Lookup, ingresando una matriz de datos $X$ y un valor $\alpha$, se retornan las anomalias y las probabilidades de estar por debajo de $\alpha$
 
-El proceso general del algoritmo oddnet se puede describir con el siguiente diagrama:
+------
+<!-- Termina Andreina -->
+<!-- Empieza Diego -->
+
+## Proceso general del algoritmo
+
+El proceso general del algoritmo **oddnet** se puede describir con el siguiente diagrama:
 
 <p align="center">
 
 <img src="proceso general.png" width="1000"/>
 
 </p>
+
 
 ## Resultados
 
@@ -348,5 +368,14 @@ ellos.
 
 </p>
 
+<!-- Termina Diego -->
+<!-- Empieza Zaith -->
+
+# Conclusiones
+
+# Limitaciones
+
+# Bibliografía
 
 # Gracias
+<!-- Termina Zaith -->

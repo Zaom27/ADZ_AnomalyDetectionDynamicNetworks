@@ -24,7 +24,7 @@ progress: true
 
 $\bullet$ Red $\bullet$ Grafo $\bullet$ Objetos (vértices o nodos) $\bullet$ Conexiones (enlaces o aristas)$\bullet$ Interacciones (propiedades a nivel global)$\bullet$
 
-## Ejemplos de redes
+## Ejemplos de redes{.smaller}
 
 ::: {layout-nrow="2"}
 ![Estructuras cerebrales](brain.png){width="300" height="300"}
@@ -53,7 +53,7 @@ $\bullet$ Red $\bullet$ Grafo $\bullet$ Objetos (vértices o nodos) $\bullet$ Co
 
 > *Análisis de redes*: Examinar las caracteristicas (Features) de las redes en el tiempo
 
-> *Reducción de dimensionalidad*:
+> *Reducción de dimensionalidad*:recolectar la mayor cantidad de información de las caracteristicas en en plano
 
 # Anomalía en redes dinámicas {.smaller}
 
@@ -63,9 +63,9 @@ $$
 \begin{aligned}
 p_{t \mid t-1}=\mathcal{P}\left(\mathcal{G}_t \mid \mathcal{G}_1, \ldots, \mathcal{G}_{t-1}\right). 
 \end{aligned}
-$$ Es decir, un gráfico $\mathcal{G}_t$ es anómalo si su probabilidad de ocurrencia es baja dada la secuencia de gráficos que lo preceden.
+$$ Es decir, un grafo $\mathcal{G}_t$ es anómalo si su probabilidad de ocurrencia es baja dada la secuencia de gráficos que lo preceden.
 
-## 2.1 Mapeo del espacio de gráficos al espacio de características
+## Mapeo del espacio de gráficos al espacio de características
 
 Sea $f$ una función de cálculo de características tal que $f: \mathscr{G} \rightarrow \mathbb{R}^n$, donde $\mathscr{G}$ denota el espacio de todas las redes, y sea $x_t$ la imagen de $\mathcal{G}_t$ bajo $f$. Así, $x_t$ es un vector de $n$ características correspondientes a $\mathcal{G}_t:$
 
@@ -143,7 +143,11 @@ Para cada red $\mathcal{G}_t$ se calculan 20 medidas teóricas de los grafos
 7.  Distancia media: calcula la media de todos los caminos entre diferentes nodos
 8.  Diámetro: Distancia más grande del grafo [^2]
 9.  Proporción de nodos no conectados
-10. Centralidad: Mide qué tan "cerca" está un nodo a otros nodos \<\<\<\<\<\<\< HEAD
+<<<<<<< HEAD
+10. Centralidad: Mide qué tan "cerca" está un nodo a otros nodos
+=======
+10. Centralidad: Mide qué tan "cerca" está un nodo a otros nodos 
+>>>>>>> 4f059ed17cc78be898638e9dafaa3681cf441de2
 
 [^1]: Nodos similares tienen a conectarse entre sí
 
@@ -195,6 +199,11 @@ Así, queda demostrado que los grafos anómalos quedan representados por residua
 
 </p>
 
+<<<<<<< HEAD
+------------------------------------------------------------------------
+
+=======
+>>>>>>> 4f059ed17cc78be898638e9dafaa3681cf441de2
 ## Reduccion de dimensionalidad y deteccion de anomalias
 
 Identificar anomalías en dimensiones altas supone una dificultad, dado que los puntos pueden estar muy lejos unos de otros y muchos puntos residen en regiones de baja densidad. Además, se pueden correlacionar errores de diferentes características.
@@ -213,6 +222,9 @@ $$ MAD(z_1,...,z_n) = 1.48med_j\|z_j - med_i(z_i)\| $$
 
 El ultimo paso es la deteccion de anomalias en el espacio reducido a dos dimensiones, mediante el algoritmo Lookup, ingresando una matriz de datos $X$ y un valor $\alpha$, se retornan las anomalias y las probabilidades de estar por debajo de $\alpha$
 
+<<<<<<< HEAD
+## ![](images/proceso%20general.png)
+=======
 El proceso general del algoritmo oddnet se puede describir con el siguiente diagrama:
 
 <p align="center">
@@ -300,3 +312,4 @@ ellos.
 
 
 
+>>>>>>> 4f059ed17cc78be898638e9dafaa3681cf441de2

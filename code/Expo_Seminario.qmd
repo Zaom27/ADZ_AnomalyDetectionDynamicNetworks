@@ -160,7 +160,7 @@ Las condiciones de acuerdo están anidadas, es decir, Condición de Acuerdo Tota
 <!-- Termina Andreina -->
 
 
-## Características
+## Características{.smaller}
 ::: panel-tabset
 ## 1-5
 1.  Distribución de triángulos:# de triángulos conectados a c/nodo
@@ -169,7 +169,7 @@ Las condiciones de acuerdo están anidadas, es decir, Condición de Acuerdo Tota
 4.  Total de aristas en $\mathcal{G}_t$
 5.  Transitividad (*amigos de amigos*):Proporción de nodos cuyos nodos adyacentes también están conectados
 
-## 6-10
+## 6-10{.smaller}
 
 6.  Asortatividad: Medición de la homofilia [^1] del grafo, basándose en las etiquetas de los nodos
 7.  Distancia media: calcula la media de todos los caminos entre diferentes nodos

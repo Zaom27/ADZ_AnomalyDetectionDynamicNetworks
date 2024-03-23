@@ -148,15 +148,15 @@ Las condiciones de acuerdo están anidadas, es decir, Condición de Acuerdo Tota
 </p>
 
 ## Características
-
-
-1.  Distribución de triángulos:# de triángulos conectados a cada nodo
+::: panel-tabset
+## 1-5
+1.  Distribución de triángulos:# de triángulos conectados a c/nodo
 2.  Grado: \# de aristas conectado a cada nodo
 3.  Densidad: \# de aristas observadas/total posibles aristas
 4.  Total de aristas en $\mathcal{G}_t$
 5.  Transitividad (*amigos de amigos*):Proporción de nodos cuyos nodos adyacentes también están conectados
 
-## Características
+## 6-10
 
 6.  Asortatividad: Medición de la homofilia [^1] del grafo, basándose en las etiquetas de los nodos
 7.  Distancia media: calcula la media de todos los caminos entre diferentes nodos
@@ -167,6 +167,32 @@ Las condiciones de acuerdo están anidadas, es decir, Condición de Acuerdo Tota
 [^1]: Nodos similares tienen a conectarse entre sí
 
 [^2]: Distancia es la caminata más corta entre dos nodos
+
+## 11-13
+
+11. La conectividad de vértices: indica el número mínimo de vértices/nodos que hay que eliminar para que el grafo no esté fuertemente conectado.
+12. La eficiencia global: la media de las distancias inversas por pares entre todos los pares de nodos.
+13. Se extraen dos características de los componentes conectados de la red. De la distribución del número de nodos en cada componente conectado se utiliza el  cuantil $99^{th }$
+
+## 14-16
+14. También se incluye el número de componentes conectados.
+15. La centralidad de proximidad de un vértice mide lo cerca que está ese vértice de otros vértices del grafo. Se define como la inversa de la suma de las distancias a todos los vértices. Se incluye la proporción de vértices con proximidad $\geq 0,8$ en el vector de características. 
+
+16. La centralidad entre nodos mide en qué medida un nodo conecta a otros nodos al ser un intermediario. Se define como los caminos más cortos que pasan por un nodo.
+
+## 17-18
+17. Se calcula el PageRank de todos los vértices y se toma el cuantil $99^ {th }$.
+18. Las puntuaciones hub de los vértices se definen como el vector propio principal de $A A^T$ donde $A$ denota la matriz de adyacencia. Se utliza el valor propio principal correspondiente a las puntuaciones hub como una característica.
+
+## 19-20
+19. Las puntuaciones de autoridad de los vértices son el vector propio principal de $A^T A$. Se Incluye el valor propio principal correspondiente a las puntuaciones de autoridad como una característica.
+
+20. El núcleo $k$ de un grafo: subgrafo máximo con un grado mínimo de al menos $k$. Es decir, cada vértice de un núcleo $k$ tiene un grado mayor que $k$. Se calcula  **coreness** para todos los vértices y se incluye el cuantil $99^{th }$.
+
+:::
+
+
+
 
 # Proceso de generación de red {.smaller}
 

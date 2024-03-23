@@ -488,17 +488,19 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 </section>
 <section id="características" class="slide level2 center">
 <h2>Características</h2>
-<p>Para cada red <span class="math inline">\(\mathcal{G}_t\)</span> se calculan 20 medidas teóricas de los grafos</p>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">1-5</a></li><li><a href="#tabset-2-2">6-10</a></li><li><a href="#tabset-2-3">11-13</a></li><li><a href="#tabset-2-4">14-16</a></li><li><a href="#tabset-2-5">17-18</a></li><li><a href="#tabset-2-6">19-20</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
 <ol type="1">
-<li>Distribución de triángulos:# de triángulos conectados a cada nodo</li>
+<li>Distribución de triángulos:# de triángulos conectados a c/nodo</li>
 <li>Grado: # de aristas conectado a cada nodo</li>
 <li>Densidad: # de aristas observadas/total posibles aristas</li>
 <li>Total de aristas en <span class="math inline">\(\mathcal{G}_t\)</span></li>
 <li>Transitividad (<em>amigos de amigos</em>):Proporción de nodos cuyos nodos adyacentes también están conectados</li>
 </ol>
-</section>
-<section id="características-1" class="slide level2 center">
-<h2>Características</h2>
+</div>
+<div id="tabset-2-2">
 <ol start="6" type="1">
 <li>Asortatividad: Medición de la homofilia <sup>1</sup> del grafo, basándose en las etiquetas de los nodos</li>
 <li>Distancia media: calcula la media de todos los caminos entre diferentes nodos</li>
@@ -506,6 +508,35 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 <li>Proporción de nodos no conectados</li>
 <li>Centralidad: Mide qué tan “cerca” está un nodo a otros nodos</li>
 </ol>
+</div>
+<div id="tabset-2-3">
+<ol start="11" type="1">
+<li>La conectividad de vértices: indica el número mínimo de vértices/nodos que hay que eliminar para que el grafo no esté fuertemente conectado.</li>
+<li>La eficiencia global: la media de las distancias inversas por pares entre todos los pares de nodos.</li>
+<li>Se extraen dos características de los componentes conectados de la red. De la distribución del número de nodos en cada componente conectado se utiliza el cuantil <span class="math inline">\(99^{th }\)</span></li>
+</ol>
+</div>
+<div id="tabset-2-4">
+<ol start="14" type="1">
+<li><p>También se incluye el número de componentes conectados.</p></li>
+<li><p>La centralidad de proximidad de un vértice mide lo cerca que está ese vértice de otros vértices del grafo. Se define como la inversa de la suma de las distancias a todos los vértices. Se incluye la proporción de vértices con proximidad <span class="math inline">\(\geq 0,8\)</span> en el vector de características.</p></li>
+<li><p>La centralidad entre nodos mide en qué medida un nodo conecta a otros nodos al ser un intermediario. Se define como los caminos más cortos que pasan por un nodo.</p></li>
+</ol>
+</div>
+<div id="tabset-2-5">
+<ol start="17" type="1">
+<li>Se calcula el PageRank de todos los vértices y se toma el cuantil <span class="math inline">\(99^ {th }\)</span>.</li>
+<li>Las puntuaciones hub de los vértices se definen como el vector propio principal de <span class="math inline">\(A A^T\)</span> donde <span class="math inline">\(A\)</span> denota la matriz de adyacencia. Se utliza el valor propio principal correspondiente a las puntuaciones hub como una característica.</li>
+</ol>
+</div>
+<div id="tabset-2-6">
+<ol start="19" type="1">
+<li><p>Las puntuaciones de autoridad de los vértices son el vector propio principal de <span class="math inline">\(A^T A\)</span>. Se Incluye el valor propio principal correspondiente a las puntuaciones de autoridad como una característica.</p></li>
+<li><p>El núcleo <span class="math inline">\(k\)</span> de un grafo: subgrafo máximo con un grado mínimo de al menos <span class="math inline">\(k\)</span>. Es decir, cada vértice de un núcleo <span class="math inline">\(k\)</span> tiene un grado mayor que <span class="math inline">\(k\)</span>. Se calcula <strong>coreness</strong> para todos los vértices y se incluye el cuantil <span class="math inline">\(99^{th }\)</span>.</p></li>
+</ol>
+</div>
+</div>
+</div>
 <aside><ol class="aside-footnotes"><li id="fn1"><p>Nodos similares tienen a conectarse entre sí</p></li><li id="fn2"><p>Distancia es la caminata más corta entre dos nodos</p></li></ol></aside></section></section>
 <section>
 <section id="proceso-de-generación-de-red" class="title-slide slide level1 smaller center">
@@ -553,7 +584,7 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 <p>Identificar anomalías en dimensiones altas supone una dificultad, dado que los puntos pueden estar muy lejos unos de otros y muchos puntos residen en regiones de baja densidad. Además, se pueden correlacionar errores de diferentes características.</p>
 <p><strong>¿Como? -&gt;</strong> Reduccion de dos dimensiones, dobin, ó PCA robusto.</p>
 </section>
-<section id="section-1" class="slide level2 center">
+<section id="section-7" class="slide level2 center">
 <h2></h2>
 <p>Para nuestros escenarios de red, una PCA robusta proporcionó un mejor rendimiento en comparación con dobin, posiblemente porque dobin no manejó las correlaciones tan bien como un PCA robusto</p>
 <p>El PCA usado utiliza una estimacion robusta de la varianza dada por la desviacion absoluta mediana al cuadrado</p>
@@ -570,18 +601,18 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 <section id="resultados" class="slide level2 center">
 <h2>Resultados</h2>
 <div class="panel-tabset">
-<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Exp 1</a></li><li><a href="#tabset-2-2">Exp 2</a></li><li><a href="#tabset-2-3">Exp 3</a></li><li><a href="#tabset-2-4">Exp 4</a></li></ul>
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Exp 1</a></li><li><a href="#tabset-3-2">Exp 2</a></li><li><a href="#tabset-3-3">Exp 3</a></li><li><a href="#tabset-3-4">Exp 4</a></li></ul>
 <div class="tab-content">
-<div id="tabset-2-1">
+<div id="tabset-3-1">
 <p><img src="RED 1.png" alt="Imagen 1"></p>
 </div>
-<div id="tabset-2-2">
+<div id="tabset-3-2">
 <p><img src="RED 2.png"></p>
 </div>
-<div id="tabset-2-3">
+<div id="tabset-3-3">
 <p><img src="RED 3.png"></p>
 </div>
-<div id="tabset-2-4">
+<div id="tabset-3-4">
 <p><img src="RED 4.png"></p>
 </div>
 </div>
@@ -633,18 +664,18 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 <section id="conclusiones-y-limitaciones" class="slide level2 center">
 <h2>Conclusiones y limitaciones</h2>
 <div class="panel-tabset">
-<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">1</a></li><li><a href="#tabset-3-2">2</a></li><li><a href="#tabset-3-3">3</a></li><li><a href="#tabset-3-4">4</a></li></ul>
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">1</a></li><li><a href="#tabset-4-2">2</a></li><li><a href="#tabset-4-3">3</a></li><li><a href="#tabset-4-4">4</a></li></ul>
 <div class="tab-content">
-<div id="tabset-3-1">
+<div id="tabset-4-1">
 <p><strong>Oddnet</strong> obtiene mejores resultados que LAD y Tensorsplat. - El método funciona bien con redes generadas por el modelo Erdos-Renyi, de alguna manera, el modelo más sencillo de generación aleatoria de redes; seria interesante probar la efectividad del método <strong>oddnet</strong> con otros modelos como modelos de Grafos Aleatorios Generalizados, modelos de Grafos Aleatorios Exponenciales, y modelos de Bloques Estocásticos</p>
 </div>
-<div id="tabset-3-2">
+<div id="tabset-4-2">
 <p>Falta la extensión de para encontrar anomalías en subredes de grandes bases de datos</p>
 </div>
-<div id="tabset-3-3">
+<div id="tabset-4-3">
 <p>La reducción de la dimensionalidad en en el espacio residual se usa para traer información de la varianza a dos dimensiones, si bien es cierto esto tiene gran potencial en la interpretabilidad, podría ser insuficiente en la recolección de la información en su totalidad</p>
 </div>
-<div id="tabset-3-4">
+<div id="tabset-4-4">
 <p>El modelo ARIMA podría no siempre ser la mejor opción para modelar una serie de tiempo.</p>
 </div>
 </div>

@@ -18,10 +18,10 @@ toc-title: Contenido
 progress: true
 ---
 
-<!-- Empieza Zaith -->
 
 
-# Objetivos
+
+## Objetivos
 
 - Generar un método que permita detectar anomalías en cualquier secuencia de redes dinámicas
 - Generalizar la modelacion de series de tiempo basado en características para la detección de
@@ -29,13 +29,12 @@ anomalías en redes dinámicas
 - Medir el rendimiento de **oddnet** comparado con otros metodos (LAD y Tensorsplat)
 
 
-# Redes
+## Redes
 
 ![Visualización de redes (gráfos)](Red1.png){fig-align="center"}
 
 $\bullet$ Red $\bullet$ Grafo $\bullet$ Objetos (vértices o nodos) $\bullet$ Conexiones (enlaces o aristas)$\bullet$ Interacciones (propiedades a nivel global)$\bullet$
 
-## Ejemplos de redes{.smaller}
 ## Ejemplos de redes
 
 ::: panel-tabset
@@ -84,11 +83,8 @@ $\bullet$ Red $\bullet$ Grafo $\bullet$ Objetos (vértices o nodos) $\bullet$ Co
 
 <!-- Empieza Andreina -->
 
-# Anomalía en redes dinámicas {.smaller} 
 
-Considere una secuencia de redes temporales $\left\{\mathcal{G}_t\right\}_{t=1}^T$ donde cada red es un grafo $\mathcal{G}_t=\left(\mathcal{V}_t, \mathcal{E}_t\right)$, con $\mathcal{V}_t$ denotando los vértices y $\mathcal{E}_t$ los bordes. Estamos interesados en el proceso general o a largo plazo de generación de redes. Una anomalía se define como un punto con baja probabilidad condicional
-=======
-# Anomalía en redes dinámicas {.smaller}
+## Anomalía en redes dinámicas {.smaller}
 
 Considere una secuencia de redes temporales $\left\{\mathcal{G}_t\right\}_{t=1}^T$ donde cada red es un grafo $\mathcal{G}_t=\left(\mathcal{V}_t \mathcal{E}_t\right)$, con $\mathcal{V}_t$ denotando los vértices y $\mathcal{E}_t$ los bordes. Estamos interesados en el proceso general o a largo plazo de generación de redes. Una anomalía se define como un punto con baja probabilidad condicional
 
@@ -163,7 +159,6 @@ Las condiciones de acuerdo están anidadas, es decir, Condición de Acuerdo Tota
 
 <!-- Termina Andreina -->
 
-<!-- Empieza Zaith -->
 
 ## Características
 ::: panel-tabset
@@ -182,19 +177,6 @@ Las condiciones de acuerdo están anidadas, es decir, Condición de Acuerdo Tota
 9.  Proporción de nodos no conectados
 
 10. Centralidad: Mide qué tan "cerca" está un nodo a otros nodos 
-11. The vertex connectivity gives the minimum number of vertices/nodes that needs to be removed to make the graph not strongly connected. A graph is a strongly connected if any vertex can be reached by any other vertex.
-12. The global efficiency is defined as the average inverse pairwise distances between all pairs of nodes.
-13. We extract two features from the connected components in the network. From the distribution of the number of nodes in each connected component we use the $99^{\text {th }}$ quantile as our feature.
-14. The number of connected components is also included.
-15. Centrality is a key aspect of network analysis. Closeness centrality of a vertex measures how close that vertex is to other vertices in the graph. It is defined as the inverse of the sum of distances to all vertices. We compute the closeness centrality for all vertices and include the proportion of vertices with closeness $\geq 0.8$ in the feature vector. For this feature, we do not use the $99^{\text {th }}$ quantile because closeness centrality lies between 0 and 1 and for most graphs the $99^{\text {th }}$ quantile is equal to 1 , making it a non-informative measure.
-
-16. Another important centrality measure is betweenness centrality. Betweenness measures how much a node connects other nodes by being a go-between. Suppose node A connects two groups of nodes, which otherwise would not be connected. In this case, node A has high betweenness centrality. It is defined as the number of shortest paths going through a node. Again, we compute the distribution for all nodes and take the $99^{\text {th }}$ quantile as our feature.
-17. PageRank is another measure of node importance. We compute the PageRank of all vertices and take the $99^{\text {th }}$ quantile.
-18. Hub scores also compute node importance. The hub scores of the vertices are defined as the principal eigenvector of $A A^T$ where $A$ denotes the adjacency matrix. We use the principal eigenvalue corresponding to the hub scores as a feature.
-19. Authority scores provide another measure of node importance. The authority scores of the vertices are the principal eigenvector of $A^T A$. We include the principal eigenvalue corresponding to the authority scores as a feature. The hub score and authority score features are identical for undirected graphs, but are different for directed graphs.
-20. Cores describe group/community aspects in a graph. The $k$-core of a graph is a maximal subgraph with minimum degree at least $k$. That is, each vertex in a $k$-core has degree greater than equal to $k$. For example, if a group of friends are in a $k$-core, each person in the group knows at least $k$ other people. The coreness of a vertex is defined as $k$ if it belongs to a $k$-core, not to a $(k+1)$-core. We compute the coreness for all vertices and include the $99^{\text {th }}$ quantile.
-=======
-10. Centralidad: Mide qué tan "cerca" está un nodo a otros nodos
 
 
 [^1]: Nodos similares tienen a conectarse entre sí
@@ -204,7 +186,7 @@ Las condiciones de acuerdo están anidadas, es decir, Condición de Acuerdo Tota
 
 <!-- Termina Zaith -->
 <!-- Empieza Andreina -->
-=======
+
 ## 11-13
 
 11. La conectividad de vértices: indica el número mínimo de vértices/nodos que hay que eliminar para que el grafo no esté fuertemente conectado.
@@ -229,7 +211,7 @@ Las condiciones de acuerdo están anidadas, es decir, Condición de Acuerdo Tota
 :::
 
 
-# Proceso de generación de red {.smaller}
+## Proceso de generación de red {.smaller}
 
 El proceso que genera la red puede crear dependencias temporales dentro del espacio de características. Por ejemplo, si el número de conexiones en una red aumenta con el tiempo, una disminución repentina en el número de conexiones en un punto específico del tiempo se consideraría una anomalía. Es crucial capturar este comportamiento. Simplemente identificar anomalías en el espacio de características no nos permitiría señalar esa anomalía en particular, como se ilustra en la Figura 4.
 
@@ -277,8 +259,6 @@ Así, queda demostrado que los grafos anómalos quedan representados por residua
 
 ------------------------------------------------------------------------
 
-<!-- Terminar Andreina -->
-<!-- Empieza Diego -->
 
 ## Reduccion de dimensionalidad y deteccion de anomalias
 
@@ -329,9 +309,6 @@ El proceso general del algoritmo **oddnet** se puede describir con el siguiente 
 
 ## Resultados
 
-
-Se emplean 4 modelos de generacion de redes, de los cuales se simula una serie temporal de 100 redes, con 100 nodos. En todas las simulaciones se introduce una anomalia en el tiempo $t=50$ y se consideran diferentes variaciones de la probabilidad $p$ de conexion entre nodos.
-=======
 ::: panel-tabset
 ## Exp 1
 
@@ -404,17 +381,7 @@ Redes de Co-votación del Senado de EE.UU: Incluye las redes de co-votación en 
 
 
 <!-- Termina Diego -->
-<!-- Empieza Zaith -->
 
-# Conclusiones
-
-# Limitaciones
-
-# Bibliografía
-
-# Gracias
-<!-- Termina Zaith -->
-=======
 ## Conclusiones y limitaciones
 ::: panel-tabset
 
@@ -435,4 +402,14 @@ La reducción de la dimensionalidad en en el espacio residual se usa para traer 
 
 El modelo ARIMA podría no siempre ser la mejor opción para modelar una serie de tiempo.
 :::
+
+## Bibliografía 
+
+- Akoglu, L., Tong, H. & Koutra, D. (2015), ‘Graph based anomaly detection and description: A survey’, *Data Mining and Knowledge Discovery* 29(3), 626–688.
+- Albert, R. & Barabasi, A.-L. (2002), ‘Statistical mechanics of complex networks’, *Reviews of modern physics* 74(1), 47.
+- Almquist, Z. W. & Butts, C. T. (2013), ‘Dynamic network logistic regression: A logistic choice analysis of inter- and intra-group blog citation dynamics in the 2004 US presidential election’, *Political Analysis* 21(4), 430–448.
+- Barabasi, A.-L. & Albert, R. (1999), ‘Emergence of scaling in random networks’, *Science* 286(5439), 509–512.
+
+# ¡Gracias!
+
 

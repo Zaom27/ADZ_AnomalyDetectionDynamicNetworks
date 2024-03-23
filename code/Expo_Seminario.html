@@ -8,7 +8,7 @@
 <link href="Expo_Seminario_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="Expo_Seminario_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Expo_Seminario_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.550">
+  <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Andreina Alamo, Zaith Moreno, Diego Useche">
   <title>Anomaly detection in dynamic networks</title>
@@ -158,8 +158,7 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    padding-bottom: 0.5rem;
-    margin-bottom: 0;
+    margin-bottom: 0.5rem;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -347,13 +346,17 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 <section id="redes" class="title-slide slide level1 center">
 <h1>Redes</h1>
 
-<img data-src="Red1.png" class="quarto-figure quarto-figure-center r-stretch"><p class="caption">Visualización de redes (gráfos)</p><p><span class="math inline">\(\bullet\)</span> Red <span class="math inline">\(\bullet\)</span> Grafo <span class="math inline">\(\bullet\)</span> Objetos (vértices o nodos) <span class="math inline">\(\bullet\)</span> Conexiones (enlaces o aristas)<span class="math inline">\(\bullet\)</span> Interacciones (propiedades a nivel global)<span class="math inline">\(\bullet\)</span></p>
+<img data-src="Red1.png" class="r-stretch quarto-figure-center"><p class="caption">Visualización de redes (gráfos)</p><p><span class="math inline">\(\bullet\)</span> Red <span class="math inline">\(\bullet\)</span> Grafo <span class="math inline">\(\bullet\)</span> Objetos (vértices o nodos) <span class="math inline">\(\bullet\)</span> Conexiones (enlaces o aristas)<span class="math inline">\(\bullet\)</span> Interacciones (propiedades a nivel global)<span class="math inline">\(\bullet\)</span></p>
 </section>
 <section id="ejemplos-de-redes" class="slide level2 smaller center">
 <h2>Ejemplos de redes</h2>
-<div class="quarto-layout-panel" data-layout-nrow="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+</section>
+<section id="ejemplos-de-redes-1" class="slide level2 center">
+<h2>Ejemplos de redes</h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Estructuras cerebrales</a></li><li><a href="#tabset-1-2">Redes de trenes</a></li><li><a href="#tabset-1-3">Redes eléctricas</a></li><li><a href="#tabset-1-4">Redes Sociales</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="brain.png" width="300" height="300"></p>
@@ -361,7 +364,7 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="tabset-1-2">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="train.png" width="250" height="250"></p>
@@ -369,9 +372,7 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 </figure>
 </div>
 </div>
-</div>
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="tabset-1-3">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="electric.png" width="250" height="250"></p>
@@ -379,7 +380,7 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="tabset-1-4">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="social.png" width="300" height="300"></p>
@@ -414,7 +415,11 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 <blockquote>
 <p><em>Reducción de dimensionalidad</em>:recolectar la mayor cantidad de información de las caracteristicas en en plano</p>
 </blockquote>
-</section></section>
+</section>
+<section id="algoritmo-oddnet" class="slide level2 center">
+<h2>Algoritmo <strong><em>oddnet</em></strong></h2>
+
+<img data-src="algoritmo.png" class="r-stretch"></section></section>
 <section>
 <section id="anomalía-en-redes-dinámicas" class="title-slide slide level1 smaller center">
 <h1>Anomalía en redes dinámicas</h1>
@@ -622,11 +627,9 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 <p align="center">
 </p><p><img src="congreso anomalias.png" width="1000"></p>
 <p></p>
-<div class="quarto-auto-generated-content">
 <p><img src="logoUN3.PNG" class="slide-logo"></p>
 <div class="footer footer-default">
 
-</div>
 </div>
 </section></section>
 
@@ -657,6 +660,7 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': true,
+'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -918,9 +922,10 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      function tippyHover(el, contentFn) {
         const config = {
           allowHTML: true,
+          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -930,17 +935,8 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start',
+          placement: 'bottom-start'
         };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 

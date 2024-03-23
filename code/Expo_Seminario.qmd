@@ -286,7 +286,7 @@ ellos.
 
 <p align="center">
 
-<img src="congreso USA.png" width="800"/>
+<img src="congreso USA.png" width="950"/>
 
 </p>
 

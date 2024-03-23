@@ -25,16 +25,26 @@ progress: true
 $\bullet$ Red $\bullet$ Grafo $\bullet$ Objetos (vértices o nodos) $\bullet$ Conexiones (enlaces o aristas)$\bullet$ Interacciones (propiedades a nivel global)$\bullet$
 
 ## Ejemplos de redes
+::: {.panel-tabset}
 
-::: {layout-nrow="2"}
+### Estructuras cerebrales
+
 ![Estructuras cerebrales](brain.png){width="300" height="300"}
+
+### Redes de trenes
 
 ![Redes de trenes](train.png){width="250" height="250"}
 
+### Redes eléctricas
+
 ![Redes eléctricas](electric.png){width="250" height="250"}
+
+### Redes Sociales
 
 ![Redes sociales](social.png){width="300" height="300"}
 :::
+
+
 
 ## Redes dinámicas
 
@@ -54,6 +64,14 @@ $\bullet$ Red $\bullet$ Grafo $\bullet$ Objetos (vértices o nodos) $\bullet$ Co
 > *Análisis de redes*: Examinar las caracteristicas (Features) de las redes en el tiempo
 
 > *Reducción de dimensionalidad*:recolectar la mayor cantidad de información de las caracteristicas en en plano
+
+
+## Algoritmo ***oddnet***
+
+![](algoritmo.png)
+
+
+
 
 # Anomalía en redes dinámicas {.smaller}
 

@@ -350,38 +350,37 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 </section>
 <section id="ejemplos-de-redes" class="slide level2 center">
 <h2>Ejemplos de redes</h2>
-<div class="quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 54.5%;justify-content: center;">
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Estructuras cerebrales</a></li><li><a href="#tabset-1-2">Redes de trenes</a></li><li><a href="#tabset-1-3">Redes eléctricas</a></li><li><a href="#tabset-1-4">Redes Sociales</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="brain.png" width="300"></p>
+<p><img data-src="brain.png" width="300" height="300"></p>
 <figcaption>Estructuras cerebrales</figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 45.5%;justify-content: center;">
+<div id="tabset-1-2">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="train.png" width="250"></p>
+<p><img data-src="train.png" width="250" height="250"></p>
 <figcaption>Redes de trenes</figcaption>
 </figure>
 </div>
 </div>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 45.5%;justify-content: center;">
+<div id="tabset-1-3">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="electric.png" width="250"></p>
+<p><img data-src="electric.png" width="250" height="250"></p>
 <figcaption>Redes eléctricas</figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 54.5%;justify-content: center;">
+<div id="tabset-1-4">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="social.png" width="300"></p>
+<p><img data-src="social.png" width="300" height="300"></p>
 <figcaption>Redes sociales</figcaption>
 </figure>
 </div>
@@ -411,9 +410,13 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 <p><em>Análisis de redes</em>: Examinar las caracteristicas (Features) de las redes en el tiempo</p>
 </blockquote>
 <blockquote>
-<p><em>Reducción de dimensionalidad</em>:</p>
+<p><em>Reducción de dimensionalidad</em>:recolectar la mayor cantidad de información de las caracteristicas en en plano</p>
 </blockquote>
-</section></section>
+</section>
+<section id="algoritmo-oddnet" class="slide level2 center">
+<h2>Algoritmo <strong><em>oddnet</em></strong></h2>
+
+<img data-src="algoritmo.png" class="r-stretch"></section></section>
 <section>
 <section id="anomalía-en-redes-dinámicas" class="title-slide slide level1 smaller center">
 <h1>Anomalía en redes dinámicas</h1>
@@ -425,7 +428,7 @@ p_{t \mid t-1}=\mathcal{P}\left(\mathcal{G}_t \mid \mathcal{G}_1, \ldots, \mathc
 \]</span> Es decir, un gráfico <span class="math inline">\(\mathcal{G}_t\)</span> es anómalo si su probabilidad de ocurrencia es baja dada la secuencia de gráficos que lo preceden.</p>
 </section>
 <section id="mapeo-del-espacio-de-gráficos-al-espacio-de-características" class="slide level2 center">
-<h2>2.1 Mapeo del espacio de gráficos al espacio de características</h2>
+<h2>Mapeo del espacio de gráficos al espacio de características</h2>
 <p>Sea <span class="math inline">\(f\)</span> una función de cálculo de características tal que <span class="math inline">\(f: \mathscr{G} \rightarrow \mathbb{R}^n\)</span>, donde <span class="math inline">\(\mathscr{G}\)</span> denota el espacio de todas las redes, y sea <span class="math inline">\(x_t\)</span> la imagen de <span class="math inline">\(\mathcal{G}_t\)</span> bajo <span class="math inline">\(f\)</span>. Así, <span class="math inline">\(x_t\)</span> es un vector de <span class="math inline">\(n\)</span> características correspondientes a <span class="math inline">\(\mathcal{G}_t:\)</span></p>
 <p><span class="math display">\[
 x_t=f\left(\mathcal{G}_t\right),
@@ -492,7 +495,7 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 <li>Distancia media: calcula la media de todos los caminos entre diferentes nodos</li>
 <li>Diámetro: Distancia más grande del grafo <sup>2</sup></li>
 <li>Proporción de nodos no conectados</li>
-<li>Centralidad: Mide qué tan “cerca” está un nodo a otros nodos &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</li>
+<li>Centralidad: Mide qué tan “cerca” está un nodo a otros nodos</li>
 </ol>
 <aside><ol class="aside-footnotes"><li id="fn1"><p>Nodos similares tienen a conectarse entre sí</p></li><li id="fn2"><p>Distancia es la caminata más corta entre dos nodos</p></li></ol></aside></section></section>
 <section>

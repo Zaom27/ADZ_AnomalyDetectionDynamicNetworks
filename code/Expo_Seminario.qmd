@@ -18,6 +18,14 @@ toc-title: Contenido
 progress: true
 ---
 
+<!-- Empieza Zaith -->
+
+# Introducción 
+
+# Objetivos
+
+# Conceptos Previos 
+
 # Redes
 
 ![Visualización de redes (gráfos)](Red1.png){fig-align="center"}
@@ -67,14 +75,15 @@ $\bullet$ Red $\bullet$ Grafo $\bullet$ Objetos (vértices o nodos) $\bullet$ Co
 
 ## Algoritmo ***oddnet***
 
-![](algoritmo.png)
+![](algoritmo.PNG)
 
+<!-- Termina Zaith -->
 
+<!-- Empieza Andreina -->
 
+# Anomalía en redes dinámicas {.smaller} 
 
-# Anomalía en redes dinámicas {.smaller}
-
-Considere una secuencia de redes temporales $\left\{\mathcal{G}_t\right\}_{t=1}^T$ donde cada red es un grafo $\mathcal{G}_t=\left(\mathcal{V}_t \mathcal{E}_t\right)$, con $\mathcal{V}_t$ denotando los vértices y $\mathcal{E}_t$ los bordes. Estamos interesados en el proceso general o a largo plazo de generación de redes. Una anomalía se define como un punto con baja probabilidad condicional
+Considere una secuencia de redes temporales $\left\{\mathcal{G}_t\right\}_{t=1}^T$ donde cada red es un grafo $\mathcal{G}_t=\left(\mathcal{V}_t, \mathcal{E}_t\right)$, con $\mathcal{V}_t$ denotando los vértices y $\mathcal{E}_t$ los bordes. Estamos interesados en el proceso general o a largo plazo de generación de redes. Una anomalía se define como un punto con baja probabilidad condicional
 
 $$
 \begin{aligned}
@@ -161,6 +170,17 @@ Para cada red $\mathcal{G}_t$ se calculan 20 medidas teóricas de los grafos
 8.  Diámetro: Distancia más grande del grafo [^2]
 9.  Proporción de nodos no conectados
 10. Centralidad: Mide qué tan "cerca" está un nodo a otros nodos 
+11. The vertex connectivity gives the minimum number of vertices/nodes that needs to be removed to make the graph not strongly connected. A graph is a strongly connected if any vertex can be reached by any other vertex.
+12. The global efficiency is defined as the average inverse pairwise distances between all pairs of nodes.
+13. We extract two features from the connected components in the network. From the distribution of the number of nodes in each connected component we use the $99^{\text {th }}$ quantile as our feature.
+14. The number of connected components is also included.
+15. Centrality is a key aspect of network analysis. Closeness centrality of a vertex measures how close that vertex is to other vertices in the graph. It is defined as the inverse of the sum of distances to all vertices. We compute the closeness centrality for all vertices and include the proportion of vertices with closeness $\geq 0.8$ in the feature vector. For this feature, we do not use the $99^{\text {th }}$ quantile because closeness centrality lies between 0 and 1 and for most graphs the $99^{\text {th }}$ quantile is equal to 1 , making it a non-informative measure.
+
+16. Another important centrality measure is betweenness centrality. Betweenness measures how much a node connects other nodes by being a go-between. Suppose node A connects two groups of nodes, which otherwise would not be connected. In this case, node A has high betweenness centrality. It is defined as the number of shortest paths going through a node. Again, we compute the distribution for all nodes and take the $99^{\text {th }}$ quantile as our feature.
+17. PageRank is another measure of node importance. We compute the PageRank of all vertices and take the $99^{\text {th }}$ quantile.
+18. Hub scores also compute node importance. The hub scores of the vertices are defined as the principal eigenvector of $A A^T$ where $A$ denotes the adjacency matrix. We use the principal eigenvalue corresponding to the hub scores as a feature.
+19. Authority scores provide another measure of node importance. The authority scores of the vertices are the principal eigenvector of $A^T A$. We include the principal eigenvalue corresponding to the authority scores as a feature. The hub score and authority score features are identical for undirected graphs, but are different for directed graphs.
+20. Cores describe group/community aspects in a graph. The $k$-core of a graph is a maximal subgraph with minimum degree at least $k$. That is, each vertex in a $k$-core has degree greater than equal to $k$. For example, if a group of friends are in a $k$-core, each person in the group knows at least $k$ other people. The coreness of a vertex is defined as $k$ if it belongs to a $k$-core, not to a $(k+1)$-core. We compute the coreness for all vertices and include the $99^{\text {th }}$ quantile.
 
 [^1]: Nodos similares tienen a conectarse entre sí
 

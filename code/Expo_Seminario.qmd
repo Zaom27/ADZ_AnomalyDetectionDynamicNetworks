@@ -291,24 +291,6 @@ El proceso general del algoritmo oddnet se puede describir con el siguiente diag
 
 
 
-::: grid-container
-::: grid-item
-
-:::
-
-::: grid-item
-
-:::
-
-::: grid-item
-
-:::
-
-::: grid-item
-
-:::
-:::
-
 ```{=html}
 <style>
 .grid-container {

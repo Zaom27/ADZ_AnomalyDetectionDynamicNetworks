@@ -225,7 +225,7 @@ $$ para valores pequeños de $\delta$. Esto asegura que los modelos ARIMA captur
 
 ## Proposición 2.1.
 
-Si una función $f$ satisface la Condición de Preservación de Anomalías con parámetro $\epsilon$, y si los modelos ARIMA aproximan el proceso generador de la red con parámetro $\delta$ con $\delta \geq \epsilon$, entonces un grafo anómalo $\mathcal{G}_t$ da lugar a una anomalía en el espacio de residuos de ARIMA, es decir, existe un valor pequeño $\xi$ tal que $\mathcal{P}\left(\boldsymbol{e}_t\right) \leq \xi$, donde $\xi=\xi(\delta)$ y $\boldsymbol{e}_t$ es el residuo correspondiente al grafo $\mathcal{G}_t$.
+Si una función $f$ satisface la Condición de Preservación de Anomalías con parámetro $\epsilon$, y si los modelos ARIMA aproximan el proceso generador de la red con parámetro $\delta$ con $\delta \geq \epsilon$, entonces un grafo anómalo $\mathcal{G}_t$ da lugar a una anomalía en el espacio de residuos del ARIMA, es decir, existe un valor pequeño $\xi$ tal que $\mathcal{P}\left(\boldsymbol{e}_t\right) \leq \xi$, donde $\xi=\xi(\delta)$ y $\boldsymbol{e}_t$ es el residuo correspondiente al grafo $\mathcal{G}_t$.
 
 ------------------------------------------------------------------------
 

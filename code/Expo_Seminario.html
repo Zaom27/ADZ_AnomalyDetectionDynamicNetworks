@@ -597,44 +597,39 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 </section>
 <section id="deteccion-de-anomalias" class="slide level2 center">
 <h2>Deteccion de anomalias</h2>
-<p>El ultimo paso es la deteccion de anomalias en el espacio reducido a dos dimensiones, mediante el algoritmo Lookup, ingresando una matriz de datos <span class="math inline">\(X\)</span> y un valor <span class="math inline">\(\alpha\)</span>, se retornan las anomalias y las probabilidades de estar por debajo de <span class="math inline">\(\alpha\)</span></p>
-<table style="width:10%;">
-<colgroup>
-<col style="width: 9%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td><!-- Termina Andreina --> <!-- Empieza Diego --></td>
-</tr>
-<tr class="even">
-<td>## Proceso general del algoritmo</td>
-</tr>
-<tr class="odd">
-<td>El proceso general del algoritmo <strong>oddnet</strong> se puede describir con el siguiente diagrama:</td>
-</tr>
-<tr class="even">
-<td></td>
-</tr>
-<tr class="odd">
-<td><img src="proceso general.png" width="1000"></td>
-</tr>
-<tr class="even">
-<td></td>
-</tr>
-<tr class="odd">
-<td>## Resultados</td>
-</tr>
-<tr class="even">
-<td>### Ejercicios de simulacion</td>
-</tr>
-<tr class="odd">
-<td>Para contrastar los resultados del algoritmo oddnet, para la deteccion de anomalias, al ser comparado con los metodos Laplacian Anomaly Detection (LAD) y Tensorsplat.</td>
-</tr>
-<tr class="even">
-<td>Se emplean 4 modelos de generacion de redes, de los cuales se simula una serie temporal de 100 redes, con 100 nodos. En todas las simulaciones se introduce una anomalia en el tiempo <span class="math inline">\(t=50\)</span> y se consideran diferentes variaciones de la probabilidad <span class="math inline">\(p\)</span> de conexion entre nodos.</td>
-</tr>
-</tbody>
-</table>
+<p>El ultimo paso es la detección de anomalias en el espacio reducido a dos dimensiones, esto se realiza mediante el algortimo <strong>lookup</strong>.</p>
+<p>Los métodos de detección de anomalías que utilizan estimaciones kernel de la densidad generalmente emplean un parámetro definido por el usuario para determinar el ancho de banda. Lookout utiliza análisis de datos topológicos para construir un ancho de banda adecuado para la detección de anomalías sin necesidad de ninguna entrada del usuario.</p>
+</section>
+<section id="algoritmo-lookup" class="slide level2 smaller center">
+<h2>Algoritmo Lookup</h2>
+<ol type="1">
+<li>Se escalan las variables de 0 a 1.</li>
+<li>Se modela la nube de puntos utilizando el complejo de Vietoris–Rips, el cual forma nexos entre las observaciones. El ancho de banda estará dado por la máxima diferencia de las distancias entre nacimientos de nexos.</li>
+<li>Se estima la densidad kernel clásica a los datos con este ancho de banda y sus valores se denotan <span class="math inline">\(y_i\)</span>, y también la versión <em>leave one out</em> que se denotan <span class="math inline">\(y_{-i}\)</span>.</li>
+<li>Utilizando EVT (teoría de valores extremos) se ajusta una distribución generalizada de pareto (GPD) a <span class="math inline">\(\left\{-\log \left(y_i\right)\right\}_{i=1}^N\)</span> y se estiman sus parámetros <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma\)</span> y <span class="math inline">\(\xi\)</span>.</li>
+<li>Se calcula <span class="math inline">\(P\left(-\log \left(y_{-i}\right) \mid \mu, \sigma, \xi\right)\)</span> y si es menor a un <span class="math inline">\(\alpha\)</span> tan pequeño como se desee, la observacion i es una anomalía.</li>
+</ol>
+</section>
+<section class="slide level2 center">
+
+<!-- Termina Andreina -->
+<!-- Empieza Diego -->
+</section>
+<section id="proceso-general-del-algoritmo" class="slide level2 center">
+<h2>Proceso general del algoritmo</h2>
+<p>El proceso general del algoritmo <strong>oddnet</strong> se puede describir con el siguiente diagrama:</p>
+<p align="center">
+</p>
+<img src="proceso general.png" width="1000" class="r-stretch"><p></p>
+</section>
+<section id="resultados" class="slide level2 center">
+<h2>Resultados</h2>
+<h3 id="ejercicios-de-simulacion">Ejercicios de simulacion</h3>
+<p>Para contrastar los resultados del algoritmo oddnet, para la deteccion de anomalias, al ser comparado con los metodos Laplacian Anomaly Detection (LAD) y Tensorsplat.</p>
+<p>Se emplean 4 modelos de generacion de redes, de los cuales se simula una serie temporal de 100 redes, con 100 nodos. En todas las simulaciones se introduce una anomalia en el tiempo <span class="math inline">\(t=50\)</span> y se consideran diferentes variaciones de la probabilidad <span class="math inline">\(p\)</span> de conexion entre nodos.</p>
+</section>
+<section class="slide level2 center">
+
 <ol type="1">
 <li><p>Redes de Erdős-Rényi con una probabilidad <span class="math inline">\(p=0,05\)</span> constante de conexión entre nodos, en <span class="math inline">\(t=50\)</span> se tiene <span class="math inline">\(p=p_*\)</span> con <span class="math inline">\(p_* \in \{0.1, 0.15, 0.2, 0.25\}\)</span></p></li>
 <li><p>Redes de Erdős-Rényi Dinámicas, donde la probabilidad de conexión entre los nodos aumenta linealmente a lo largo del tiempo, en <span class="math inline">\(t=50\)</span> <span class="math inline">\(p = 0.2727 + p_*\)</span>, con <span class="math inline">\(p_* \in \{0.05, 0.1, 0.15, 0.2\}\)</span></p></li>

@@ -40,19 +40,19 @@ $\bullet$ Red $\bullet$ Grafo $\bullet$ Objetos (vértices o nodos) $\bullet$ Co
 ::: panel-tabset
 ### Estructuras cerebrales
 
-![Estructuras cerebrales](brain.png){width="300" height="300"}
+![](brain.png){width="300" height="300"}
 
 ### Redes de trenes
 
-![Redes de trenes](train.png){width="250" height="250"}
+![](train.png){width="250" height="250"}
 
 ### Redes eléctricas
 
-![Redes eléctricas](electric.png){width="250" height="250"}
+![](electric.png){width="250" height="250"}
 
 ### Redes Sociales
 
-![Redes sociales](social.png){width="300" height="300"}
+![](social.png){width="300" height="300"}
 :::
 
 ## Redes dinámicas
@@ -86,7 +86,7 @@ $\bullet$ Red $\bullet$ Grafo $\bullet$ Objetos (vértices o nodos) $\bullet$ Co
 
 ## Anomalía en redes dinámicas {.smaller}
 
-Considere una secuencia de redes temporales $\left\{\mathcal{G}_t\right\}_{t=1}^T$ donde cada red es un grafo $\mathcal{G}_t=\left(\mathcal{V}_t \mathcal{E}_t\right)$, con $\mathcal{V}_t$ denotando los vértices y $\mathcal{E}_t$ los bordes. Estamos interesados en el proceso general o a largo plazo de generación de redes. Una anomalía se define como un punto con baja probabilidad condicional
+Considere una secuencia de redes temporales $\left\{\mathcal{G}_t\right\}_{t=1}^T$ donde cada red es un grafo $\mathcal{G}_t=\left(\mathcal{V}_t , \mathcal{E}_t\right)$, con $\mathcal{V}_t$ denotando los vértices y $\mathcal{E}_t$ las aristas Estamos interesados en el proceso general o a largo plazo de generación de redes. Una anomalía se define como un punto con baja probabilidad condicional
 
 
 $$
@@ -107,7 +107,7 @@ donde $x_t \in \mathbb{R}^n$. Sea $\mathcal{F}$ el codominio de $f$, al cual lla
 
 ## 
 
-Este espacio de características $\mathcal{F}$ debe retener aspectos de la distribución del espacio de gráficos $\mathscr{G}$. Así, la probabilidad condicional definida para la detección de anomalías se puede estimar como sigue:
+Este espacio de características $\mathcal{F}$ debe retener aspectos de la distribución del espacio de grafos $\mathscr{G}$. Así, la probabilidad condicional definida para la detección de anomalías se puede estimar como sigue:
 
 $$
 \tilde{p}_{t \mid t-1}=\mathcal{P}\left(x_t \mid x_1, \ldots, x_{t-1}\right).
@@ -117,7 +117,7 @@ donde $x_t \in \mathbb{R}^n$.
 
 ## Definición 2.1
 
-Una función $f: \mathscr{G} \rightarrow \mathbb{R}^n$ satisface la Condición de Acuerdo Total para un conjunto de gráficos $\left\{\mathcal{G}_t\right\}_{t=1}^T$, si
+Una función $f: \mathscr{G} \rightarrow \mathbb{R}^n$ satisface la Condición de Acuerdo Total para un conjunto de grafos $\left\{\mathcal{G}_t\right\}_{t=1}^T$, si
 
 $$
 p_{t \mid t-1}=\tilde{p}_{t \mid t-1} \quad \text { para todo } t \in\{1, \ldots, T\} .
@@ -137,7 +137,7 @@ donde $\epsilon>0$ y es pequeño.
 
 ## Definición 2.3
 
-Una función $f: \mathscr{G} \rightarrow \mathbb{R}^n$ satisface la Condición de Preservación de Anomalías con parámetro $\epsilon$, o se dice que es $\epsilon$-preservadora de anomalías para un conjunto de gráficos $\left\{\mathcal{G}_t\right\}_{t=1}^T$, si y solo si $p_{t \mid t-1} \leq \epsilon_1$ implica que existe $\epsilon_2>0$ con $\epsilon=\max \left(\epsilon_1, \epsilon_2\right)$ tal que $\tilde{p}_{t \mid t-1} \leq \epsilon_2$. Es decir,
+Una función $f: \mathscr{G} \rightarrow \mathbb{R}^n$ satisface la Condición de Preservación de Anomalías con parámetro $\epsilon$, o se dice que es $\epsilon$-preservadora de anomalías para un conjunto de gráficos $\left\{\mathcal{G}_t\right\}_{t=1}^T$, si 
 
 $$
 p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \epsilon_2
@@ -241,7 +241,7 @@ $$
 \tilde{p}_{t \mid t-1} \geq \delta \Longleftrightarrow \left\| \boldsymbol{e}_t \right\| \leq c(\delta),
 $$ para valores pequeños de $\delta$. Esto asegura que los modelos ARIMA capturan los patrones generales, incluyendo la tendencia y la estacionalidad en el espacio de características, al mapear puntos de alta densidad en la distribución condicional $f\left(\mathcal{G}_t\right) \mid \mathcal{G}_1, \ldots, \mathcal{G}_{t-1}$ a residuos pequeños.
 
-## Proposición 2.1.
+--------------
 
 Si una función $f$ satisface la Condición de Preservación de Anomalías con parámetro $\epsilon$, y si los modelos ARIMA aproximan el proceso generador de la red con parámetro $\delta$ con $\delta \geq \epsilon$, entonces un grafo anómalo $\mathcal{G}_t$ da lugar a una anomalía en el espacio de residuos del ARIMA, es decir, existe un valor pequeño $\xi$ tal que $\mathcal{P}\left(\boldsymbol{e}_t\right) \leq \xi$, donde $\xi=\xi(\delta)$ y $\boldsymbol{e}_t$ es el residuo correspondiente al grafo $\mathcal{G}_t$.
 

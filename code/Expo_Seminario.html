@@ -361,36 +361,16 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 <ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Estructuras cerebrales</a></li><li><a href="#tabset-1-2">Redes de trenes</a></li><li><a href="#tabset-1-3">Redes eléctricas</a></li><li><a href="#tabset-1-4">Redes Sociales</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1">
-<div class="quarto-figure quarto-figure-center">
-<figure>
 <p><img data-src="brain.png" width="300" height="300"></p>
-<figcaption>Estructuras cerebrales</figcaption>
-</figure>
-</div>
 </div>
 <div id="tabset-1-2">
-<div class="quarto-figure quarto-figure-center">
-<figure>
 <p><img data-src="train.png" width="250" height="250"></p>
-<figcaption>Redes de trenes</figcaption>
-</figure>
-</div>
 </div>
 <div id="tabset-1-3">
-<div class="quarto-figure quarto-figure-center">
-<figure>
 <p><img data-src="electric.png" width="250" height="250"></p>
-<figcaption>Redes eléctricas</figcaption>
-</figure>
-</div>
 </div>
 <div id="tabset-1-4">
-<div class="quarto-figure quarto-figure-center">
-<figure>
 <p><img data-src="social.png" width="300" height="300"></p>
-<figcaption>Redes sociales</figcaption>
-</figure>
-</div>
 </div>
 </div>
 </div>
@@ -428,7 +408,7 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 <img data-src="algoritmo.PNG" class="r-stretch"></section>
 <section id="anomalía-en-redes-dinámicas" class="slide level2 smaller center">
 <h2>Anomalía en redes dinámicas</h2>
-<p>Considere una secuencia de redes temporales <span class="math inline">\(\left\{\mathcal{G}_t\right\}_{t=1}^T\)</span> donde cada red es un grafo <span class="math inline">\(\mathcal{G}_t=\left(\mathcal{V}_t \mathcal{E}_t\right)\)</span>, con <span class="math inline">\(\mathcal{V}_t\)</span> denotando los vértices y <span class="math inline">\(\mathcal{E}_t\)</span> los bordes. Estamos interesados en el proceso general o a largo plazo de generación de redes. Una anomalía se define como un punto con baja probabilidad condicional</p>
+<p>Considere una secuencia de redes temporales <span class="math inline">\(\left\{\mathcal{G}_t\right\}_{t=1}^T\)</span> donde cada red es un grafo <span class="math inline">\(\mathcal{G}_t=\left(\mathcal{V}_t , \mathcal{E}_t\right)\)</span>, con <span class="math inline">\(\mathcal{V}_t\)</span> denotando los vértices y <span class="math inline">\(\mathcal{E}_t\)</span> las aristas Estamos interesados en el proceso general o a largo plazo de generación de redes. Una anomalía se define como un punto con baja probabilidad condicional</p>
 <p><span class="math display">\[
 \begin{aligned}
 p_{t \mid t-1}=\mathcal{P}\left(\mathcal{G}_t \mid \mathcal{G}_1, \ldots, \mathcal{G}_{t-1}\right).
@@ -445,7 +425,7 @@ x_t=f\left(\mathcal{G}_t\right),
 </section>
 <section id="section" class="slide level2 center">
 <h2></h2>
-<p>Este espacio de características <span class="math inline">\(\mathcal{F}\)</span> debe retener aspectos de la distribución del espacio de gráficos <span class="math inline">\(\mathscr{G}\)</span>. Así, la probabilidad condicional definida para la detección de anomalías se puede estimar como sigue:</p>
+<p>Este espacio de características <span class="math inline">\(\mathcal{F}\)</span> debe retener aspectos de la distribución del espacio de grafos <span class="math inline">\(\mathscr{G}\)</span>. Así, la probabilidad condicional definida para la detección de anomalías se puede estimar como sigue:</p>
 <p><span class="math display">\[
 \tilde{p}_{t \mid t-1}=\mathcal{P}\left(x_t \mid x_1, \ldots, x_{t-1}\right).
 \]</span></p>
@@ -453,7 +433,7 @@ x_t=f\left(\mathcal{G}_t\right),
 </section>
 <section id="definición-2.1" class="slide level2 center">
 <h2>Definición 2.1</h2>
-<p>Una función <span class="math inline">\(f: \mathscr{G} \rightarrow \mathbb{R}^n\)</span> satisface la Condición de Acuerdo Total para un conjunto de gráficos <span class="math inline">\(\left\{\mathcal{G}_t\right\}_{t=1}^T\)</span>, si</p>
+<p>Una función <span class="math inline">\(f: \mathscr{G} \rightarrow \mathbb{R}^n\)</span> satisface la Condición de Acuerdo Total para un conjunto de grafos <span class="math inline">\(\left\{\mathcal{G}_t\right\}_{t=1}^T\)</span>, si</p>
 <p><span class="math display">\[
 p_{t \mid t-1}=\tilde{p}_{t \mid t-1} \quad \text { para todo } t \in\{1, \ldots, T\} .
 \]</span></p>
@@ -469,7 +449,7 @@ p_{t \mid t-1}=\tilde{p}_{t \mid t-1} \quad \text { para todo } t \in\{1, \ldots
 </section>
 <section id="definición-2.3" class="slide level2 center">
 <h2>Definición 2.3</h2>
-<p>Una función <span class="math inline">\(f: \mathscr{G} \rightarrow \mathbb{R}^n\)</span> satisface la Condición de Preservación de Anomalías con parámetro <span class="math inline">\(\epsilon\)</span>, o se dice que es <span class="math inline">\(\epsilon\)</span>-preservadora de anomalías para un conjunto de gráficos <span class="math inline">\(\left\{\mathcal{G}_t\right\}_{t=1}^T\)</span>, si y solo si <span class="math inline">\(p_{t \mid t-1} \leq \epsilon_1\)</span> implica que existe <span class="math inline">\(\epsilon_2&gt;0\)</span> con <span class="math inline">\(\epsilon=\max \left(\epsilon_1, \epsilon_2\right)\)</span> tal que <span class="math inline">\(\tilde{p}_{t \mid t-1} \leq \epsilon_2\)</span>. Es decir,</p>
+<p>Una función <span class="math inline">\(f: \mathscr{G} \rightarrow \mathbb{R}^n\)</span> satisface la Condición de Preservación de Anomalías con parámetro <span class="math inline">\(\epsilon\)</span>, o se dice que es <span class="math inline">\(\epsilon\)</span>-preservadora de anomalías para un conjunto de gráficos <span class="math inline">\(\left\{\mathcal{G}_t\right\}_{t=1}^T\)</span>, si</p>
 <p><span class="math display">\[
 p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \epsilon_2
 \]</span></p>
@@ -566,8 +546,8 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 \tilde{p}_{t \mid t-1} \geq \delta \Longleftrightarrow \left\| \boldsymbol{e}_t \right\| \leq c(\delta),
 \]</span> para valores pequeños de <span class="math inline">\(\delta\)</span>. Esto asegura que los modelos ARIMA capturan los patrones generales, incluyendo la tendencia y la estacionalidad en el espacio de características, al mapear puntos de alta densidad en la distribución condicional <span class="math inline">\(f\left(\mathcal{G}_t\right) \mid \mathcal{G}_1, \ldots, \mathcal{G}_{t-1}\)</span> a residuos pequeños.</p>
 </section>
-<section id="proposición-2.1." class="slide level2 center">
-<h2>Proposición 2.1.</h2>
+<section class="slide level2 center">
+
 <p>Si una función <span class="math inline">\(f\)</span> satisface la Condición de Preservación de Anomalías con parámetro <span class="math inline">\(\epsilon\)</span>, y si los modelos ARIMA aproximan el proceso generador de la red con parámetro <span class="math inline">\(\delta\)</span> con <span class="math inline">\(\delta \geq \epsilon\)</span>, entonces un grafo anómalo <span class="math inline">\(\mathcal{G}_t\)</span> da lugar a una anomalía en el espacio de residuos del ARIMA, es decir, existe un valor pequeño <span class="math inline">\(\xi\)</span> tal que <span class="math inline">\(\mathcal{P}\left(\boldsymbol{e}_t\right) \leq \xi\)</span>, donde <span class="math inline">\(\xi=\xi(\delta)\)</span> y <span class="math inline">\(\boldsymbol{e}_t\)</span> es el residuo correspondiente al grafo <span class="math inline">\(\mathcal{G}_t\)</span>.</p>
 </section>
 <section class="slide level2 center">

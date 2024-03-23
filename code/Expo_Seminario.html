@@ -8,7 +8,7 @@
 <link href="Expo_Seminario_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="Expo_Seminario_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Expo_Seminario_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.4.550">
 
   <meta name="author" content="Andreina Alamo, Zaith Moreno, Diego Useche">
   <title>Anomaly detection in dynamic networks</title>
@@ -158,7 +158,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -346,42 +347,42 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 <section id="redes" class="title-slide slide level1 center">
 <h1>Redes</h1>
 
-<img data-src="Red1.png" class="r-stretch quarto-figure-center"><p class="caption">Visualización de redes (gráfos)</p><p><span class="math inline">\(\bullet\)</span> Red <span class="math inline">\(\bullet\)</span> Grafo <span class="math inline">\(\bullet\)</span> Objetos (vértices o nodos) <span class="math inline">\(\bullet\)</span> Conexiones (enlaces o aristas)<span class="math inline">\(\bullet\)</span> Interacciones (propiedades a nivel global)<span class="math inline">\(\bullet\)</span></p>
+<img data-src="Red1.png" class="quarto-figure quarto-figure-center r-stretch"><p class="caption">Visualización de redes (gráfos)</p><p><span class="math inline">\(\bullet\)</span> Red <span class="math inline">\(\bullet\)</span> Grafo <span class="math inline">\(\bullet\)</span> Objetos (vértices o nodos) <span class="math inline">\(\bullet\)</span> Conexiones (enlaces o aristas)<span class="math inline">\(\bullet\)</span> Interacciones (propiedades a nivel global)<span class="math inline">\(\bullet\)</span></p>
 </section>
 <section id="ejemplos-de-redes" class="slide level2 smaller center">
 <h2>Ejemplos de redes</h2>
-<div class="quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 54.5%;justify-content: center;">
+<div class="quarto-layout-panel" data-layout-nrow="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="brain.png" width="300"></p>
+<p><img data-src="brain.png" width="300" height="300"></p>
 <figcaption>Estructuras cerebrales</figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 45.5%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="train.png" width="250"></p>
+<p><img data-src="train.png" width="250" height="250"></p>
 <figcaption>Redes de trenes</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 45.5%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="electric.png" width="250"></p>
+<p><img data-src="electric.png" width="250" height="250"></p>
 <figcaption>Redes eléctricas</figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 54.5%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="social.png" width="300"></p>
+<p><img data-src="social.png" width="300" height="300"></p>
 <figcaption>Redes sociales</figcaption>
 </figure>
 </div>
@@ -491,9 +492,8 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 <li>Asortatividad: Medición de la homofilia <sup>1</sup> del grafo, basándose en las etiquetas de los nodos</li>
 <li>Distancia media: calcula la media de todos los caminos entre diferentes nodos</li>
 <li>Diámetro: Distancia más grande del grafo <sup>2</sup></li>
-<li>Proporción de nodos no conectados &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</li>
-<li><h1 id="centralidad-mide-qué-tan-cerca-está-un-nodo-a-otros-nodos">Centralidad: Mide qué tan “cerca” está un nodo a otros nodos</h1></li>
-<li>Centralidad: Mide qué tan “cerca” está un nodo a otros nodos &gt;&gt;&gt;&gt;&gt;&gt;&gt; 4f059ed17cc78be898638e9dafaa3681cf441de2</li>
+<li>Proporción de nodos no conectados</li>
+<li>Centralidad: Mide qué tan “cerca” está un nodo a otros nodos</li>
 </ol>
 <aside><ol class="aside-footnotes"><li id="fn1"><p>Nodos similares tienen a conectarse entre sí</p></li><li id="fn2"><p>Distancia es la caminata más corta entre dos nodos</p></li></ol></aside></section></section>
 <section>
@@ -537,9 +537,8 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 </p>
 <img src="figure_5.png" width="1000" class="r-stretch"><p></p>
 </section>
-<section id="head" class="slide level2 center">
-<h2>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</h2>
-<p>======= &gt;&gt;&gt;&gt;&gt;&gt;&gt; 4f059ed17cc78be898638e9dafaa3681cf441de2 ## Reduccion de dimensionalidad y deteccion de anomalias</p>
+<section id="reduccion-de-dimensionalidad-y-deteccion-de-anomalias" class="slide level2 center">
+<h2>Reduccion de dimensionalidad y deteccion de anomalias</h2>
 <p>Identificar anomalías en dimensiones altas supone una dificultad, dado que los puntos pueden estar muy lejos unos de otros y muchos puntos residen en regiones de baja densidad. Además, se pueden correlacionar errores de diferentes características.</p>
 <p><strong>¿Como? -&gt;</strong> Reduccion de dos dimensiones, dobin, ó PCA robusto.</p>
 </section>
@@ -552,16 +551,30 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 <section id="deteccion-de-anomalias" class="slide level2 center">
 <h2>Deteccion de anomalias</h2>
 <p>El ultimo paso es la deteccion de anomalias en el espacio reducido a dos dimensiones, mediante el algoritmo Lookup, ingresando una matriz de datos <span class="math inline">\(X\)</span> y un valor <span class="math inline">\(\alpha\)</span>, se retornan las anomalias y las probabilidades de estar por debajo de <span class="math inline">\(\alpha\)</span></p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD ## <img data-src="images/proceso%20general.png"> ======= El proceso general del algoritmo oddnet se puede describir con el siguiente diagrama:</p>
+<p>El proceso general del algoritmo oddnet se puede describir con el siguiente diagrama:</p>
 <p align="center">
-</p><p><img src="proceso general.png" width="1000"></p>
-<p></p>
+</p>
+<img src="proceso general.png" width="1000" class="r-stretch"><p></p>
 </section>
 <section id="resultados" class="slide level2 center">
 <h2>Resultados</h2>
 <h3 id="ejercicios-de-simulacion">Ejercicios de simulacion</h3>
 <p>Para contrastar los resultados del algoritmo oddnet, para la deteccion de anomalias, al ser comparado con los metodos Laplacian Anomaly Detection (LAD) y Tensorsplat.</p>
-<p>Se emplean 4 modelos de generacion de redes, de los cuales se simula una serie temporal de 100 redes, con 100 nodos.</p>
+<p>Se emplean 4 modelos de generacion de redes, de los cuales se simula una serie temporal de 100 redes, con 100 nodos. En todas las simulaciones se introduce una anomalia en el tiempo <span class="math inline">\(t=50\)</span> y se consideran diferentes variaciones de la probabilidad <span class="math inline">\(p\)</span> de conexion entre nodos.</p>
+</section>
+<section class="slide level2 center">
+
+<ol type="1">
+<li><p>Redes de Erdős-Rényi con una probabilidad <span class="math inline">\(p=0,05\)</span> constante de conexión entre nodos, en <span class="math inline">\(t=50\)</span> se tiene <span class="math inline">\(p=p_*\)</span> con <span class="math inline">\(p_* \in \{0.1, 0.15, 0.2, 0.25\}\)</span></p></li>
+<li><p>Redes de Erdős-Rényi Dinámicas, donde la probabilidad de conexión entre los nodos aumenta linealmente a lo largo del tiempo, en <span class="math inline">\(t=50\)</span> <span class="math inline">\(p = 0.2727 + p_*\)</span>, con <span class="math inline">\(p_* \in \{0.05, 0.1, 0.15, 0.2\}\)</span></p></li>
+</ol>
+</section>
+<section class="slide level2 center">
+
+<ol start="3" type="1">
+<li><p>Redes de Barabási-Albert que siguen un modelo de conexión preferencial, donde algunos nodos tienen una probabilidad mayor de formar nuevas conexiones.</p></li>
+<li><p>Redes de Watts-Strogatz con propiedades de mundo pequeño, caracterizadas por altos niveles de agrupamiento y cortas distancias promedio entre nodos, <span class="math inline">\(p\)</span> aumenta de <span class="math inline">\(0.05\)</span> a <span class="math inline">\(0.3\)</span>, pero en el tiempo <span class="math inline">\(t=50\)</span> <span class="math inline">\(p=0.1737 + p_*\)</span> con <span class="math inline">\(p_* \in \{0.05, 0.1, 0.15, 0.2\}\)</span></p></li>
+</ol>
 </section></section>
 <section>
 <section id="section-2" class="title-slide slide level1 center">
@@ -609,24 +622,11 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 <p align="center">
 </p><p><img src="congreso anomalias.png" width="1000"></p>
 <p></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>4f059ed17cc78be898638e9dafaa3681cf441de2</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+<div class="quarto-auto-generated-content">
 <p><img src="logoUN3.PNG" class="slide-logo"></p>
 <div class="footer footer-default">
 
+</div>
 </div>
 </section></section>
 
@@ -657,7 +657,6 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': true,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -919,10 +918,9 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn) {
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -932,8 +930,17 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 

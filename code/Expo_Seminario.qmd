@@ -18,15 +18,8 @@ toc-title: Contenido
 progress: true
 ---
 
-<<<<<<< HEAD
 <!-- Empieza Zaith -->
 
-# Introducción 
-
-# Objetivos
-
-# Conceptos Previos 
-=======
 
 # Objetivos
 
@@ -34,7 +27,7 @@ progress: true
 - Generalizar la modelacion de series de tiempo basado en características para la detección de
 anomalías en redes dinámicas
 - Medir el rendimiento de **oddnet** comparado con otros metodos (LAD y Tensorsplat)
->>>>>>> Zaith
+
 
 # Redes
 
@@ -86,7 +79,7 @@ $\bullet$ Red $\bullet$ Grafo $\bullet$ Objetos (vértices o nodos) $\bullet$ Co
 
 ![](algoritmo.PNG)
 
-<<<<<<< HEAD
+
 <!-- Termina Zaith -->
 
 <!-- Empieza Andreina -->
@@ -98,7 +91,7 @@ Considere una secuencia de redes temporales $\left\{\mathcal{G}_t\right\}_{t=1}^
 # Anomalía en redes dinámicas {.smaller}
 
 Considere una secuencia de redes temporales $\left\{\mathcal{G}_t\right\}_{t=1}^T$ donde cada red es un grafo $\mathcal{G}_t=\left(\mathcal{V}_t \mathcal{E}_t\right)$, con $\mathcal{V}_t$ denotando los vértices y $\mathcal{E}_t$ los bordes. Estamos interesados en el proceso general o a largo plazo de generación de redes. Una anomalía se define como un punto con baja probabilidad condicional
->>>>>>> Zaith
+
 
 $$
 \begin{aligned}
@@ -187,7 +180,7 @@ Las condiciones de acuerdo están anidadas, es decir, Condición de Acuerdo Tota
 7.  Distancia media: calcula la media de todos los caminos entre diferentes nodos
 8.  Diámetro: Distancia más grande del grafo [^2]
 9.  Proporción de nodos no conectados
-<<<<<<< HEAD
+
 10. Centralidad: Mide qué tan "cerca" está un nodo a otros nodos 
 11. The vertex connectivity gives the minimum number of vertices/nodes that needs to be removed to make the graph not strongly connected. A graph is a strongly connected if any vertex can be reached by any other vertex.
 12. The global efficiency is defined as the average inverse pairwise distances between all pairs of nodes.
@@ -202,13 +195,13 @@ Las condiciones de acuerdo están anidadas, es decir, Condición de Acuerdo Tota
 20. Cores describe group/community aspects in a graph. The $k$-core of a graph is a maximal subgraph with minimum degree at least $k$. That is, each vertex in a $k$-core has degree greater than equal to $k$. For example, if a group of friends are in a $k$-core, each person in the group knows at least $k$ other people. The coreness of a vertex is defined as $k$ if it belongs to a $k$-core, not to a $(k+1)$-core. We compute the coreness for all vertices and include the $99^{\text {th }}$ quantile.
 =======
 10. Centralidad: Mide qué tan "cerca" está un nodo a otros nodos
->>>>>>> Zaith
+
 
 [^1]: Nodos similares tienen a conectarse entre sí
 
 [^2]: Distancia es la caminata más corta entre dos nodos
 
-<<<<<<< HEAD
+
 <!-- Termina Zaith -->
 <!-- Empieza Andreina -->
 =======
@@ -235,9 +228,6 @@ Las condiciones de acuerdo están anidadas, es decir, Condición de Acuerdo Tota
 
 :::
 
-
-
->>>>>>> Zaith
 
 # Proceso de generación de red {.smaller}
 
@@ -340,8 +330,6 @@ El proceso general del algoritmo **oddnet** se puede describir con el siguiente 
 ## Resultados
 
 
-
-<<<<<<< HEAD
 Se emplean 4 modelos de generacion de redes, de los cuales se simula una serie temporal de 100 redes, con 100 nodos. En todas las simulaciones se introduce una anomalia en el tiempo $t=50$ y se consideran diferentes variaciones de la probabilidad $p$ de conexion entre nodos.
 =======
 ::: panel-tabset
@@ -362,7 +350,7 @@ Se emplean 4 modelos de generacion de redes, de los cuales se simula una serie t
 
 <img src="RED 4.png"/>
 :::
->>>>>>> Zaith
+
 
 --------
 
@@ -414,7 +402,7 @@ Redes de Co-votación del Senado de EE.UU: Incluye las redes de co-votación en 
 
 </p>
 
-<<<<<<< HEAD
+
 <!-- Termina Diego -->
 <!-- Empieza Zaith -->
 
@@ -447,4 +435,4 @@ La reducción de la dimensionalidad en en el espacio residual se usa para traer 
 
 El modelo ARIMA podría no siempre ser la mejor opción para modelar una serie de tiempo.
 :::
->>>>>>> Zaith
+

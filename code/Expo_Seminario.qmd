@@ -18,6 +18,7 @@ toc-title: Contenido
 progress: true
 ---
 
+<<<<<<< HEAD
 <!-- Empieza Zaith -->
 
 # Introducción 
@@ -25,6 +26,15 @@ progress: true
 # Objetivos
 
 # Conceptos Previos 
+=======
+
+# Objetivos
+
+- Generar un método que permita detectar anomalías en cualquier secuencia de redes dinámicas
+- Generalizar la modelacion de series de tiempo basado en características para la detección de
+anomalías en redes dinámicas
+- Medir el rendimiento de **oddnet** comparado con otros metodos (LAD y Tensorsplat)
+>>>>>>> Zaith
 
 # Redes
 
@@ -34,8 +44,8 @@ $\bullet$ Red $\bullet$ Grafo $\bullet$ Objetos (vértices o nodos) $\bullet$ Co
 
 ## Ejemplos de redes{.smaller}
 ## Ejemplos de redes
-::: {.panel-tabset}
 
+::: panel-tabset
 ### Estructuras cerebrales
 
 ![Estructuras cerebrales](brain.png){width="300" height="300"}
@@ -72,11 +82,11 @@ $\bullet$ Red $\bullet$ Grafo $\bullet$ Objetos (vértices o nodos) $\bullet$ Co
 
 > *Reducción de dimensionalidad*:recolectar la mayor cantidad de información de las caracteristicas en en plano
 
-
 ## Algoritmo ***oddnet***
 
 ![](algoritmo.PNG)
 
+<<<<<<< HEAD
 <!-- Termina Zaith -->
 
 <!-- Empieza Andreina -->
@@ -84,6 +94,11 @@ $\bullet$ Red $\bullet$ Grafo $\bullet$ Objetos (vértices o nodos) $\bullet$ Co
 # Anomalía en redes dinámicas {.smaller} 
 
 Considere una secuencia de redes temporales $\left\{\mathcal{G}_t\right\}_{t=1}^T$ donde cada red es un grafo $\mathcal{G}_t=\left(\mathcal{V}_t, \mathcal{E}_t\right)$, con $\mathcal{V}_t$ denotando los vértices y $\mathcal{E}_t$ los bordes. Estamos interesados en el proceso general o a largo plazo de generación de redes. Una anomalía se define como un punto con baja probabilidad condicional
+=======
+# Anomalía en redes dinámicas {.smaller}
+
+Considere una secuencia de redes temporales $\left\{\mathcal{G}_t\right\}_{t=1}^T$ donde cada red es un grafo $\mathcal{G}_t=\left(\mathcal{V}_t \mathcal{E}_t\right)$, con $\mathcal{V}_t$ denotando los vértices y $\mathcal{E}_t$ los bordes. Estamos interesados en el proceso general o a largo plazo de generación de redes. Una anomalía se define como un punto con baja probabilidad condicional
+>>>>>>> Zaith
 
 $$
 \begin{aligned}
@@ -158,21 +173,21 @@ Las condiciones de acuerdo están anidadas, es decir, Condición de Acuerdo Tota
 <!-- Empieza Zaith -->
 
 ## Características
-
-Para cada red $\mathcal{G}_t$ se calculan 20 medidas teóricas de los grafos
-
-1.  Distribución de triángulos:# de triángulos conectados a cada nodo
+::: panel-tabset
+## 1-5
+1.  Distribución de triángulos:# de triángulos conectados a c/nodo
 2.  Grado: \# de aristas conectado a cada nodo
 3.  Densidad: \# de aristas observadas/total posibles aristas
 4.  Total de aristas en $\mathcal{G}_t$
 5.  Transitividad (*amigos de amigos*):Proporción de nodos cuyos nodos adyacentes también están conectados
 
-## Características
+## 6-10
 
 6.  Asortatividad: Medición de la homofilia [^1] del grafo, basándose en las etiquetas de los nodos
 7.  Distancia media: calcula la media de todos los caminos entre diferentes nodos
 8.  Diámetro: Distancia más grande del grafo [^2]
 9.  Proporción de nodos no conectados
+<<<<<<< HEAD
 10. Centralidad: Mide qué tan "cerca" está un nodo a otros nodos 
 11. The vertex connectivity gives the minimum number of vertices/nodes that needs to be removed to make the graph not strongly connected. A graph is a strongly connected if any vertex can be reached by any other vertex.
 12. The global efficiency is defined as the average inverse pairwise distances between all pairs of nodes.
@@ -185,13 +200,44 @@ Para cada red $\mathcal{G}_t$ se calculan 20 medidas teóricas de los grafos
 18. Hub scores also compute node importance. The hub scores of the vertices are defined as the principal eigenvector of $A A^T$ where $A$ denotes the adjacency matrix. We use the principal eigenvalue corresponding to the hub scores as a feature.
 19. Authority scores provide another measure of node importance. The authority scores of the vertices are the principal eigenvector of $A^T A$. We include the principal eigenvalue corresponding to the authority scores as a feature. The hub score and authority score features are identical for undirected graphs, but are different for directed graphs.
 20. Cores describe group/community aspects in a graph. The $k$-core of a graph is a maximal subgraph with minimum degree at least $k$. That is, each vertex in a $k$-core has degree greater than equal to $k$. For example, if a group of friends are in a $k$-core, each person in the group knows at least $k$ other people. The coreness of a vertex is defined as $k$ if it belongs to a $k$-core, not to a $(k+1)$-core. We compute the coreness for all vertices and include the $99^{\text {th }}$ quantile.
+=======
+10. Centralidad: Mide qué tan "cerca" está un nodo a otros nodos
+>>>>>>> Zaith
 
 [^1]: Nodos similares tienen a conectarse entre sí
 
 [^2]: Distancia es la caminata más corta entre dos nodos
 
+<<<<<<< HEAD
 <!-- Termina Zaith -->
 <!-- Empieza Andreina -->
+=======
+## 11-13
+
+11. La conectividad de vértices: indica el número mínimo de vértices/nodos que hay que eliminar para que el grafo no esté fuertemente conectado.
+12. La eficiencia global: la media de las distancias inversas por pares entre todos los pares de nodos.
+13. Se extraen dos características de los componentes conectados de la red. De la distribución del número de nodos en cada componente conectado se utiliza el  cuantil $99^{th }$
+
+## 14-16
+14. También se incluye el número de componentes conectados.
+15. La centralidad de proximidad de un vértice mide lo cerca que está ese vértice de otros vértices del grafo. Se define como la inversa de la suma de las distancias a todos los vértices. Se incluye la proporción de vértices con proximidad $\geq 0,8$ en el vector de características. 
+
+16. La centralidad entre nodos mide en qué medida un nodo conecta a otros nodos al ser un intermediario. Se define como los caminos más cortos que pasan por un nodo.
+
+## 17-18
+17. Se calcula el PageRank de todos los vértices y se toma el cuantil $99^ {th }$.
+18. Las puntuaciones hub de los vértices se definen como el vector propio principal de $A A^T$ donde $A$ denota la matriz de adyacencia. Se utliza el valor propio principal correspondiente a las puntuaciones hub como una característica.
+
+## 19-20
+19. Las puntuaciones de autoridad de los vértices son el vector propio principal de $A^T A$. Se Incluye el valor propio principal correspondiente a las puntuaciones de autoridad como una característica.
+
+20. El núcleo $k$ de un grafo: subgrafo máximo con un grado mínimo de al menos $k$. Es decir, cada vértice de un núcleo $k$ tiene un grado mayor que $k$. Se calcula  **coreness** para todos los vértices y se incluye el cuantil $99^{th }$.
+
+:::
+
+
+
+>>>>>>> Zaith
 
 # Proceso de generación de red {.smaller}
 
@@ -293,11 +339,30 @@ El proceso general del algoritmo **oddnet** se puede describir con el siguiente 
 
 ## Resultados
 
-### Ejercicios de simulacion
 
-Para contrastar los resultados del algoritmo oddnet, para la deteccion de anomalias, al ser comparado con los metodos Laplacian Anomaly Detection (LAD) y Tensorsplat.
 
+<<<<<<< HEAD
 Se emplean 4 modelos de generacion de redes, de los cuales se simula una serie temporal de 100 redes, con 100 nodos. En todas las simulaciones se introduce una anomalia en el tiempo $t=50$ y se consideran diferentes variaciones de la probabilidad $p$ de conexion entre nodos.
+=======
+::: panel-tabset
+## Exp 1
+
+<img src="RED 1.png" alt="Imagen 1"/>
+
+
+## Exp 2
+
+<img src="RED 2.png"/>
+
+## Exp 3
+
+<img src="RED 3.png"/>
+
+## Exp 4
+
+<img src="RED 4.png"/>
+:::
+>>>>>>> Zaith
 
 --------
 
@@ -312,35 +377,7 @@ de conexión entre los nodos aumenta linealmente a lo largo del tiempo, en $t=50
 
 4. Redes de Watts-Strogatz con propiedades de mundo pequeño, caracterizadas por altos niveles de agrupamiento y cortas distancias promedio entre nodos, $p$ aumenta de $0.05$ a $0.3$, pero en el tiempo $t=50$ $p=0.1737 + p_*$ con $p_* \in \{0.05, 0.1, 0.15, 0.2\}$
 
-# 
-
-<div class="grid-container">
-  
-  <div class="grid-item">
-  
-  <img src="RED 1.png" alt="Imagen 1">
-  
-  </div>
-  
-  <div class="grid-item">
-    
-  <img src="RED 2.png">
-    
-  </div>
-  
-  <div class="grid-item">
-  
-  <img src="RED 3.png">
-  
-  </div>
-  
-  <div class="grid-item">
-    
-  <img src="RED 4.png">
-  
-  </div>
-  
-</div>
+```{=html}
 <style>
 .grid-container {
     display: grid;
@@ -353,17 +390,15 @@ de conexión entre los nodos aumenta linealmente a lo largo del tiempo, en $t=50
     height: auto;
 }
 </style>
+```
 
--------------------------------------------------------------
+------------------------------------------------------------------------
 
 ### Ejercicio datos reales
 
-Redes de Co-votación del Senado de EE.UU: Incluye las redes de co-votación en el Senado de EE.UU. desde el 40° hasta el 113°
-Congreso, donde los nodos representan a los senadores y las aristas indican co-votaciones entre
-ellos.
+Redes de Co-votación del Senado de EE.UU: Incluye las redes de co-votación en el Senado de EE.UU. desde el 40° hasta el 113° Congreso, donde los nodos representan a los senadores y las aristas indican co-votaciones entre ellos.
 
----------------------------------------------------------------
-
+------------------------------------------------------------------------
 
 <p align="center">
 
@@ -371,7 +406,7 @@ ellos.
 
 </p>
 
-------
+------------------------------------------------------------------------
 
 <p align="center">
 
@@ -379,6 +414,7 @@ ellos.
 
 </p>
 
+<<<<<<< HEAD
 <!-- Termina Diego -->
 <!-- Empieza Zaith -->
 
@@ -390,3 +426,25 @@ ellos.
 
 # Gracias
 <!-- Termina Zaith -->
+=======
+## Conclusiones y limitaciones
+::: panel-tabset
+
+## 1
+
+**Oddnet** obtiene mejores resultados que LAD y Tensorsplat.
+-   El método funciona bien con redes generadas por el modelo Erdos-Renyi, de alguna manera, el modelo más sencillo de generación aleatoria de redes; seria interesante probar la efectividad del método **oddnet** con otros modelos como modelos de Grafos Aleatorios Generalizados, modelos de Grafos Aleatorios Exponenciales, y modelos de Bloques Estocásticos
+
+## 2
+
+Falta la extensión de \textit{oddnet} para encontrar anomalías en subredes de grandes bases de datos
+
+## 3  
+
+La reducción de la dimensionalidad en en el espacio residual se usa para traer información de la varianza a dos dimensiones, si bien es cierto esto tiene gran potencial en la interpretabilidad, podría ser insuficiente en la recolección de la información en su totalidad
+
+## 4  
+
+El modelo ARIMA podría no siempre ser la mejor opción para modelar una serie de tiempo.
+:::
+>>>>>>> Zaith

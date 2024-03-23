@@ -18,6 +18,14 @@ toc-title: Contenido
 progress: true
 ---
 
+
+# Objetivos
+
+- Generar un método que permita detectar anomalías en cualquier secuencia de redes dinámicas
+- Generalizar la modelacion de series de tiempo basado en características para la detección de
+anomalías en redes dinámicas
+- Medir el rendimiento de **oddnet** comparado con otros metodos (LAD y Tensorsplat)
+
 # Redes
 
 ![Visualización de redes (gráfos)](Red1.png){fig-align="center"}
@@ -25,8 +33,8 @@ progress: true
 $\bullet$ Red $\bullet$ Grafo $\bullet$ Objetos (vértices o nodos) $\bullet$ Conexiones (enlaces o aristas)$\bullet$ Interacciones (propiedades a nivel global)$\bullet$
 
 ## Ejemplos de redes
-::: {.panel-tabset}
 
+::: panel-tabset
 ### Estructuras cerebrales
 
 ![Estructuras cerebrales](brain.png){width="300" height="300"}
@@ -43,8 +51,6 @@ $\bullet$ Red $\bullet$ Grafo $\bullet$ Objetos (vértices o nodos) $\bullet$ Co
 
 ![Redes sociales](social.png){width="300" height="300"}
 :::
-
-
 
 ## Redes dinámicas
 
@@ -65,13 +71,9 @@ $\bullet$ Red $\bullet$ Grafo $\bullet$ Objetos (vértices o nodos) $\bullet$ Co
 
 > *Reducción de dimensionalidad*:recolectar la mayor cantidad de información de las caracteristicas en en plano
 
-
 ## Algoritmo ***oddnet***
 
 ![](algoritmo.png)
-
-
-
 
 # Anomalía en redes dinámicas {.smaller}
 
@@ -147,7 +149,6 @@ Las condiciones de acuerdo están anidadas, es decir, Condición de Acuerdo Tota
 
 ## Características
 
-Para cada red $\mathcal{G}_t$ se calculan 20 medidas teóricas de los grafos
 
 1.  Distribución de triángulos:# de triángulos conectados a cada nodo
 2.  Grado: \# de aristas conectado a cada nodo
@@ -161,7 +162,7 @@ Para cada red $\mathcal{G}_t$ se calculan 20 medidas teóricas de los grafos
 7.  Distancia media: calcula la media de todos los caminos entre diferentes nodos
 8.  Diámetro: Distancia más grande del grafo [^2]
 9.  Proporción de nodos no conectados
-10. Centralidad: Mide qué tan "cerca" está un nodo a otros nodos 
+10. Centralidad: Mide qué tan "cerca" está un nodo a otros nodos
 
 [^1]: Nodos similares tienen a conectarse entre sí
 
@@ -241,43 +242,48 @@ El proceso general del algoritmo oddnet se puede describir con el siguiente diag
 
 ## Resultados
 
-### Ejercicios de simulacion
-
-Para contrastar los resultados del algoritmo oddnet, para la deteccion de anomalias, al ser comparado con los metodos Laplacian Anomaly Detection (LAD) y Tensorsplat.
-
-Se emplean 4 modelos de generacion de redes, de los cuales se simula una serie temporal de 100 redes, con 100 nodos.
 
 
+::: panel-tabset
+## Exp 1
 
-# 
+<img src="RED 1.png" alt="Imagen 1"/>
 
-<div class="grid-container">
-  
-  <div class="grid-item">
-  
-  <img src="RED 1.png" alt="Imagen 1">
-  
-  </div>
-  
-  <div class="grid-item">
-    
-  <img src="RED 2.png">
-    
-  </div>
-  
-  <div class="grid-item">
-  
-  <img src="RED 3.png">
-  
-  </div>
-  
-  <div class="grid-item">
-    
-  <img src="RED 4.png">
-  
-  </div>
-  
-</div>
+
+## Exp 2
+
+<img src="RED 2.png"/>
+
+## Exp 3
+
+<img src="RED 3.png"/>
+
+## Exp 4
+
+<img src="RED 4.png"/>
+:::
+
+
+
+::: grid-container
+::: grid-item
+
+:::
+
+::: grid-item
+
+:::
+
+::: grid-item
+
+:::
+
+::: grid-item
+
+:::
+:::
+
+```{=html}
 <style>
 .grid-container {
     display: grid;
@@ -290,17 +296,15 @@ Se emplean 4 modelos de generacion de redes, de los cuales se simula una serie t
     height: auto;
 }
 </style>
+```
 
--------------------------------------------------------------
+------------------------------------------------------------------------
 
 ### Ejercicio datos reales
 
-Redes de Co-votación del Senado de EE.UU: Incluye las redes de co-votación en el Senado de EE.UU. desde el 40° hasta el 113°
-Congreso, donde los nodos representan a los senadores y las aristas indican co-votaciones entre
-ellos.
+Redes de Co-votación del Senado de EE.UU: Incluye las redes de co-votación en el Senado de EE.UU. desde el 40° hasta el 113° Congreso, donde los nodos representan a los senadores y las aristas indican co-votaciones entre ellos.
 
----------------------------------------------------------------
-
+------------------------------------------------------------------------
 
 <p align="center">
 
@@ -308,7 +312,7 @@ ellos.
 
 </p>
 
-------
+------------------------------------------------------------------------
 
 <p align="center">
 
@@ -316,5 +320,23 @@ ellos.
 
 </p>
 
+## Conclusiones y limitaciones
+::: panel-tabset
 
+## 1
 
+**Oddnet** obtiene mejores resultados que LAD y Tensorsplat.
+-   El método funciona bien con redes generadas por el modelo Erdos-Renyi, de alguna manera, el modelo más sencillo de generación aleatoria de redes; seria interesante probar la efectividad del método **oddnet** con otros modelos como modelos de Grafos Aleatorios Generalizados, modelos de Grafos Aleatorios Exponenciales, y modelos de Bloques Estocásticos
+
+## 2
+
+Falta la extensión de \textit{oddnet} para encontrar anomalías en subredes de grandes bases de datos
+
+## 3  
+
+La reducción de la dimensionalidad en en el espacio residual se usa para traer información de la varianza a dos dimensiones, si bien es cierto esto tiene gran potencial en la interpretabilidad, podría ser insuficiente en la recolección de la información en su totalidad
+
+## 4  
+
+El modelo ARIMA podría no siempre ser la mejor opción para modelar una serie de tiempo.
+:::

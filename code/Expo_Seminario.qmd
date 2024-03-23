@@ -273,7 +273,7 @@ Los métodos de detección de anomalías que utilizan estimaciones kernel de la 
 2. Se modela la nube de puntos utilizando el complejo de Vietoris–Rips, el cual forma nexos entre las observaciones. El ancho de banda estará dado por la máxima diferencia de las distancias entre nacimientos de nexos.
 3. Se estima la densidad kernel clásica a los datos con este ancho de banda y sus valores se denotan $y_i$, y también la versión _leave one out_ que se denotan $y_{-i}$.
 4. Utilizando EVT (teoría de valores extremos) se ajusta una distribución generalizada de pareto (GPD) a $\left\{-\log \left(y_i\right)\right\}_{i=1}^N$ y se estiman sus parámetros $\mu$, $\sigma$ y $\xi$.
-5. Se calcula $P\left(-\log \left(y_{-i}\right) \mid \mu, \sigma, \xi\right)$ y si es menor a un $\alpha$ tan pequeño como se desee, la observacion i es una anomalía.
+5. Se calcula $P\left(-\log \left(y_{-i}\right) \mid \mu, \sigma, \xi\right)$ y si es menor a un $\alpha$ tan pequeño como se desee, la observacion $i$ es una anomalía.
  
 <!-- Termina Andreina -->
 <!-- Empieza Diego -->

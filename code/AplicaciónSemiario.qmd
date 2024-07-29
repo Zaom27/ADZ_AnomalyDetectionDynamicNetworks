@@ -37,7 +37,7 @@ La red dinámica representa una colonia de hormigas. Los autores registraron la 
 ## Datos (insecta-ant-colony4)
 
 |                   |                                                                                                                                 |
-|---------------|---------------------------------------------------------|
+|-------------------|---------------------------------------------------------------------------------------------------------------------------------|
 | *Tipo*            | Conjuntos de datos de redes del mundo real procedentes de estudios publicados sobre animales salvajes, cautivos y domesticados. |
 | *Nodos y enlaces* | 102 y 81.6K                                                                                                                     |
 | *Enlace*          | Interacción                                                                                                                     |
@@ -47,9 +47,8 @@ La red dinámica representa una colonia de hormigas. Los autores registraron la 
 
 ![Definición de interacción](images/app_interaccion-01.png)
 
-
-
 ## Grafica de red
+
 ```{r}
 
   
@@ -62,9 +61,8 @@ library(readxl)
 library(readr)
 ```
 
-
-
 ## Código 1
+
 graficas
 
 ## Aplicación a las redes de hormigas
@@ -101,7 +99,6 @@ plot(anom$outlier_probability)
 
 ```
 
-
 ```{r}
 #| echo: false
 ant41_red_df |> filter(day==10) |>
@@ -120,7 +117,6 @@ ant41_red_df |> filter(day==13) |>
   plot()
 ```
 
-
 ```{r}
 #| echo: false
 
@@ -130,10 +126,6 @@ plot(anom$outlier_scores)
 plot(anom$bandwidth)
 plot(anom$data)
 ```
-
-
-
-
 
 ## Bibliografía
 

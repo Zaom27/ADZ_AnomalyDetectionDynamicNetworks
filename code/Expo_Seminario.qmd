@@ -18,16 +18,11 @@ toc-title: Contenido
 progress: true
 ---
 
-
-
-
 ## Objetivos
 
-- Generar un método que permita detectar anomalías en cualquier secuencia de redes dinámicas
-- Generalizar la modelacion de series de tiempo basado en características para la detección de
-anomalías en redes dinámicas
-- Medir el rendimiento de **oddnet** comparado con otros metodos (LAD y Tensorsplat)
-
+-   Generar un método que permita detectar anomalías en cualquier secuencia de redes dinámicas
+-   Generalizar la modelacion de series de tiempo basado en características para la detección de anomalías en redes dinámicas
+-   Medir el rendimiento de **oddnet** comparado con otros metodos (LAD y Tensorsplat)
 
 ## Redes
 
@@ -78,16 +73,13 @@ $\bullet$ Red $\bullet$ Grafo $\bullet$ Objetos (vértices o nodos) $\bullet$ Co
 
 ![](algoritmo.PNG)
 
-
 <!-- Termina Zaith -->
 
 <!-- Empieza Andreina -->
 
-
 ## Anomalía en redes dinámicas {.smaller}
 
 Considere una secuencia de redes temporales $\left\{\mathcal{G}_t\right\}_{t=1}^T$ donde cada red es un grafo $\mathcal{G}_t=\left(\mathcal{V}_t , \mathcal{E}_t\right)$, con $\mathcal{V}_t$ denotando los vértices y $\mathcal{E}_t$ las aristas Estamos interesados en el proceso general o a largo plazo de generación de redes. Una anomalía se define como un punto con baja probabilidad condicional
-
 
 $$
 \begin{aligned}
@@ -137,7 +129,7 @@ donde $\epsilon>0$ y es pequeño.
 
 ## Definición 2.3
 
-Una función $f: \mathscr{G} \rightarrow \mathbb{R}^n$ satisface la Condición de Preservación de Anomalías con parámetro $\epsilon$, o se dice que es $\epsilon$-preservadora de anomalías para un conjunto de gráficos $\left\{\mathcal{G}_t\right\}_{t=1}^T$, si 
+Una función $f: \mathscr{G} \rightarrow \mathbb{R}^n$ satisface la Condición de Preservación de Anomalías con parámetro $\epsilon$, o se dice que es $\epsilon$-preservadora de anomalías para un conjunto de gráficos $\left\{\mathcal{G}_t\right\}_{t=1}^T$, si
 
 $$
 p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \epsilon_2
@@ -159,57 +151,62 @@ Las condiciones de acuerdo están anidadas, es decir, Condición de Acuerdo Tota
 
 <!-- Termina Andreina -->
 
+## Características {.smaller}
 
-## Características{.smaller}
 ::: panel-tabset
 ## 1-5
+
 1.  Distribución de triángulos:# de triángulos conectados a c/nodo
 2.  Grado: \# de aristas conectado a cada nodo
 3.  Densidad: \# de aristas observadas/total posibles aristas
 4.  Total de aristas en $\mathcal{G}_t$
 5.  Transitividad (*amigos de amigos*):Proporción de nodos cuyos nodos adyacentes también están conectados
 
-## 6-10{.smaller}
+## 6-10 {.smaller}
 
 6.  Asortatividad: Medición de la homofilia [^1] del grafo, basándose en las etiquetas de los nodos
+
 7.  Distancia media: calcula la media de todos los caminos entre diferentes nodos
+
 8.  Diámetro: Distancia más grande del grafo [^2]
+
 9.  Proporción de nodos no conectados
 
-10. Centralidad: Mide qué tan "cerca" está un nodo a otros nodos 
-
-
-[^1]: Nodos similares tienen a conectarse entre sí
-
-[^2]: Distancia es la caminata más corta entre dos nodos
-
+10. Centralidad: Mide qué tan "cerca" está un nodo a otros nodos
 
 <!-- Termina Zaith -->
+
 <!-- Empieza Andreina -->
 
 ## 11-13
 
 11. La conectividad de vértices: indica el número mínimo de vértices/nodos que hay que eliminar para que el grafo no esté fuertemente conectado.
 12. La eficiencia global: la media de las distancias inversas por pares entre todos los pares de nodos.
-13. Se extraen dos características de los componentes conectados de la red. De la distribución del número de nodos en cada componente conectado se utiliza el  cuantil $99^{th }$
+13. Se extraen dos características de los componentes conectados de la red. De la distribución del número de nodos en cada componente conectado se utiliza el cuantil $99^{th }$
 
 ## 14-16
+
 14. También se incluye el número de componentes conectados.
-15. La centralidad de proximidad de un vértice mide lo cerca que está ese vértice de otros vértices del grafo. Se define como la inversa de la suma de las distancias a todos los vértices. Se incluye la proporción de vértices con proximidad $\geq 0,8$ en el vector de características. 
+
+15. La centralidad de proximidad de un vértice mide lo cerca que está ese vértice de otros vértices del grafo. Se define como la inversa de la suma de las distancias a todos los vértices. Se incluye la proporción de vértices con proximidad $\geq 0,8$ en el vector de características.
 
 16. La centralidad entre nodos mide en qué medida un nodo conecta a otros nodos al ser un intermediario. Se define como los caminos más cortos que pasan por un nodo.
 
 ## 17-18
+
 17. Se calcula el PageRank de todos los vértices y se toma el cuantil $99^ {th }$.
 18. Las puntuaciones hub de los vértices se definen como el vector propio principal de $A A^T$ donde $A$ denota la matriz de adyacencia. Se utliza el valor propio principal correspondiente a las puntuaciones hub como una característica.
 
 ## 19-20
+
 19. Las puntuaciones de autoridad de los vértices son el vector propio principal de $A^T A$. Se Incluye el valor propio principal correspondiente a las puntuaciones de autoridad como una característica.
 
-20. El núcleo $k$ de un grafo: subgrafo máximo con un grado mínimo de al menos $k$. Es decir, cada vértice de un núcleo $k$ tiene un grado mayor que $k$. Se calcula  **coreness** para todos los vértices y se incluye el cuantil $99^{th }$.
-
+20. El núcleo $k$ de un grafo: subgrafo máximo con un grado mínimo de al menos $k$. Es decir, cada vértice de un núcleo $k$ tiene un grado mayor que $k$. Se calcula **coreness** para todos los vértices y se incluye el cuantil $99^{th }$.
 :::
 
+[^1]: Nodos similares tienen a conectarse entre sí
+
+[^2]: Distancia es la caminata más corta entre dos nodos
 
 ## Proceso de generación de red {.smaller}
 
@@ -241,7 +238,7 @@ $$
 \tilde{p}_{t \mid t-1} \geq \delta \Longleftrightarrow \left\| \boldsymbol{e}_t \right\| \leq c(\delta),
 $$ para valores pequeños de $\delta$. Esto asegura que los modelos ARIMA capturan los patrones generales, incluyendo la tendencia y la estacionalidad en el espacio de características, al mapear puntos de alta densidad en la distribución condicional $f\left(\mathcal{G}_t\right) \mid \mathcal{G}_1, \ldots, \mathcal{G}_{t-1}$ a residuos pequeños.
 
---------------
+------------------------------------------------------------------------
 
 Si una función $f$ satisface la Condición de Preservación de Anomalías con parámetro $\epsilon$, y si los modelos ARIMA aproximan el proceso generador de la red con parámetro $\delta$ con $\delta \geq \epsilon$, entonces un grafo anómalo $\mathcal{G}_t$ da lugar a una anomalía en el espacio de residuos del ARIMA, es decir, existe un valor pequeño $\xi$ tal que $\mathcal{P}\left(\boldsymbol{e}_t\right) \leq \xi$, donde $\xi=\xi(\delta)$ y $\boldsymbol{e}_t$ es el residuo correspondiente al grafo $\mathcal{G}_t$.
 
@@ -259,7 +256,6 @@ Así, queda demostrado que los grafos anómalos quedan representados por residua
 
 ------------------------------------------------------------------------
 
-
 ## Reduccion de dimensionalidad y deteccion de anomalias
 
 Identificar anomalías en dimensiones altas supone una dificultad, dado que los puntos pueden estar muy lejos unos de otros y muchos puntos residen en regiones de baja densidad. Además, se pueden correlacionar errores de diferentes características.
@@ -275,6 +271,7 @@ El PCA usado utiliza una estimacion robusta de la varianza dada por la desviacio
 $$ \operatorname{MAD}\left(z_1, \ldots, z_n\right)=1.48 \operatorname{med}_j\left|z_j-\operatorname{med}_i z_i\right| $$
 
 <!-- Termina Diego -->
+
 <!-- Empieza Andreina -->
 
 ## Deteccion de anomalias
@@ -283,20 +280,19 @@ El ultimo paso es la detección de anomalias en el espacio reducido a dos dimens
 
 Los métodos de detección de anomalías que utilizan estimaciones kernel de la densidad generalmente emplean un parámetro definido por el usuario para determinar el ancho de banda. Lookout utiliza análisis de datos topológicos para construir un ancho de banda adecuado para la detección de anomalías sin necesidad de ninguna entrada del usuario.
 
-## Algoritmo Lookup{.smaller}
+## Algoritmo Lookup {.smaller}
 
-1. Se escalan las variables de 0 a 1.
-2. Se modela la nube de puntos utilizando el complejo de Vietoris–Rips, el cual forma nexos entre las observaciones. El ancho de banda estará dado por la máxima diferencia de las distancias entre nacimientos de nexos.
-3. Se estima la densidad kernel clásica a los datos con este ancho de banda y sus valores se denotan $y_i$, y también la versión _leave one out_ que se denotan $y_{-i}$.
-4. Utilizando EVT (teoría de valores extremos) se ajusta una distribución generalizada de pareto (GPD) a $\left\{-\log \left(y_i\right)\right\}_{i=1}^N$ y se estiman sus parámetros $\mu$, $\sigma$ y $\xi$.
-5. Se calcula $P\left(-\log \left(y_{-i}\right) \mid \mu, \sigma, \xi\right)$ y si es menor a un $\alpha$ tan pequeño como se desee, la observacion $i$ es una anomalía.
- 
+1.  Se escalan las variables de 0 a 1.
+2.  Se modela la nube de puntos utilizando el complejo de Vietoris–Rips, el cual forma nexos entre las observaciones. El ancho de banda estará dado por la máxima diferencia de las distancias entre nacimientos de nexos.
+3.  Se estima la densidad kernel clásica a los datos con este ancho de banda y sus valores se denotan $y_i$, y también la versión *leave one out* que se denotan $y_{-i}$.
+4.  Utilizando EVT (teoría de valores extremos) se ajusta una distribución generalizada de pareto (GPD) a $\left\{-\log \left(y_i\right)\right\}_{i=1}^N$ y se estiman sus parámetros $\mu$, $\sigma$ y $\xi$.
+5.  Se calcula $P\left(-\log \left(y_{-i}\right) \mid \mu, \sigma, \xi\right)$ y si es menor a un $\alpha$ tan pequeño como se desee, la observacion $i$ es una anomalía.
+
 <!-- Termina Andreina -->
+
 <!-- Empieza Diego -->
 
-
 ## Proceso general del algoritmo
-
 
 El proceso general del algoritmo **oddnet** se puede describir con el siguiente diagrama:
 
@@ -306,14 +302,12 @@ El proceso general del algoritmo **oddnet** se puede describir con el siguiente 
 
 </p>
 
-
 ## Resultados
 
 ::: panel-tabset
 ## Exp 1
 
 <img src="RED 1.png" alt="Imagen 1"/>
-
 
 ## Exp 2
 
@@ -328,19 +322,17 @@ El proceso general del algoritmo **oddnet** se puede describir con el siguiente 
 <img src="RED 4.png"/>
 :::
 
+------------------------------------------------------------------------
 
---------
+1.  Redes de Erdős-Rényi con una probabilidad $p=0,05$ constante de conexión entre nodos, en $t=50$ se tiene $p=p_*$ con $p_* \in \{0.1, 0.15, 0.2, 0.25\}$
 
-1. Redes de Erdős-Rényi con una probabilidad $p=0,05$ constante de conexión entre nodos, en $t=50$ se tiene $p=p_*$ con $p_* \in \{0.1, 0.15, 0.2, 0.25\}$
+2.  Redes de Erdős-Rényi Dinámicas, donde la probabilidad de conexión entre los nodos aumenta linealmente a lo largo del tiempo, en $t=50$ $p = 0.2727 + p_*$, con $p_* \in \{0.05, 0.1, 0.15, 0.2\}$
 
-2. Redes de Erdős-Rényi Dinámicas, donde la probabilidad
-de conexión entre los nodos aumenta linealmente a lo largo del tiempo, en $t=50$ $p = 0.2727 + p_*$, con $p_* \in \{0.05, 0.1, 0.15, 0.2\}$
+------------------------------------------------------------------------
 
-------
+3.  Redes de Barabási-Albert que siguen un modelo de conexión preferencial, donde algunos nodos tienen una probabilidad mayor de formar nuevas conexiones.
 
-3. Redes de Barabási-Albert que siguen un modelo de conexión preferencial, donde algunos nodos tienen una probabilidad mayor de formar nuevas conexiones. 
-
-4. Redes de Watts-Strogatz con propiedades de mundo pequeño, caracterizadas por altos niveles de agrupamiento y cortas distancias promedio entre nodos, $p$ aumenta de $0.05$ a $0.3$, pero en el tiempo $t=50$ $p=0.1737 + p_*$ con $p_* \in \{0.05, 0.1, 0.15, 0.2\}$
+4.  Redes de Watts-Strogatz con propiedades de mundo pequeño, caracterizadas por altos niveles de agrupamiento y cortas distancias promedio entre nodos, $p$ aumenta de $0.05$ a $0.3$, pero en el tiempo $t=50$ $p=0.1737 + p_*$ con $p_* \in \{0.05, 0.1, 0.15, 0.2\}$
 
 ```{=html}
 <style>
@@ -379,37 +371,33 @@ Redes de Co-votación del Senado de EE.UU: Incluye las redes de co-votación en 
 
 </p>
 
-
 <!-- Termina Diego -->
 
 ## Conclusiones y limitaciones
-::: panel-tabset
 
+::: panel-tabset
 ## 1
 
-**Oddnet** obtiene mejores resultados que LAD y Tensorsplat.
--   El método funciona bien con redes generadas por el modelo Erdos-Renyi, de alguna manera, el modelo más sencillo de generación aleatoria de redes; seria interesante probar la efectividad del método **oddnet** con otros modelos como modelos de Grafos Aleatorios Generalizados, modelos de Grafos Aleatorios Exponenciales, y modelos de Bloques Estocásticos
+**Oddnet** obtiene mejores resultados que LAD y Tensorsplat. - El método funciona bien con redes generadas por el modelo Erdos-Renyi, de alguna manera, el modelo más sencillo de generación aleatoria de redes; seria interesante probar la efectividad del método **oddnet** con otros modelos como modelos de Grafos Aleatorios Generalizados, modelos de Grafos Aleatorios Exponenciales, y modelos de Bloques Estocásticos
 
 ## 2
 
 Falta la extensión de \textit{oddnet} para encontrar anomalías en subredes de grandes bases de datos
 
-## 3  
+## 3
 
 La reducción de la dimensionalidad en en el espacio residual se usa para traer información de la varianza a dos dimensiones, si bien es cierto esto tiene gran potencial en la interpretabilidad, podría ser insuficiente en la recolección de la información en su totalidad
 
-## 4  
+## 4
 
 El modelo ARIMA podría no siempre ser la mejor opción para modelar una serie de tiempo.
 :::
 
-## Bibliografía 
+## Bibliografía
 
-- Akoglu, L., Tong, H. & Koutra, D. (2015), ‘Graph based anomaly detection and description: A survey’, *Data Mining and Knowledge Discovery* 29(3), 626–688.
-- Albert, R. & Barabasi, A.-L. (2002), ‘Statistical mechanics of complex networks’, *Reviews of modern physics* 74(1), 47.
-- Almquist, Z. W. & Butts, C. T. (2013), ‘Dynamic network logistic regression: A logistic choice analysis of inter- and intra-group blog citation dynamics in the 2004 US presidential election’, *Political Analysis* 21(4), 430–448.
-- Barabasi, A.-L. & Albert, R. (1999), ‘Emergence of scaling in random networks’, *Science* 286(5439), 509–512.
+-   Akoglu, L., Tong, H. & Koutra, D. (2015), ‘Graph based anomaly detection and description: A survey’, *Data Mining and Knowledge Discovery* 29(3), 626–688.
+-   Albert, R. & Barabasi, A.-L. (2002), ‘Statistical mechanics of complex networks’, *Reviews of modern physics* 74(1), 47.
+-   Almquist, Z. W. & Butts, C. T. (2013), ‘Dynamic network logistic regression: A logistic choice analysis of inter- and intra-group blog citation dynamics in the 2004 US presidential election’, *Political Analysis* 21(4), 430–448.
+-   Barabasi, A.-L. & Albert, R. (1999), ‘Emergence of scaling in random networks’, *Science* 286(5439), 509–512.
 
 # ¡Gracias!
-
-

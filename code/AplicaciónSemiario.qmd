@@ -1,0 +1,145 @@
+---
+title: "Anomaly detection in dynamic networks"
+author: "Andreina Alamo, Zaith Moreno, Diego Useche"
+subtitle: "Seminario I 2024-I"
+institute: "Universidad Nacional de Colombia"
+execute: 
+  output: false
+  echo: false
+format:
+  revealjs: 
+    center: true
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    preview-links: auto
+    logo: "logoUN3.PNG"
+    code-fold: true
+    #footer: Universidad Nacional de Colombia
+editor: visual
+# toc: true
+toc-title: Contenido
+progress: true
+---
+
+## Aplicación
+
+::: panel-tabset
+## Hormigas
+
+![](images/AP_hormigas.png){width="599"}
+
+## Descripción
+
+La red dinámica representa una colonia de hormigas. Los autores registraron la posición y orientación de todos los individuos dos veces por segundo para reconstruir el movimiento espacial e inferir todas las interacciones sociales que se produjeron a lo largo de los 41 días que duró el experimento
+:::
+
+## Datos (insecta-ant-colony4)
+
+|                   |                                                                                                                                 |
+|---------------|---------------------------------------------------------|
+| *Tipo*            | Conjuntos de datos de redes del mundo real procedentes de estudios publicados sobre animales salvajes, cautivos y domesticados. |
+| *Nodos y enlaces* | 102 y 81.6K                                                                                                                     |
+| *Enlace*          | Interacción                                                                                                                     |
+| *Red*             | No dirigida                                                                                                                     |
+
+## Interacción
+
+![Definición de interacción](images/app_interaccion-01.png)
+
+
+
+## Grafica de red
+```{r}
+
+  
+library(igraph)
+library(dplyr)
+library(oddnet)
+library(tsibble)
+library(forcats)
+library(readxl)
+library(readr)
+```
+
+
+
+## Código 1
+graficas
+
+## Aplicación a las redes de hormigas
+
+```{r}
+#| echo: true
+#| output: true
+
+datcol4 <- read_table("~/../Desktop/ADZ_AnomalyDetectionDynamicNetworks/data/insecta-ant-colony4.edges", col_names = FALSE)
+
+trescol <- datcol4 |>
+  select(-X3) |>
+  dplyr::rename(day = X4)
+
+#Datos originales, pero agrupados
+ant41_red_df <- trescol |> group_by(day)
+# Separados por dias (41)
+ant41_red_list <-  group_split(ant41_red_df)
+
+networks <- list()
+for (i in 1:length(ant41_red_list)) {
+  gr <- graph_from_data_frame(ant41_red_list[[i]])
+  networks[[i]] <- as_adjacency_matrix(gr)
+}
+anom <- anomalous_networks(networks,alpha = 0.05, fast = T)
+anom
+```
+
+## Gráfica de probabilidad de outliers
+
+```{r}
+#| output: true
+plot(anom$outlier_probability)
+
+```
+
+
+```{r}
+#| echo: false
+ant41_red_df |> filter(day==10) |>
+  igraph::graph_from_data_frame()  |>
+    plot()
+  
+ant41_red_df |> filter(day==11) |>
+  igraph::graph_from_data_frame()  |>
+  plot()
+ant41_red_df |> filter(day==12) |>
+  igraph::graph_from_data_frame()  |>
+  plot()
+
+ant41_red_df |> filter(day==13) |>
+  igraph::graph_from_data_frame()  |>
+  plot()
+```
+
+
+```{r}
+#| echo: false
+
+plot(anom$kde)
+plot(anom$lookde)
+plot(anom$outlier_scores)
+plot(anom$bandwidth)
+plot(anom$data)
+```
+
+
+
+
+
+## Bibliografía
+
+-   Akoglu, L., Tong, H. & Koutra, D. (2015), ‘Graph based anomaly detection and description: A survey’, *Data Mining and Knowledge Discovery* 29(3), 626–688.
+-   Albert, R. & Barabasi, A.-L. (2002), ‘Statistical mechanics of complex networks’, *Reviews of modern physics* 74(1), 47.
+-   Almquist, Z. W. & Butts, C. T. (2013), ‘Dynamic network logistic regression: A logistic choice analysis of inter- and intra-group blog citation dynamics in the 2004 US presidential election’, *Political Analysis* 21(4), 430–448.
+-   Barabasi, A.-L. & Albert, R. (1999), ‘Emergence of scaling in random networks’, *Science* 286(5439), 509–512.
+
+# ¡Gracias!

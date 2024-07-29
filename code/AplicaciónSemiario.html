@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="Expo_Seminario_files/libs/clipboard/clipboard.min.js"></script>
-<script src="Expo_Seminario_files/libs/quarto-html/tabby.min.js"></script>
-<script src="Expo_Seminario_files/libs/quarto-html/popper.min.js"></script>
-<script src="Expo_Seminario_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="Expo_Seminario_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Expo_Seminario_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="Expo_Seminario_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="Expo_Seminario_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="AplicaciónSemiario_files/libs/clipboard/clipboard.min.js"></script>
+<script src="AplicaciónSemiario_files/libs/quarto-html/tabby.min.js"></script>
+<script src="AplicaciónSemiario_files/libs/quarto-html/popper.min.js"></script>
+<script src="AplicaciónSemiario_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="AplicaciónSemiario_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="AplicaciónSemiario_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="AplicaciónSemiario_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="AplicaciónSemiario_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.54">
 
   <meta name="author" content="Andreina Alamo, Zaith Moreno, Diego Useche">
@@ -15,8 +15,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="Expo_Seminario_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="Expo_Seminario_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="AplicaciónSemiario_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="AplicaciónSemiario_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -29,14 +29,79 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="Expo_Seminario_files/libs/revealjs/dist/theme/quarto.css">
-  <link href="Expo_Seminario_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="Expo_Seminario_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="Expo_Seminario_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="Expo_Seminario_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="Expo_Seminario_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="Expo_Seminario_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="AplicaciónSemiario_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="AplicaciónSemiario_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="AplicaciónSemiario_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="AplicaciónSemiario_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="AplicaciónSemiario_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="AplicaciónSemiario_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="AplicaciónSemiario_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -343,345 +408,96 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 </div>
 
 </section>
-<section id="objetivos" class="slide level2 center">
-<h2>Objetivos</h2>
-<ul>
-<li>Generar un método que permita detectar anomalías en cualquier secuencia de redes dinámicas</li>
-<li>Generalizar la modelacion de series de tiempo basado en características para la detección de anomalías en redes dinámicas</li>
-<li>Medir el rendimiento de <strong>oddnet</strong> comparado con otros metodos (LAD y Tensorsplat)</li>
-</ul>
-</section>
-<section id="redes" class="slide level2 center">
-<h2>Redes</h2>
-
-<img data-src="Red1.png" class="r-stretch quarto-figure-center"><p class="caption">Visualización de redes (gráfos)</p><p><span class="math inline">\(\bullet\)</span> Red <span class="math inline">\(\bullet\)</span> Grafo <span class="math inline">\(\bullet\)</span> Objetos (vértices o nodos) <span class="math inline">\(\bullet\)</span> Conexiones (enlaces o aristas)<span class="math inline">\(\bullet\)</span> Interacciones (propiedades a nivel global)<span class="math inline">\(\bullet\)</span></p>
-</section>
-<section id="ejemplos-de-redes" class="slide level2 center">
-<h2>Ejemplos de redes</h2>
+<section id="aplicación" class="slide level2 center">
+<h2>Aplicación</h2>
 <div class="panel-tabset">
-<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Estructuras cerebrales</a></li><li><a href="#tabset-1-2">Redes de trenes</a></li><li><a href="#tabset-1-3">Redes eléctricas</a></li><li><a href="#tabset-1-4">Redes Sociales</a></li></ul>
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Hormigas</a></li><li><a href="#tabset-1-2">Descripción</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1">
-<p><img data-src="brain.png" width="300" height="300"></p>
+<p><img data-src="images/AP_hormigas.png" width="599"></p>
 </div>
 <div id="tabset-1-2">
-<p><img data-src="train.png" width="250" height="250"></p>
-</div>
-<div id="tabset-1-3">
-<p><img data-src="electric.png" width="250" height="250"></p>
-</div>
-<div id="tabset-1-4">
-<p><img data-src="social.png" width="300" height="300"></p>
+<p>La red dinámica representa una colonia de hormigas. Los autores registraron la posición y orientación de todos los individuos dos veces por segundo para reconstruir el movimiento espacial e inferir todas las interacciones sociales que se produjeron a lo largo de los 41 días que duró el experimento</p>
 </div>
 </div>
 </div>
 </section>
-<section id="redes-dinámicas" class="slide level2 center">
-<h2>Redes dinámicas</h2>
+<section id="datos-insecta-ant-colony4" class="slide level2 center">
+<h2>Datos (insecta-ant-colony4)</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 79%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><em>Tipo</em></td>
+<td>Conjuntos de datos de redes del mundo real procedentes de estudios publicados sobre animales salvajes, cautivos y domesticados.</td>
+</tr>
+<tr class="even">
+<td><em>Nodos y enlaces</em></td>
+<td>102 y 81.6K</td>
+</tr>
+<tr class="odd">
+<td><em>Enlace</em></td>
+<td>Interacción</td>
+</tr>
+<tr class="even">
+<td><em>Red</em></td>
+<td>No dirigida</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="interacción" class="slide level2 center">
+<h2>Interacción</h2>
 
-<img data-src="Red2.png" class="r-stretch quarto-figure-center"><p class="caption">Redes dinámicas (componente temporal)</p></section>
-<section id="por-qué-es-importante-la-detección-de-anomalías" class="slide level2 smaller center">
-<h2>¿Por qué es importante la detección de anomalías?</h2>
-<ul>
-<li>Accidentes, eventos sospechosos, actividad inusual que merece <strong>investigación adicional</strong>.</li>
-<li>Los estudios sobre la detección de anomalías en Redes Dinámicas son <strong>limitados</strong>.</li>
-<li>Existen estudios sobre anomalías en nodos y aristas, o en subgrafos de estructuras de interés, pero no sobre los <strong>puntos en el tiempo</strong> donde se producen estas anomalías.</li>
-<li>Akoglu (2015) categorizó las técnicas de detección de anomalías en Redes Dinámicas en cuatro grupos: Características, Descomposición, Agrupamiento y Ventanas.</li>
-</ul>
+<img data-src="images/app_interaccion-01.png" class="r-stretch quarto-figure-center"><p class="caption">Definición de interacción</p></section>
+<section id="grafica-de-red" class="slide level2 center">
+<h2>Grafica de red</h2>
 </section>
-<section id="oddnet" class="slide level2 center">
-<h2><strong><em>oddnet</em></strong></h2>
-<blockquote>
-<p><em>Series de tiempo</em>: tratamiento de patrones estacionales complejos que la similaridad no alcanza a capturar</p>
-</blockquote>
-<blockquote>
-<p><em>Análisis de redes</em>: Examinar las caracteristicas (Features) de las redes en el tiempo</p>
-</blockquote>
-<blockquote>
-<p><em>Reducción de dimensionalidad</em>:recolectar la mayor cantidad de información de las caracteristicas en en plano</p>
-</blockquote>
+<section id="código-1" class="slide level2 center">
+<h2>Código 1</h2>
+<p>graficas</p>
 </section>
-<section id="algoritmo-oddnet" class="slide level2 center">
-<h2>Algoritmo <strong><em>oddnet</em></strong></h2>
+<section id="aplicación-a-las-redes-de-hormigas" class="slide level2 center">
+<h2>Aplicación a las redes de hormigas</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a>datcol4 <span class="ot">&lt;-</span> <span class="fu">read_table</span>(<span class="st">"~/../Desktop/ADZ_AnomalyDetectionDynamicNetworks/data/insecta-ant-colony4.edges"</span>, <span class="at">col_names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-2"><a href=""></a></span>
+<span id="cb1-3"><a href=""></a>trescol <span class="ot">&lt;-</span> datcol4 <span class="sc">|&gt;</span></span>
+<span id="cb1-4"><a href=""></a>  <span class="fu">select</span>(<span class="sc">-</span>X3) <span class="sc">|&gt;</span></span>
+<span id="cb1-5"><a href=""></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">day =</span> X4)</span>
+<span id="cb1-6"><a href=""></a></span>
+<span id="cb1-7"><a href=""></a><span class="co">#Datos originales, pero agrupados</span></span>
+<span id="cb1-8"><a href=""></a>ant41_red_df <span class="ot">&lt;-</span> trescol <span class="sc">|&gt;</span> <span class="fu">group_by</span>(day)</span>
+<span id="cb1-9"><a href=""></a><span class="co"># Separados por dias (41)</span></span>
+<span id="cb1-10"><a href=""></a>ant41_red_list <span class="ot">&lt;-</span>  <span class="fu">group_split</span>(ant41_red_df)</span>
+<span id="cb1-11"><a href=""></a></span>
+<span id="cb1-12"><a href=""></a>networks <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb1-13"><a href=""></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(ant41_red_list)) {</span>
+<span id="cb1-14"><a href=""></a>  gr <span class="ot">&lt;-</span> <span class="fu">graph_from_data_frame</span>(ant41_red_list[[i]])</span>
+<span id="cb1-15"><a href=""></a>  networks[[i]] <span class="ot">&lt;-</span> <span class="fu">as_adjacency_matrix</span>(gr)</span>
+<span id="cb1-16"><a href=""></a>}</span>
+<span id="cb1-17"><a href=""></a>anom <span class="ot">&lt;-</span> <span class="fu">anomalous_networks</span>(networks,<span class="at">alpha =</span> <span class="fl">0.05</span>, <span class="at">fast =</span> T)</span>
+<span id="cb1-18"><a href=""></a>anom</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Leave-out-out KDE outliers using lookout algorithm
 
-<!-- Termina Zaith -->
-<!-- Empieza Andreina -->
-<img data-src="algoritmo.PNG" class="r-stretch"></section>
-<section id="anomalía-en-redes-dinámicas" class="slide level2 smaller center">
-<h2>Anomalía en redes dinámicas</h2>
-<p>Considere una secuencia de redes temporales <span class="math inline">\(\left\{\mathcal{G}_t\right\}_{t=1}^T\)</span> donde cada red es un grafo <span class="math inline">\(\mathcal{G}_t=\left(\mathcal{V}_t , \mathcal{E}_t\right)\)</span>, con <span class="math inline">\(\mathcal{V}_t\)</span> denotando los vértices y <span class="math inline">\(\mathcal{E}_t\)</span> las aristas Estamos interesados en el proceso general o a largo plazo de generación de redes. Una anomalía se define como un punto con baja probabilidad condicional</p>
-<p><span class="math display">\[
-\begin{aligned}
-p_{t \mid t-1}=\mathcal{P}\left(\mathcal{G}_t \mid \mathcal{G}_1, \ldots, \mathcal{G}_{t-1}\right).
-\end{aligned}
-\]</span> Es decir, un grafo <span class="math inline">\(\mathcal{G}_t\)</span> es anómalo si su probabilidad de ocurrencia es baja dada la secuencia de gráficos que lo preceden.</p>
-</section>
-<section id="mapeo-del-espacio-de-gráficos-al-espacio-de-características" class="slide level2 center">
-<h2>Mapeo del espacio de gráficos al espacio de características</h2>
-<p>Sea <span class="math inline">\(f\)</span> una función de cálculo de características tal que <span class="math inline">\(f: \mathscr{G} \rightarrow \mathbb{R}^n\)</span>, donde <span class="math inline">\(\mathscr{G}\)</span> denota el espacio de todas las redes, y sea <span class="math inline">\(x_t\)</span> la imagen de <span class="math inline">\(\mathcal{G}_t\)</span> bajo <span class="math inline">\(f\)</span>. Así, <span class="math inline">\(x_t\)</span> es un vector de <span class="math inline">\(n\)</span> características correspondientes a <span class="math inline">\(\mathcal{G}_t:\)</span></p>
-<p><span class="math display">\[
-x_t=f\left(\mathcal{G}_t\right),
-\]</span></p>
-<p>donde <span class="math inline">\(x_t \in \mathbb{R}^n\)</span>. Sea <span class="math inline">\(\mathcal{F}\)</span> el codominio de <span class="math inline">\(f\)</span>, al cual llamaremos espacio de características.</p>
-</section>
-<section id="section" class="slide level2 center">
-<h2></h2>
-<p>Este espacio de características <span class="math inline">\(\mathcal{F}\)</span> debe retener aspectos de la distribución del espacio de grafos <span class="math inline">\(\mathscr{G}\)</span>. Así, la probabilidad condicional definida para la detección de anomalías se puede estimar como sigue:</p>
-<p><span class="math display">\[
-\tilde{p}_{t \mid t-1}=\mathcal{P}\left(x_t \mid x_1, \ldots, x_{t-1}\right).
-\]</span></p>
-<p>donde <span class="math inline">\(x_t \in \mathbb{R}^n\)</span>.</p>
-</section>
-<section id="definición-2.1" class="slide level2 center">
-<h2>Definición 2.1</h2>
-<p>Una función <span class="math inline">\(f: \mathscr{G} \rightarrow \mathbb{R}^n\)</span> satisface la Condición de Acuerdo Total para un conjunto de grafos <span class="math inline">\(\left\{\mathcal{G}_t\right\}_{t=1}^T\)</span>, si</p>
-<p><span class="math display">\[
-p_{t \mid t-1}=\tilde{p}_{t \mid t-1} \quad \text { para todo } t \in\{1, \ldots, T\} .
-\]</span></p>
-<p>La Condición de Acuerdo Total es la forma más estricta de acuerdo entre los dos espacios <span class="math inline">\(\mathscr{G}\)</span> y <span class="math inline">\(\mathcal{F}\)</span>. A continuación, se define una versión más flexible.</p>
-</section>
-<section id="definición-2.2" class="slide level2 center">
-<h2>Definición 2.2</h2>
-<p>Una función <span class="math inline">\(f: \mathscr{G} \rightarrow \mathbb{R}^n\)</span> satisface la Condición de Acuerdo Aproximado con parámetro <span class="math inline">\(\epsilon\)</span>, o se dice que es <span class="math inline">\(\epsilon\)</span>-aproximada para un conjunto de gráficos <span class="math inline">\(\left\{\mathcal{G}_t\right\}_{t=1}^T\)</span>, si</p>
-<p><span class="math display">\[
-\left|p_{t \mid t-1}-\tilde{p}_{t \mid t-1}\right| \leq \epsilon \quad \text { para todo } t \in\{1, \ldots, T\} ，
-\]</span></p>
-<p>donde <span class="math inline">\(\epsilon&gt;0\)</span> y es pequeño.</p>
-</section>
-<section id="definición-2.3" class="slide level2 center">
-<h2>Definición 2.3</h2>
-<p>Una función <span class="math inline">\(f: \mathscr{G} \rightarrow \mathbb{R}^n\)</span> satisface la Condición de Preservación de Anomalías con parámetro <span class="math inline">\(\epsilon\)</span>, o se dice que es <span class="math inline">\(\epsilon\)</span>-preservadora de anomalías para un conjunto de gráficos <span class="math inline">\(\left\{\mathcal{G}_t\right\}_{t=1}^T\)</span>, si</p>
-<p><span class="math display">\[
-p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \epsilon_2
-\]</span></p>
-<p>donde tanto <span class="math inline">\(\epsilon_1\)</span> como <span class="math inline">\(\epsilon_2\)</span> son pequeños.</p>
-</section>
-<section id="lema-2.1" class="slide level2 center">
-<h2>Lema 2.1</h2>
-<p>Las condiciones de acuerdo están anidadas, es decir, Condición de Acuerdo Total <span class="math inline">\(\Rightarrow\)</span> Condición de Acuerdo Aproximado, Condición de Acuerdo Aproximado <span class="math inline">\((\epsilon / 2) \Rightarrow\)</span> Condición de Preservación de Anomalías <span class="math inline">\((\epsilon)\)</span>.</p>
-</section>
-<section id="ejemplo" class="slide level2 center">
-<h2>Ejemplo</h2>
-<p align="center">
-</p>
-<img src="ejemplo1.png" width="1000" class="r-stretch"><p></p>
-<!-- Termina Andreina -->
-</section>
-<section id="características" class="slide level2 smaller center">
-<h2>Características</h2>
-<div class="panel-tabset">
-<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">1-5</a></li><li><a href="#tabset-2-2">6-10</a></li><li><a href="#tabset-2-3">11-13</a></li><li><a href="#tabset-2-4">14-16</a></li><li><a href="#tabset-2-5">17-18</a></li><li><a href="#tabset-2-6">19-20</a></li></ul>
-<div class="tab-content">
-<div id="tabset-2-1">
-<ol type="1">
-<li>Distribución de triángulos:# de triángulos conectados a c/nodo</li>
-<li>Grado: # de aristas conectado a cada nodo</li>
-<li>Densidad: # de aristas observadas/total posibles aristas</li>
-<li>Total de aristas en <span class="math inline">\(\mathcal{G}_t\)</span></li>
-<li>Transitividad (<em>amigos de amigos</em>):Proporción de nodos cuyos nodos adyacentes también están conectados</li>
-</ol>
-</div>
-<div id="tabset-2-2">
-<ol start="6" type="1">
-<li><p>Asortatividad: Medición de la homofilia <sup>1</sup> del grafo, basándose en las etiquetas de los nodos</p></li>
-<li><p>Distancia media: calcula la media de todos los caminos entre diferentes nodos</p></li>
-<li><p>Diámetro: Distancia más grande del grafo <sup>2</sup></p></li>
-<li><p>Proporción de nodos no conectados</p></li>
-<li><p>Centralidad: Mide qué tan “cerca” está un nodo a otros nodos</p></li>
-</ol>
-<!-- Termina Zaith -->
-<!-- Empieza Andreina -->
-</div>
-<div id="tabset-2-3">
-<ol start="11" type="1">
-<li>La conectividad de vértices: indica el número mínimo de vértices/nodos que hay que eliminar para que el grafo no esté fuertemente conectado.</li>
-<li>La eficiencia global: la media de las distancias inversas por pares entre todos los pares de nodos.</li>
-<li>Se extraen dos características de los componentes conectados de la red. De la distribución del número de nodos en cada componente conectado se utiliza el cuantil <span class="math inline">\(99^{th }\)</span></li>
-</ol>
-</div>
-<div id="tabset-2-4">
-<ol start="14" type="1">
-<li><p>También se incluye el número de componentes conectados.</p></li>
-<li><p>La centralidad de proximidad de un vértice mide lo cerca que está ese vértice de otros vértices del grafo. Se define como la inversa de la suma de las distancias a todos los vértices. Se incluye la proporción de vértices con proximidad <span class="math inline">\(\geq 0,8\)</span> en el vector de características.</p></li>
-<li><p>La centralidad entre nodos mide en qué medida un nodo conecta a otros nodos al ser un intermediario. Se define como los caminos más cortos que pasan por un nodo.</p></li>
-</ol>
-</div>
-<div id="tabset-2-5">
-<ol start="17" type="1">
-<li>Se calcula el PageRank de todos los vértices y se toma el cuantil <span class="math inline">\(99^ {th }\)</span>.</li>
-<li>Las puntuaciones hub de los vértices se definen como el vector propio principal de <span class="math inline">\(A A^T\)</span> donde <span class="math inline">\(A\)</span> denota la matriz de adyacencia. Se utliza el valor propio principal correspondiente a las puntuaciones hub como una característica.</li>
-</ol>
-</div>
-<div id="tabset-2-6">
-<ol start="19" type="1">
-<li><p>Las puntuaciones de autoridad de los vértices son el vector propio principal de <span class="math inline">\(A^T A\)</span>. Se Incluye el valor propio principal correspondiente a las puntuaciones de autoridad como una característica.</p></li>
-<li><p>El núcleo <span class="math inline">\(k\)</span> de un grafo: subgrafo máximo con un grado mínimo de al menos <span class="math inline">\(k\)</span>. Es decir, cada vértice de un núcleo <span class="math inline">\(k\)</span> tiene un grado mayor que <span class="math inline">\(k\)</span>. Se calcula <strong>coreness</strong> para todos los vértices y se incluye el cuantil <span class="math inline">\(99^{th }\)</span>.</p></li>
-</ol>
-</div>
-</div>
-</div>
-<aside><ol class="aside-footnotes"><li id="fn1"><p>Nodos similares tienen a conectarse entre sí</p></li><li id="fn2"><p>Distancia es la caminata más corta entre dos nodos</p></li></ol></aside></section>
-<section id="proceso-de-generación-de-red" class="slide level2 smaller center">
-<h2>Proceso de generación de red</h2>
-<p>El proceso que genera la red puede crear dependencias temporales dentro del espacio de características. Por ejemplo, si el número de conexiones en una red aumenta con el tiempo, una disminución repentina en el número de conexiones en un punto específico del tiempo se consideraría una anomalía. Es crucial capturar este comportamiento. Simplemente identificar anomalías en el espacio de características no nos permitiría señalar esa anomalía en particular, como se ilustra en la Figura 4.</p>
-</section>
-<section class="slide level2 center">
+Call: lookout::lookout(X = dfpca[, 1:dd], alpha = alpha)
 
-<p align="center">
-</p>
-<img src="figure_4.png" width="1000" class="r-stretch"><p></p>
+  Outliers Probability
+1       12           0</code></pre>
+</div>
+</div>
 </section>
-<section class="slide level2 center">
+<section id="gráfica-de-probabilidad-de-outliers" class="slide level2 center">
+<h2>Gráfica de probabilidad de outliers</h2>
 
-<p>Para modelar el comportamiento temporal, utilizamos métodos para pronósticar series de tiempo sobre las características de la red.</p>
-<p>Sea <span class="math inline">\(x_{\cdot, i}=\left\{x_{t, i}\right\}_{t=1}^T\)</span> el conjunto de series temporales univariadas de la <span class="math inline">\(i\)</span>-ésima característica.</p>
-<ul>
-<li><p>Se ajustan modelos ARIMA a cada serie temporal de características <span class="math inline">\(x_{\cdot, i}\)</span> para <span class="math inline">\(i \in \{1, \ldots, n\}\)</span>.</p></li>
-<li><p>Si el modelo ha capturado adecuadamente la dependencia temporal, entonces <span class="math inline">\(e_{t, i} \sim \mathcal{NID}\left(0, \sigma^2\right)\)</span> y los residuos no mostrarán correlación temporal.</p></li>
-</ul>
-</section>
-<section id="definición-2.4." class="slide level2 center">
-<h2>Definición 2.4.</h2>
-<p>Los modelos ARIMA aproximan el proceso generador de la red con el parámetro <span class="math inline">\(\delta\)</span>, si</p>
-<p><span class="math display">\[
-\tilde{p}_{t \mid t-1} \geq \delta \Longleftrightarrow \left\| \boldsymbol{e}_t \right\| \leq c(\delta),
-\]</span> para valores pequeños de <span class="math inline">\(\delta\)</span>. Esto asegura que los modelos ARIMA capturan los patrones generales, incluyendo la tendencia y la estacionalidad en el espacio de características, al mapear puntos de alta densidad en la distribución condicional <span class="math inline">\(f\left(\mathcal{G}_t\right) \mid \mathcal{G}_1, \ldots, \mathcal{G}_{t-1}\)</span> a residuos pequeños.</p>
-</section>
-<section class="slide level2 center">
-
-<p>Si una función <span class="math inline">\(f\)</span> satisface la Condición de Preservación de Anomalías con parámetro <span class="math inline">\(\epsilon\)</span>, y si los modelos ARIMA aproximan el proceso generador de la red con parámetro <span class="math inline">\(\delta\)</span> con <span class="math inline">\(\delta \geq \epsilon\)</span>, entonces un grafo anómalo <span class="math inline">\(\mathcal{G}_t\)</span> da lugar a una anomalía en el espacio de residuos del ARIMA, es decir, existe un valor pequeño <span class="math inline">\(\xi\)</span> tal que <span class="math inline">\(\mathcal{P}\left(\boldsymbol{e}_t\right) \leq \xi\)</span>, donde <span class="math inline">\(\xi=\xi(\delta)\)</span> y <span class="math inline">\(\boldsymbol{e}_t\)</span> es el residuo correspondiente al grafo <span class="math inline">\(\mathcal{G}_t\)</span>.</p>
-</section>
-<section class="slide level2 center">
-
-<p>Así, queda demostrado que los grafos anómalos quedan representados por residuales de valores grandes resultantes del ajuste del modelo ARIMA.</p>
-</section>
-<section class="slide level2 center">
-
-<p align="center">
-</p>
-<img src="figure_5.png" width="1000" class="r-stretch"><p></p>
-</section>
-<section id="reduccion-de-dimensionalidad-y-deteccion-de-anomalias" class="slide level2 center">
-<h2>Reduccion de dimensionalidad y deteccion de anomalias</h2>
-<p>Identificar anomalías en dimensiones altas supone una dificultad, dado que los puntos pueden estar muy lejos unos de otros y muchos puntos residen en regiones de baja densidad. Además, se pueden correlacionar errores de diferentes características.</p>
-<p><strong>¿Como? -&gt;</strong> Reduccion de dos dimensiones, dobin, ó PCA robusto.</p>
-</section>
-<section id="section-7" class="slide level2 center">
-<h2></h2>
-<p>Para nuestros escenarios de red, una PCA robusta proporcionó un mejor rendimiento en comparación con dobin, posiblemente porque dobin no manejó las correlaciones tan bien como un PCA robusto</p>
-<p>El PCA usado utiliza una estimacion robusta de la varianza dada por la desviacion absoluta mediana al cuadrado</p>
-<p><span class="math display">\[ \operatorname{MAD}\left(z_1, \ldots, z_n\right)=1.48 \operatorname{med}_j\left|z_j-\operatorname{med}_i z_i\right| \]</span></p>
-<!-- Termina Diego -->
-<!-- Empieza Andreina -->
-</section>
-<section id="deteccion-de-anomalias" class="slide level2 center">
-<h2>Deteccion de anomalias</h2>
-<p>El ultimo paso es la detección de anomalias en el espacio reducido a dos dimensiones, esto se realiza mediante el algortimo <strong>lookup</strong>.</p>
-<p>Los métodos de detección de anomalías que utilizan estimaciones kernel de la densidad generalmente emplean un parámetro definido por el usuario para determinar el ancho de banda. Lookout utiliza análisis de datos topológicos para construir un ancho de banda adecuado para la detección de anomalías sin necesidad de ninguna entrada del usuario.</p>
-</section>
-<section id="algoritmo-lookup" class="slide level2 smaller center">
-<h2>Algoritmo Lookup</h2>
-<ol type="1">
-<li>Se escalan las variables de 0 a 1.</li>
-<li>Se modela la nube de puntos utilizando el complejo de Vietoris–Rips, el cual forma nexos entre las observaciones. El ancho de banda estará dado por la máxima diferencia de las distancias entre nacimientos de nexos.</li>
-<li>Se estima la densidad kernel clásica a los datos con este ancho de banda y sus valores se denotan <span class="math inline">\(y_i\)</span>, y también la versión <em>leave one out</em> que se denotan <span class="math inline">\(y_{-i}\)</span>.</li>
-<li>Utilizando EVT (teoría de valores extremos) se ajusta una distribución generalizada de pareto (GPD) a <span class="math inline">\(\left\{-\log \left(y_i\right)\right\}_{i=1}^N\)</span> y se estiman sus parámetros <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma\)</span> y <span class="math inline">\(\xi\)</span>.</li>
-<li>Se calcula <span class="math inline">\(P\left(-\log \left(y_{-i}\right) \mid \mu, \sigma, \xi\right)\)</span> y si es menor a un <span class="math inline">\(\alpha\)</span> tan pequeño como se desee, la observacion <span class="math inline">\(i\)</span> es una anomalía.</li>
-</ol>
-<!-- Termina Andreina -->
-<!-- Empieza Diego -->
-</section>
-<section id="proceso-general-del-algoritmo" class="slide level2 center">
-<h2>Proceso general del algoritmo</h2>
-<p>El proceso general del algoritmo <strong>oddnet</strong> se puede describir con el siguiente diagrama:</p>
-<p align="center">
-</p>
-<img src="proceso general.png" width="1000" class="r-stretch"><p></p>
-</section>
-<section id="resultados" class="slide level2 center">
-<h2>Resultados</h2>
-<div class="panel-tabset">
-<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Exp 1</a></li><li><a href="#tabset-3-2">Exp 2</a></li><li><a href="#tabset-3-3">Exp 3</a></li><li><a href="#tabset-3-4">Exp 4</a></li></ul>
-<div class="tab-content">
-<div id="tabset-3-1">
-<p><img src="RED 1.png" alt="Imagen 1"></p>
-</div>
-<div id="tabset-3-2">
-<p><img src="RED 2.png"></p>
-</div>
-<div id="tabset-3-3">
-<p><img src="RED 3.png"></p>
-</div>
-<div id="tabset-3-4">
-<p><img src="RED 4.png"></p>
-</div>
-</div>
-</div>
-</section>
-<section class="slide level2 center">
-
-<ol type="1">
-<li><p>Redes de Erdős-Rényi con una probabilidad <span class="math inline">\(p=0,05\)</span> constante de conexión entre nodos, en <span class="math inline">\(t=50\)</span> se tiene <span class="math inline">\(p=p_*\)</span> con <span class="math inline">\(p_* \in \{0.1, 0.15, 0.2, 0.25\}\)</span></p></li>
-<li><p>Redes de Erdős-Rényi Dinámicas, donde la probabilidad de conexión entre los nodos aumenta linealmente a lo largo del tiempo, en <span class="math inline">\(t=50\)</span> <span class="math inline">\(p = 0.2727 + p_*\)</span>, con <span class="math inline">\(p_* \in \{0.05, 0.1, 0.15, 0.2\}\)</span></p></li>
-</ol>
-</section>
-<section class="slide level2 center">
-
-<ol start="3" type="1">
-<li><p>Redes de Barabási-Albert que siguen un modelo de conexión preferencial, donde algunos nodos tienen una probabilidad mayor de formar nuevas conexiones.</p></li>
-<li><p>Redes de Watts-Strogatz con propiedades de mundo pequeño, caracterizadas por altos niveles de agrupamiento y cortas distancias promedio entre nodos, <span class="math inline">\(p\)</span> aumenta de <span class="math inline">\(0.05\)</span> a <span class="math inline">\(0.3\)</span>, pero en el tiempo <span class="math inline">\(t=50\)</span> <span class="math inline">\(p=0.1737 + p_*\)</span> con <span class="math inline">\(p_* \in \{0.05, 0.1, 0.15, 0.2\}\)</span></p></li>
-</ol>
-<style>
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px;
-}
-
-.grid-item img {
-    max-width: 100%;
-    height: auto;
-}
-</style>
-</section>
-<section class="slide level2 center">
-
-<h3 id="ejercicio-datos-reales">Ejercicio datos reales</h3>
-<p>Redes de Co-votación del Senado de EE.UU: Incluye las redes de co-votación en el Senado de EE.UU. desde el 40° hasta el 113° Congreso, donde los nodos representan a los senadores y las aristas indican co-votaciones entre ellos.</p>
-</section>
-<section class="slide level2 center">
-
-<p align="center">
-</p>
-<img src="congreso USA.png" width="950" class="r-stretch"><p></p>
-</section>
-<section class="slide level2 center">
-
-<p align="center">
-</p>
-<img src="congreso anomalias.png" width="1000" class="r-stretch"><p></p>
-<!-- Termina Diego -->
-</section>
-<section id="conclusiones-y-limitaciones" class="slide level2 center">
-<h2>Conclusiones y limitaciones</h2>
-<div class="panel-tabset">
-<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">1</a></li><li><a href="#tabset-4-2">2</a></li><li><a href="#tabset-4-3">3</a></li><li><a href="#tabset-4-4">4</a></li></ul>
-<div class="tab-content">
-<div id="tabset-4-1">
-<p><strong>Oddnet</strong> obtiene mejores resultados que LAD y Tensorsplat. - El método funciona bien con redes generadas por el modelo Erdos-Renyi, de alguna manera, el modelo más sencillo de generación aleatoria de redes; seria interesante probar la efectividad del método <strong>oddnet</strong> con otros modelos como modelos de Grafos Aleatorios Generalizados, modelos de Grafos Aleatorios Exponenciales, y modelos de Bloques Estocásticos</p>
-</div>
-<div id="tabset-4-2">
-<p>Falta la extensión de para encontrar anomalías en subredes de grandes bases de datos</p>
-</div>
-<div id="tabset-4-3">
-<p>La reducción de la dimensionalidad en en el espacio residual se usa para traer información de la varianza a dos dimensiones, si bien es cierto esto tiene gran potencial en la interpretabilidad, podría ser insuficiente en la recolección de la información en su totalidad</p>
-</div>
-<div id="tabset-4-4">
-<p>El modelo ARIMA podría no siempre ser la mejor opción para modelar una serie de tiempo.</p>
-</div>
-</div>
-</div>
-</section>
+<img data-src="AplicaciónSemiario_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
 <section id="bibliografía" class="slide level2 center">
 <h2>Bibliografía</h2>
 <ul>
@@ -700,26 +516,24 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
 </div>
 </div>
 </section>
-
-
     </div>
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="Expo_Seminario_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="AplicaciónSemiario_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="Expo_Seminario_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="Expo_Seminario_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="Expo_Seminario_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="Expo_Seminario_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="Expo_Seminario_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="Expo_Seminario_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="AplicaciónSemiario_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="AplicaciónSemiario_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="AplicaciónSemiario_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="AplicaciónSemiario_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="AplicaciónSemiario_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="AplicaciónSemiario_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="Expo_Seminario_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="Expo_Seminario_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="Expo_Seminario_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="Expo_Seminario_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="AplicaciónSemiario_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="AplicaciónSemiario_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="AplicaciónSemiario_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="AplicaciónSemiario_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -914,6 +728,82 @@ p_{t \mid t-1} \leq \epsilon_1 \Longleftrightarrow \tilde{p}_{t \mid t-1} \leq \
         ]
       });
     </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

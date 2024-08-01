@@ -20,6 +20,9 @@ editor: visual
 # toc: true
 toc-title: Contenido
 progress: true
+with:
+   target: gh-pages
+   path: AplicacionSeminario.qmd
 ---
 
 ## Aplicación
@@ -37,80 +40,54 @@ La red dinámica representa una colonia de hormigas. Los autores registraron la 
 ## Datos (insecta-ant-colony4)
 
 |                   |                                                                                                                                 |
-|--------------------|----------------------------------------------------|
+|-------------------|---------------------------------------------------------------------------------------------------------------------------------|
 | *Tipo*            | Conjuntos de datos de redes del mundo real procedentes de estudios publicados sobre animales salvajes, cautivos y domesticados. |
 | *Nodos y enlaces* | 102 y 81.6K                                                                                                                     |
 | *Enlace*          | Interacción                                                                                                                     |
 | *Red*             | No dirigida                                                                                                                     |
 
-## Algunas funciones detrás del código:
+## Algunas funciones detrás del código
 
 ::: panel-tabset
-## 1-5
+## Redes 1
 
-1.  Distribución de triángulos: # de triángulos conectados a c/nodo
-2.  Grado: \# de aristas conectado a cada nodo
-3.  Densidad: \# de aristas observadas/total posibles aristas
-4.  Total de aristas en $\mathcal{G}_t$
-5.  Transitividad (*amigos de amigos*):Proporción de nodos cuyos nodos adyacentes también están conectados
+1.  **igraph::count_triangles** \# de triángulos conectados a c/nodo.
+2.  **igraph::degree** \# de aristas conectado a cada nodo.
+3.  **igraph::edge_density** \# de aristas observadas/total posibles aristas.
+4.  **igraph::gsize** Total de aristas en $\mathcal{G}_t$.
 
-## 6-10 {.smaller}
+## Redes 2
 
-6.  Asortatividad: Medición de la homofilia [^1] del grafo, basándose en las etiquetas de los nodos
+5.  **igraph::transitivity** (*amigos de amigos*):Proporción de nodos cuyos nodos adyacentes también están conectados.
 
-7.  Distancia media: calcula la media de todos los caminos entre diferentes nodos
+6.  **igraph::assortativity.nominal** y **igraph::assortativity_degree** Medición de la homofilia del grafo, basándose en las etiquetas de los nodos.
 
-8.  Diámetro: Distancia más grande del grafo [^2]
+7.  **igraph::mean_distance** calcula la media de todos los caminos entre diferentes nodos.
 
-9.  Proporción de nodos no conectados
+## Redes 3
 
-10. Centralidad: Mide qué tan "cerca" está un nodo a otros nodos
+8.  **igraph::diameter** Distancia más grande del grafo.
 
-<!-- Termina Zaith -->
+9.  **igraph::page_rank** Se calcula el PageRank de todos los vértices y se toma el cuantil $99^ {th }$.
 
-<!-- Empieza Andreina -->
+10. **igraph::coreness** El núcleo $k$ de un grafo: subgrafo máximo con un grado mínimo de al menos $k$. Es decir, cada vértice de un núcleo $k$ tiene un grado mayor que $k$. Se calcula **coreness** para todos los vértices y se incluye el cuantil $99$.
 
-## 11-13
+## Detección de anomalías
 
-11. La conectividad de vértices: indica el número mínimo de vértices/nodos que hay que eliminar para que el grafo no esté fuertemente conectado.
-12. La eficiencia global: la media de las distancias inversas por pares entre todos los pares de nodos.
-13. Se extraen dos características de los componentes conectados de la red. De la distribución del número de nodos en cada componente conectado se utiliza el cuantil $99^{th }$
-
-## 14-16
-
-14. También se incluye el número de componentes conectados.
-
-15. La centralidad de proximidad de un vértice mide lo cerca que está ese vértice de otros vértices del grafo. Se define como la inversa de la suma de las distancias a todos los vértices. Se incluye la proporción de vértices con proximidad $\geq 0,8$ en el vector de características.
-
-16. La centralidad entre nodos mide en qué medida un nodo conecta a otros nodos al ser un intermediario. Se define como los caminos más cortos que pasan por un nodo.
-
-## 17-18
-
-17. Se calcula el PageRank de todos los vértices y se toma el cuantil $99^ {th }$.
-18. Las puntuaciones hub de los vértices se definen como el vector propio principal de $A A^T$ donde $A$ denota la matriz de adyacencia. Se utliza el valor propio principal correspondiente a las puntuaciones hub como una característica.
-
-## 19-20
-
-19. Las puntuaciones de autoridad de los vértices son el vector propio principal de $A^T A$. Se Incluye el valor propio principal correspondiente a las puntuaciones de autoridad como una característica.
-
-20. El núcleo $k$ de un grafo: subgrafo máximo con un grado mínimo de al menos $k$. Es decir, cada vértice de un núcleo $k$ tiene un grado mayor que $k$. Se calcula **coreness** para todos los vértices y se incluye el cuantil $99^{th }$.
+11. **fabletools::model(arima)** Ajuste automático de los modelos ARIMA a cada serie.
+12. **pcaPP::PCAproj** PCA robusto para reducir la dimensión a dos componentes.
+13. **lookout::lookout** Algoritmo Lookout para detectar anomalías en datos bidimensionales.
 :::
-
-[^1]: Nodos similares tienen a conectarse entre sí
-
-[^2]: Distancia es la caminata más corta entre dos nodos
-
 
 ## Interacción
 
-![Definición de interacción](images/app_interaccion-01.png)
+![](images/app_interaccion-01.png)
 
-## Grafica de red
+## Grafica de la red dinámica
 
-
-
-![net](network_animation_2.gif){width="599"}
-
+::: {style="text-align: center;"}
+<img src="network_animation_2.gif" style="width:50%;"/>
+:::
 
 ```{r packages}
 library(igraph)
@@ -122,19 +99,11 @@ library(readxl)
 library(readr)
 ```
 
-
 ## Aplicación a las redes de hormigas
 
-```{r}
-
-datcol4 <- read_table("~/../Desktop/ADZ_AnomalyDetectionDynamicNetworks/data/insecta-ant-colony4.edges",col_names = F)
-#datcol4 <- read_table("C:/Users/diego/Documents//ADZ_AnomalyDetectionDynamicNetworks/data/insecta-ant-colony4.edges", col_names = FALSE)
-```
-
-
 ```{r carga datos}
-
-#datcol4 <- read_table("C:/Users/andre/OneDrive/Documentos/Documentos/Universidad Nacional/Seminario/Seminario I Posgrado/ADZ_AnomalyDetectionDynamicNetworks/data/insecta-ant-colony4.edges", col_names = FALSE)
+getwd()
+datcol4 <- read_table("C:/Users/andre/OneDrive/Documentos/Documentos/Universidad Nacional/Seminario/Seminario I Posgrado/ADZ_AnomalyDetectionDynamicNetworks/data/insecta-ant-colony4.edges", col_names = FALSE)
 
 trescol <- datcol4 |>
   select(-X3) |>
@@ -163,7 +132,6 @@ anom <- anomalous_networks(networks,alpha = 0.05, fast = T)
 anom
 ```
 
-
 ```{r}
 # Cargar las librerías necesarias
 library(dplyr)
@@ -173,24 +141,11 @@ library(igraph)
 library(ggplot2)
 
 # Importar los datos de aristas
-
-#datcol4 <- read.table("C:/Users/diego/Documents//ADZ_AnomalyDetectionDynamicNetworks/data/insecta-ant-colony4.edges", header = FALSE)
-datcol4 <- read.table("~/../Desktop/ADZ_AnomalyDetectionDynamicNetworks/data/insecta-ant-colony4.edges", header = FALSE)
-
-
+datcol4 <- read.table("C:/Users/andre/OneDrive/Documentos/Documentos/Universidad Nacional/Seminario/Seminario I Posgrado/ADZ_AnomalyDetectionDynamicNetworks/data/insecta-ant-colony4.edges", header = FALSE)
 colnames(datcol4) <- c("from", "to", "weight", "day")
 
 # Importar los datos de nodos
-#Datos_Grupos_Colonia4 <- read_excel("~/../Desktop/ADZ_AnomalyDetectionDynamicNetworks/data/Datos_Grupos_Colonia4.xlsx")
-#datcol4 <- read.table("C:/Users/andre/OneDrive/Documentos/Documentos/Universidad Nacional/Seminario/Seminario I Posgrado/ADZ_AnomalyDetectionDynamicNetworks/data/insecta-ant-colony4.edges", header = FALSE)
-datcol4 <- read.table("~/../Desktop/ADZ_AnomalyDetectionDynamicNetworks/data/insecta-ant-colony4.edges", header = FALSE)
-
-colnames(datcol4) <- c("from", "to", "weight", "day")
-
-# Importar los datos de nodos
-#Datos_Grupos_Colonia4 <- read_excel("C:/Users/andre/OneDrive/Documentos/Documentos/Universidad Nacional/Seminario/Seminario I Posgrado/ADZ_AnomalyDetectionDynamicNetworks/data/Datos_Grupos_Colonia4.xlsx")
-
-Datos_Grupos_Colonia4 <- read_excel("~/../Desktop/ADZ_AnomalyDetectionDynamicNetworks/data/Datos_Grupos_Colonia4.xlsx")
+Datos_Grupos_Colonia4 <- read_excel("C:/Users/andre/OneDrive/Documentos/Documentos/Universidad Nacional/Seminario/Seminario I Posgrado/ADZ_AnomalyDetectionDynamicNetworks/data/Datos_Grupos_Colonia4.xlsx")
 
 
 # Convertir las columnas from y to a character
@@ -255,8 +210,7 @@ edges_df <- datcol4 %>%
 
 ```
 
-```{r }
-
+```{r redes_etl ,eval=FALSE}
 library(igraph)
 
 # Crear una lista vacía para almacenar las redes
@@ -309,26 +263,6 @@ library(gganimate)
 library(tidygraph)
 library(ggplot2)
 
-# Convertir edges_df en un grafo para ggraph
-graph_tbl <- as_tbl_graph(edges_df, directed = FALSE)
-
-# Asegurarnos de que el data frame de nodos esté integrado en el grafo
-graph_tbl <- graph_tbl %>%
-  activate(nodes) %>%
-  left_join(Datos_Grupos_Colonia4, by = "name")
-
-# Crear el gráfico animado
-p <- ggraph(graph_tbl, layout = 'fr') + 
-  geom_edge_link(aes(frame = time), alpha = 0.8, color = 'grey88') + 
-  geom_node_point(aes(color = category), size = 5) + 
-  scale_color_manual(values = c("F" = "indianred", "N" = "navy", "C" = "gold3", "unknown" = "grey20")) + 
-  theme_void()
-
-# Añadir animación
-#animated_plot <- p + transition_time(time) + labs(title = "Día: {frame_time}")
-
-#animate(animated_plot, renderer = gifski_renderer("network_animation_2.gif"))
-
 # # Convertir edges_df en un grafo para ggraph
 # graph_tbl <- as_tbl_graph(edges_df, directed = FALSE)
 # 
@@ -350,14 +284,9 @@ p <- ggraph(graph_tbl, layout = 'fr') +
 # animate(animated_plot, renderer = gifski_renderer("network_animation_2.gif"))
 
 
-
 ```
 
-## Red dinamica
-
-Grafica de las redes en el tiempo ![](network_animation_2.gif)
-
-## Gráfica de probabilidad de outliers
+## Gráfica de las probabilidades condicionales
 
 ```{r}
 #| output: true
@@ -384,115 +313,113 @@ mitema <-
 
 prob_outlier <-anom$outlier_probability
 
-ggplot() + geom_point(aes(x=1:41,y=prob_outlier), color="darkblue", size=2, shape=1) + geom_line(aes(x=1:41,y=prob_outlier), color="blue4", size=0.6, alpha=0.5) + geom_hline(yintercept = 0.05, linetype=2, color=2) + labs(title = "Probabilidad condicional ...",x="Tiempo",y="Prob. Outlier" ) + mitema +  scale_x_continuous(breaks = seq(1,41,2))
+ggplot() + geom_point(aes(x=1:41,y=prob_outlier), color="darkblue", size=2, shape=1) + geom_line(aes(x=1:41,y=prob_outlier), color="blue4", size=0.6, alpha=0.5) + geom_hline(yintercept = 0.05, linetype=2, color=2) + labs(title = "Probabilidad condicional",x="Tiempo",y="Prob. Outlier" ) + mitema +  scale_x_continuous(breaks = seq(1,41,2))
 
 ```
 
-## Tiempos anómalos
+## Red anómala día 12
 
-```{r}
-#| output: true
+::: {style="text-align: center;"}
+<img src="anomalous_network_12.png" style="width:75%;"/>
+:::
 
-# Especificar el tiempo que deseas graficar
-selected_time <- 12
-
-# Filtrar los datos de aristas para el tiempo seleccionado
-edges_df_time <- edges_df %>%
-  dplyr::filter(time == selected_time)
-
-# Filtrar los datos de nodos para los nodos que aparecen en el tiempo seleccionado
-nodes_time <- nodes %>%
-  filter(name %in% unique(c(edges_df_time$from, edges_df_time$to)))
-
-library(ggraph)
-library(tidygraph)
-library(ggplot2)
-
-# Convertir el data frame filtrado en un grafo
-graph_tbl_time <- as_tbl_graph(edges_df_time, directed = FALSE)
-
-# Asegurarnos de que el data frame de nodos esté integrado en el grafo
-graph_tbl_time <- graph_tbl_time %>%
-  activate(nodes) %>%
-  left_join(nodes_time, by = "name")
-
-# Crear el gráfico para el tiempo específico con ajustes estéticos
-p_time <- ggraph(graph_tbl_time, layout = 'fr') + 
-  geom_edge_link(aes(), alpha = 0.8, color = 'grey88') + 
-  geom_node_point(aes(color = category.x), size = 5) + 
-  scale_color_manual(values = c("F" = "indianred", "N" = "navy", "C" = "gold3", "unknown" = "grey20")) + 
-  theme_void() + 
-  theme(
-    legend.position = "right",
-    plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
-    plot.subtitle = element_text(hjust = 0.5, size = 12)
-  ) +
-  labs(
-    title = "Network Visualization",
-    subtitle = paste("Day:", selected_time),
-    color = "Category"
-  )
-
-# Mostrar el gráfico
-print(p_time)
-```
-
-```{r}
-#| output: false
-
-
-library(ggplot2)
-library(igraph)
-
-# Crear el grafo usando igraph
-graph_time <- graph_from_data_frame(d = edges_df_time, vertices = nodes_time, directed = FALSE)
-
-# Obtener las posiciones de los nodos usando el algoritmo Fruchterman-Reingold
-layout <- layout_with_fr(graph_time)
-
-# Convertir el layout a un data frame
-layout_df <- as.data.frame(layout)
-colnames(layout_df) <- c("x", "y")
-layout_df$name <- V(graph_time)$name
-
-# Unir las posiciones de los nodos con los datos de nodos
-nodes_pos <- nodes_time %>%
-  left_join(layout_df, by = "name")
-
-# Preparar los datos de aristas para ggplot2
-edges_df_time <- edges_df_time %>% distinct() |> 
-  left_join(layout_df, by = c("from" = "name")) %>%
-  rename(x_from = x, y_from = y) %>%
-  left_join(layout_df, by = c("to" = "name")) %>%
-  rename(x_to = x, y_to = y)
-
-# Crear el gráfico con ggplot2
-p_time_ggplot <- ggplot() +
-  geom_segment(data = edges_df_time, aes(x = x_from, y = y_from, xend = x_to, yend = y_to), color = "grey88", alpha = 0.8) +
-  geom_point(data = nodes_pos, aes(x = x, y = y, color = category.y), size = 5) +
-  scale_color_manual(values = c("F" = "indianred", "N" = "navy", "C" = "gold3", "unknown" = "grey20")) +
-  theme_void() +
-  theme(
-    legend.position = "right",
-    plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
-    plot.subtitle = element_text(hjust = 0.5, size = 12)
-  ) +
-  labs(
-    title = "Network Visualization",
-    subtitle = paste("Day:", selected_time),
-    color = "Category"
-  )
-
-# Mostrar el gráfico
-print(p_time_ggplot)
-
-
-
-```
-
-```{r}
+```{r anomaly_plot}
 #| echo: false
-#| output: false  
+ library(dplyr)
+#  
+#  # Especificar el tiempo que deseas graficar
+#  # selected_time <- 12
+#  
+#  # Filtrar los datos de aristas para el tiempo seleccionado
+#  edges_df_time <- edges_df[edges_df$time==12,]
+#  
+#  # Filtrar los datos de nodos para los nodos que aparecen en el tiempo seleccionado
+#  nodes_time <- nodes %>%
+#    filter(name %in% unique(c(edges_df_time$from, edges_df_time$to)))
+#  
+#  library(ggraph)
+#  library(tidygraph)
+#  library(ggplot2)
+#  
+#  # Convertir el data frame filtrado en un grafo
+#  graph_tbl_time <- as_tbl_graph(edges_df_time, directed = FALSE)
+#  
+#  # Asegurarnos de que el data frame de nodos esté integrado en el grafo
+#  graph_tbl_time <- graph_tbl_time %>%
+#    activate(nodes) %>%
+#    left_join(nodes_time, by = "name")
+#  
+#  # Crear el gráfico para el tiempo específico con ajustes estéticos
+#  p_time <- ggraph(graph_tbl_time, layout = 'fr') + 
+#  geom_edge_link(aes(), alpha = 0.8, color = 'grey88') + 
+#    geom_node_point(aes(color = category.x), size = 5) + 
+#    scale_color_manual(values = c("F" = "indianred", "N" = "navy", "C" = "gold3", "unknown" = "grey20")) + 
+#    theme_void() + 
+#    theme(
+#      legend.position = "right",
+#      plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+#      plot.subtitle = element_text(hjust = 0.5, size = 12)
+#    ) +
+#    labs(
+#      title = "Network Visualization",
+#      subtitle = paste("Day:", selected_time),
+#      color = "Category"
+#    )
+#  
+#  # Mostrar el gráfico
+#  print(p_time)
+#  
+#  library(ggplot2)
+#  library(igraph)
+#  
+#  # Crear el grafo usando igraph
+#  graph_time <- graph_from_data_frame(d = edges_df_time, vertices = nodes_time, directed = FALSE)
+#  
+#  # Obtener las posiciones de los nodos usando el algoritmo Fruchterman-Reingold
+#  layout <- layout_with_fr(graph_time)
+#  
+#  # Convertir el layout a un data frame
+#  layout_df <- as.data.frame(layout)
+#  colnames(layout_df) <- c("x", "y")
+#  layout_df$name <- V(graph_time)$name
+#  
+#  # Unir las posiciones de los nodos con los datos de nodos
+#  nodes_pos <- nodes_time %>%
+#    left_join(layout_df, by = "name")
+#  
+#  # Preparar los datos de aristas para ggplot2
+#  edges_df_time <- edges_df_time %>%
+#    left_join(layout_df, by = c("from" = "name")) %>%
+#    rename(x_from = x, y_from = y) %>%
+#    left_join(layout_df, by = c("to" = "name")) %>%
+#    rename(x_to = x, y_to = y)
+#  
+#  # Crear el gráfico con ggplot2
+#  p_time_ggplot <- ggplot() +
+#    geom_segment(data = edges_df_time, aes(x = x_from, y = y_from, xend = x_to, yend = y_to), color = "grey88", alpha = 0.8) +
+#    geom_point(data = nodes_pos, aes(x = x, y = y, color = category.y), size = 5) +
+#    scale_color_manual(values = c("F" = "indianred", "N" = "navy", "C" = "gold3", "unknown" = "grey20")) +
+#    theme_void() +
+#    theme(
+#      legend.position = "right",
+#      plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+#      plot.subtitle = element_text(hjust = 0.5, size = 12)
+#    ) +
+#    labs(
+#      title = "Network Visualization",
+#      subtitle = paste("Day:", selected_time),
+#      color = "Category"
+#    )
+#  
+#  # Mostrar el gráfico
+#  print(p_time_ggplot)
+# 
+# ggsave("anomalous_network_12.png",width=12,height=9)
+
+```
+
+```{r functions_plots}
+#| echo: false
 
 plot(anom$kde)
 plot(anom$lookde)
@@ -501,9 +428,7 @@ plot(anom$bandwidth)
 plot(anom$data)
 ```
 
-## Bibliografía
-
-- Mersch, D., Crespi A., Keller,L.  Tracking Individuals Shows Spatial Fidelity Is a Key Regulator of Ant Social Organization, *Science* 340(6136).
+## Bibliografía {.smaller}
 
 -   Akoglu, L., Tong, H. & Koutra, D. (2015), ‘Graph based anomaly detection and description: A survey’, *Data Mining and Knowledge Discovery* 29(3), 626–688.
 -   Albert, R. & Barabasi, A.-L. (2002), ‘Statistical mechanics of complex networks’, *Reviews of modern physics* 74(1), 47.

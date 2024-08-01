@@ -37,7 +37,7 @@ La red dinámica representa una colonia de hormigas. Los autores registraron la 
 ## Datos (insecta-ant-colony4)
 
 |                   |                                                                                                                                 |
-|-------------------|---------------------------------------------------------------------------------------------------------------------------------|
+|-------------------|-----------------------------------------------------|
 | *Tipo*            | Conjuntos de datos de redes del mundo real procedentes de estudios publicados sobre animales salvajes, cautivos y domesticados. |
 | *Nodos y enlaces* | 102 y 81.6K                                                                                                                     |
 | *Enlace*          | Interacción                                                                                                                     |
@@ -71,7 +71,8 @@ graficas
 #| echo: true
 #| output: true
 
-datcol4 <- read_table("~/../Desktop/ADZ_AnomalyDetectionDynamicNetworks/data/insecta-ant-colony4.edges", col_names = FALSE)
+getwd()
+datcol4 <- read_table("C:/Users/diego/Documents//ADZ_AnomalyDetectionDynamicNetworks/data/insecta-ant-colony4.edges", col_names = FALSE)
 
 trescol <- datcol4 |>
   select(-X3) |>
@@ -87,34 +88,296 @@ for (i in 1:length(ant41_red_list)) {
   gr <- graph_from_data_frame(ant41_red_list[[i]])
   networks[[i]] <- as_adjacency_matrix(gr)
 }
+#edges_df <- bind_rows(edges_list)
 anom <- anomalous_networks(networks,alpha = 0.05, fast = T)
 anom
 ```
+
+```{r}
+# Cargar las librerías necesarias
+library(dplyr)
+library(readr)
+library(readxl)
+library(igraph)
+library(ggplot2)
+
+# Importar los datos de aristas
+datcol4 <- read.table("C:/Users/diego/Documents//ADZ_AnomalyDetectionDynamicNetworks/data/insecta-ant-colony4.edges", header = FALSE)
+colnames(datcol4) <- c("from", "to", "weight", "day")
+
+# Importar los datos de nodos
+Datos_Grupos_Colonia4 <- read_excel("C:/Users/diego/Documents//ADZ_AnomalyDetectionDynamicNetworks/data/Datos_Grupos_Colonia4.xlsx")
+
+
+# Convertir las columnas from y to a character
+datcol4$from <- as.character(datcol4$from)
+datcol4$to <- as.character(datcol4$to)
+
+
+# Convertir la columna name a character
+Datos_Grupos_Colonia4$tag_id<-as.character(Datos_Grupos_Colonia4$tag_id)
+# Verificar los datos de aristas
+head(datcol4)
+
+# Verificar los datos de nodos
+head(Datos_Grupos_Colonia4)
+
+colnames(Datos_Grupos_Colonia4) <- c("name","category")
+
+# Eliminar nodos duplicados en el data frame de nodos
+nodes_unique <- Datos_Grupos_Colonia4 %>%
+  distinct(name, .keep_all = TRUE)
+
+# Obtener todos los nodos presentes en las aristas
+all_nodes <- unique(c(datcol4$from, datcol4$to))
+
+# Verificar que todos los nodos están en el data frame de nodos
+missing_nodes <- setdiff(all_nodes, nodes_unique$name)
+if(length(missing_nodes) > 0) {
+  cat("Nodos faltantes en el data frame de nodos:", missing_nodes, "\n")
+}
+
+# Crear un data frame de nodos faltantes con una categoría predeterminada
+nodes_missing_df <- data.frame(name = missing_nodes, category = "unknown")
+
+# Combinar el data frame de nodos originales con los nodos faltantes
+nodes_complete <- bind_rows(nodes_unique, nodes_missing_df)
+
+# Filtrar los datos de nodos para incluir solo los nodos presentes en las aristas
+nodes_complete <- nodes_complete %>%
+  filter(name %in% all_nodes)
+
+# Crear el grafo usando igraph
+graph <- graph_from_data_frame(d = datcol4, vertices = nodes_complete, directed = FALSE)
+
+# Obtener las posiciones de los nodos usando el algoritmo Fruchterman-Reingold
+layout <- layout_with_fr(graph)
+
+# Convertir el layout a un data frame
+layout_df <- as.data.frame(layout)
+colnames(layout_df) <- c("x", "y")
+layout_df$name <- V(graph)$name
+
+# Unir las posiciones de los nodos con los datos de nodos
+nodes_pos <- nodes_complete %>%
+  left_join(layout_df, by = "name")
+
+# Preparar los datos de aristas para ggplot2
+edges_df <- datcol4 %>%
+  left_join(layout_df, by = c("from" = "name")) %>%
+  rename(x_from = x, y_from = y) %>%
+  left_join(layout_df, by = c("to" = "name")) %>%
+  rename(x_to = x, y_to = y)
+
+```
+
+```{r eval=FALSE}
+library(igraph)
+
+# Crear una lista vacía para almacenar las redes
+networks <- list()
+edges_list <- list()
+
+# Suponiendo que ant41_red_list es una lista de data frames de aristas
+for (i in 1:length(ant41_red_list)) {
+  # Filtrar las aristas para el día actual
+  edges <- ant41_red_list[[i]]
+
+  # Verificar y completar los nodos faltantes en las aristas
+  all_nodes_in_edges <- unique(c(edges$from, edges$to))
+  missing_nodes_in_edges <- setdiff(all_nodes_in_edges, nodes_complete$name)
+  if(length(missing_nodes_in_edges) > 0) {
+    cat("Nodos faltantes en el día", i, ":", missing_nodes_in_edges, "\n")
+  }
+
+  # Crear el gráfico usando igraph
+  gr <- graph_from_data_frame(d = edges, directed = FALSE, vertices = nodes_complete)
+
+  # Guardar el gráfico en la lista
+  networks[[i]] <- gr
+
+  # Convertir el gráfico a data frame y añadir la información de tiempo
+  edges_list[[i]] <- igraph::as_data_frame(gr, what = "edges") %>%
+    mutate(time = unique(edges$day))
+}
+
+# Unir todos los data frames de enlaces en uno solo
+edges_df <- bind_rows(edges_list)
+
+# Crear el data frame de nodos con categorías
+nodes <- igraph::as_data_frame(networks[[1]], what = "vertices")
+# Asegurarnos de que el data frame de nodos tiene la columna de categoría
+# Convertir la columna 'name' en 'nodes' a tipo 'character'
+nodes <- nodes %>%
+  mutate(name = as.character(name))
+
+# Convertir la columna 'name' en 'Datos_Grupos_Colonia4' a tipo 'character'
+Datos_Grupos_Colonia4 <- Datos_Grupos_Colonia4 %>%
+  mutate(name = as.character(name))
+
+# Realizar la unión de datos
+nodes <- nodes %>%
+  left_join(Datos_Grupos_Colonia4, by = "name")
+
+library(ggraph)
+library(gganimate)
+library(tidygraph)
+library(ggplot2)
+
+# Convertir edges_df en un grafo para ggraph
+graph_tbl <- as_tbl_graph(edges_df, directed = FALSE)
+
+# Asegurarnos de que el data frame de nodos esté integrado en el grafo
+graph_tbl <- graph_tbl %>%
+  activate(nodes) %>%
+  left_join(Datos_Grupos_Colonia4, by = "name")
+
+# Crear el gráfico animado
+p <- ggraph(graph_tbl, layout = 'fr') + 
+  geom_edge_link(aes(frame = time), alpha = 0.8, color = 'grey88') + 
+  geom_node_point(aes(color = category), size = 5) + 
+  scale_color_manual(values = c("F" = "indianred", "N" = "navy", "C" = "gold3", "unknown" = "grey20")) + 
+  theme_void()
+
+# Añadir animación
+animated_plot <- p + transition_time(time) + labs(title = "Día: {frame_time}")
+
+animate(animated_plot, renderer = gifski_renderer("network_animation_2.gif"))
+
+
+```
+
+## Red dinamica
+
+Grafica de las redes en el tiempo ![](network_animation_2.gif)
 
 ## Gráfica de probabilidad de outliers
 
 ```{r}
 #| output: true
-plot(anom$outlier_probability)
+# tema ggplot 
+
+library(ggplot2)
+mitema <- 
+  theme(
+    plot.title=element_text(family="sans",face="bold",size=16,vjust=0.5,hjust=0.5,
+                            color="black",angle=0),
+    axis.title.x=element_text(family="sans",face="bold",size=14,vjust=0.5,hjust=0.5,
+                              color="gray23",angle=0),
+    axis.title.y=element_text(family="sans",face="bold",size=14,vjust=0.5,hjust=0.5,
+                              color="gray23",angle=90),
+    axis.text.x=element_text(family="sans",face="italic",size=10,vjust=0.5,hjust=0.5,
+                             color="gray22",angle=0),
+    axis.text.y=element_text(family="sans",face="italic",size=10,vjust=0.5,hjust=0.5,
+                             color="gray22",angle=0),
+    panel.background=element_rect(fill="gray95"),
+    panel.grid.major=element_line(color="gray85",size=1),
+    panel.grid.minor=element_line(color="gray85",size=0.5),
+    legend.title = element_text(family = "sans",face = "bold", size = 12, color = "Black"),
+    legend.text = element_text(family = "sans",face="italic",size=10,color="gray25",angle=0))
+
+prob_outlier <-anom$outlier_probability
+
+ggplot() + geom_point(aes(x=1:41,y=prob_outlier), color="darkblue", size=2, shape=1) + geom_line(aes(x=1:41,y=prob_outlier), color="blue4", size=0.6, alpha=0.5) + geom_hline(yintercept = 0.05, linetype=2, color=2) + labs(title = "Probabilidad condicional ...",x="Tiempo",y="Prob. Outlier" ) + mitema +  scale_x_continuous(breaks = seq(1,41,2))
 
 ```
 
+hacer plots de los tiempos
+
 ```{r}
 #| echo: false
-ant41_red_df |> filter(day==10) |>
-  igraph::graph_from_data_frame()  |>
-    plot()
-  
-ant41_red_df |> filter(day==11) |>
-  igraph::graph_from_data_frame()  |>
-  plot()
-ant41_red_df |> filter(day==12) |>
-  igraph::graph_from_data_frame()  |>
-  plot()
+library(dplyr)
 
-ant41_red_df |> filter(day==13) |>
-  igraph::graph_from_data_frame()  |>
-  plot()
+# Especificar el tiempo que deseas graficar
+selected_time <- 12
+
+# Filtrar los datos de aristas para el tiempo seleccionado
+edges_df_time <- edges_df %>%
+  filter(time == selected_time)
+
+# Filtrar los datos de nodos para los nodos que aparecen en el tiempo seleccionado
+nodes_time <- nodes %>%
+  filter(name %in% unique(c(edges_df_time$from, edges_df_time$to)))
+
+library(ggraph)
+library(tidygraph)
+library(ggplot2)
+
+# Convertir el data frame filtrado en un grafo
+graph_tbl_time <- as_tbl_graph(edges_df_time, directed = FALSE)
+
+# Asegurarnos de que el data frame de nodos esté integrado en el grafo
+graph_tbl_time <- graph_tbl_time %>%
+  activate(nodes) %>%
+  left_join(nodes_time, by = "name")
+
+# Crear el gráfico para el tiempo específico con ajustes estéticos
+p_time <- ggraph(graph_tbl_time, layout = 'fr') + 
+  geom_edge_link(aes(), alpha = 0.8, color = 'grey88') + 
+  geom_node_point(aes(color = category.x), size = 5) + 
+  scale_color_manual(values = c("F" = "indianred", "N" = "navy", "C" = "gold3", "unknown" = "grey20")) + 
+  theme_void() + 
+  theme(
+    legend.position = "right",
+    plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+    plot.subtitle = element_text(hjust = 0.5, size = 12)
+  ) +
+  labs(
+    title = "Network Visualization",
+    subtitle = paste("Day:", selected_time),
+    color = "Category"
+  )
+
+# Mostrar el gráfico
+print(p_time)
+
+library(ggplot2)
+library(igraph)
+
+# Crear el grafo usando igraph
+graph_time <- graph_from_data_frame(d = edges_df_time, vertices = nodes_time, directed = FALSE)
+
+# Obtener las posiciones de los nodos usando el algoritmo Fruchterman-Reingold
+layout <- layout_with_fr(graph_time)
+
+# Convertir el layout a un data frame
+layout_df <- as.data.frame(layout)
+colnames(layout_df) <- c("x", "y")
+layout_df$name <- V(graph_time)$name
+
+# Unir las posiciones de los nodos con los datos de nodos
+nodes_pos <- nodes_time %>%
+  left_join(layout_df, by = "name")
+
+# Preparar los datos de aristas para ggplot2
+edges_df_time <- edges_df_time %>%
+  left_join(layout_df, by = c("from" = "name")) %>%
+  rename(x_from = x, y_from = y) %>%
+  left_join(layout_df, by = c("to" = "name")) %>%
+  rename(x_to = x, y_to = y)
+
+# Crear el gráfico con ggplot2
+p_time_ggplot <- ggplot() +
+  geom_segment(data = edges_df_time, aes(x = x_from, y = y_from, xend = x_to, yend = y_to), color = "grey88", alpha = 0.8) +
+  geom_point(data = nodes_pos, aes(x = x, y = y, color = category.y), size = 5) +
+  scale_color_manual(values = c("F" = "indianred", "N" = "navy", "C" = "gold3", "unknown" = "grey20")) +
+  theme_void() +
+  theme(
+    legend.position = "right",
+    plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+    plot.subtitle = element_text(hjust = 0.5, size = 12)
+  ) +
+  labs(
+    title = "Network Visualization",
+    subtitle = paste("Day:", selected_time),
+    color = "Category"
+  )
+
+# Mostrar el gráfico
+print(p_time_ggplot)
+
+
+
 ```
 
 ```{r}

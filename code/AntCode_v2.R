@@ -1,3 +1,5 @@
+### LIBRERIAS ###
+
 library(igraph)
 library(dplyr)
 library(oddnet)
@@ -6,40 +8,174 @@ library(forcats)
 library(tidygraph)
 library(tidyverse)
 library(ggraph)
+library(readxl)
 
 
-#dat <- read_graph("~/../Desktop/DatosRedes/insecta-ant-colony5.edges")
+### Carga de datos
 
 getwd()
-setwd("C:/Users/diego/OneDrive - Universidad Nacional de Colombia/Documentos/2024-I/Seminario I")
+setwd("C:/Users/diego/Documents/ADZ_AnomalyDetectionDynamicNetworks")
 
-datcol4 <- read.table("insecta-ant-colony4.edges")
-Datos_Grupos_Colonia4 <- read_excel("Datos_Grupos_Colonia4.xlsx")
+## Redes de la colonia 4
+datcol4 <- read.table("data/insecta-ant-colony4.edges")
+
+## Grupos de la colonia 4
+Datos_Grupos_Colonia4 <- read_excel("data/Datos_Grupos_Colonia4.xlsx")
 
 
-# datos originales --------------------------------------------------------
+## Ajustes de nombres de columnas 
+
+colnames(datcol4) <- c("from", "to", "weight", "day")
+colnames(Datos_Grupos_Colonia4) <- c("name","category")
 
 
-trescol <- datcol4 |> dplyr::rename(day = V4)
-#Datos originales, pero agrupados
-ant41_red_df <- trescol |> group_by(day)
-# Separados por dias (41)
-ant41_red_list <-  group_split(ant41_red_df)
+## Creacion de categorias faltantes
 
-ant41_red_df |> filter(day==10) |>
-  igraph::graph_from_data_frame()  |>
-    plot()
+# Eliminar nodos duplicados en el data frame de nodos
+nodes_unique <- Datos_Grupos_Colonia4 %>%
+  distinct(name, .keep_all = TRUE)
+
+# Obtener todos los nodos presentes en las aristas
+all_nodes <- unique(c(datcol4$from, datcol4$to))
+
+# Verificar que todos los nodos están en el data frame de nodos
+missing_nodes <- setdiff(all_nodes, nodes_unique$name)
+if(length(missing_nodes) > 0) {
+  cat("Nodos faltantes en el data frame de nodos:", missing_nodes, "\n")
+}
+
+# Crear un data frame de nodos faltantes con una categoría predeterminada
+nodes_missing_df <- data.frame(name = missing_nodes, category = "unknown")
+
+# Combinar el data frame de nodos originales con los nodos faltantes
+nodes_complete <- bind_rows(nodes_unique, nodes_missing_df)
+
+# Filtrar los datos de nodos para incluir solo los nodos presentes en las aristas
+nodes_complete <- nodes_complete %>%
+  filter(name %in% all_nodes)
+
+# Crear el grafo usando igraph
+graph <- graph_from_data_frame(d = datcol4, vertices = nodes_complete, directed = FALSE)
+
+
+### Creacion de animacion de la red
+
+### Librerías adicionales para animación ###
+
+library(gganimate)
+
+### Convertir a un objeto tidygraph ###
+graph_tbl <- as_tbl_graph(graph)
+
+### Asegurarse de que las columnas necesarias estén presentes ###
+graph_tbl <- graph_tbl %>%
+  activate(nodes) %>%
+  mutate(category = as.factor(category)) %>%
+  activate(edges) %>%
+  mutate(day = as.numeric(day))
+
+### Crear la animación ###
+p <- graph_tbl %>%
+  ggraph(layout = "fr") +  # Fruchterman-Reingold layout
+  geom_edge_link(alpha = 0.7, color = "gray12") +
+  geom_node_point(aes(color = category), size = 5) + 
+  scale_color_manual(values = c("F" = "indianred", "N" = "navy", "C" = "gold3", "unknown" = "grey80")) +
+  theme_void() + labs(title = 'Día: {frame_time}') +
+  transition_time(day) +
+  ease_aes('linear')
+
+### Guardar la animación ###
+anim <- animate(p, nframes = length(unique(datcol4$day)), fps = 5, width = 800, height = 600)
+anim_save("network_animationPrueba.gif", anim)
+
+### Plot de dias especificos
+# Función para filtrar y preparar los datos para ggplot2 en un día específico
+prepare_data_for_day <- function(graph_tbl, day) {
+  # Filtrar las aristas del día específico
+  edges_day <- graph_tbl %>%
+    activate(edges) %>%
+    filter(day == !!day) %>%
+    as_tibble()
   
-ant41_red_df |> filter(day==11) |>
-  igraph::graph_from_data_frame()  |>
-  plot()
-ant41_red_df |> filter(day==12) |>
-  igraph::graph_from_data_frame()  |>
-  plot()
+  # Convertir las columnas 'from' y 'to' a carácter si son numéricas
+  if (is.integer(edges_day$from) || is.integer(edges_day$to)) {
+    edges_day <- edges_day %>%
+      mutate(across(c(from, to), as.character))
+  }
+  
+  # Imprimir información de las aristas
+  cat("Número de aristas para el día", day, ":", nrow(edges_day), "\n")
+  if (nrow(edges_day) > 0) {
+    print(head(edges_day))
+  }
+  
+  # Filtrar los nodos conectados por las aristas seleccionadas
+  connected_nodes <- unique(c(edges_day$from, edges_day$to))
+  nodes_day <- graph_tbl %>%
+    activate(nodes) %>%
+    filter(name %in% connected_nodes) %>%
+    as_tibble()
+  
+  # Imprimir información de los nodos
+  cat("Número de nodos para el día", day, ":", nrow(nodes_day), "\n")
+  if (nrow(nodes_day) > 0) {
+    print(head(nodes_day))
+  }
+  
+  # Comprobar si todos los nodos en las aristas están presentes en el conjunto de nodos
+  missing_nodes <- setdiff(c(edges_day$from, edges_day$to), nodes_day$name)
+  if (length(missing_nodes) > 0) {
+    cat("Nodos en las aristas pero no en los nodos:", missing_nodes, "\n")
+  }
+  
+  list(nodes = nodes_day, edges = edges_day)
+}
 
-ant41_red_df |> filter(day==13) |>
-  igraph::graph_from_data_frame()  |>
-  plot()
+# Plotear los datos de red para un día específico usando ggplot2
+plot_network_for_day <- function(graph_tbl, day) {
+  data_day <- prepare_data_for_day(graph_tbl, day)
+  
+  nodes_day <- data_day$nodes
+  edges_day <- data_day$edges
+  
+  if (is.null(nodes_day) || is.null(edges_day) || nrow(nodes_day) == 0 || nrow(edges_day) == 0) {
+    cat("No hay datos suficientes para el día", day, "\n")
+    return(NULL)
+  }
+  
+  # Crear layout usando igraph para las posiciones de los nodos
+  graph_igraph <- graph_from_data_frame(d = edges_day, vertices = nodes_day, directed = FALSE)
+  
+  # Verificar si el grafo se creó correctamente
+  if (gorder(graph_igraph) == 0) {
+    cat("El grafo tiene 0 nodos, lo que indica un problema en la construcción del grafo.\n")
+    return(NULL)
+  }
+  
+  layout <- layout_with_fr(graph_igraph)
+  
+  nodes_day <- nodes_day %>%
+    mutate(x = layout[, 1], y = layout[, 2])
+  
+  # Convertir 'from' y 'to' a carácter para la unión
+  edges_day <- edges_day %>%
+    left_join(nodes_day %>% select(name, x, y), by = c("from" = "name")) %>%
+    rename(xstart = x, ystart = y) %>%
+    left_join(nodes_day %>% select(name, x, y), by = c("to" = "name")) %>%
+    rename(xend = x, yend = y)
+  
+  ggplot() +
+    geom_segment(data = edges_day, aes(x = xstart, y = ystart, xend = xend, yend = yend), alpha = 0.7, color="gray12") +
+    geom_point(data = nodes_day, aes(x = x, y = y, color = category), size = 5) +
+    theme_void() + scale_color_manual(values = c("F" = "indianred", "N" = "navy", "C" = "gold3", "unknown" = "grey80")) +
+    labs(title = paste('Red Dia:', day)) +
+    scale_size(range = c(0.5, 2))
+}
+
+# Plotear la red para el día 34
+plot_network_for_day(graph_tbl, 3)
+
+###  Deteccion de anomalias
 
 networks <- list()
 for (i in 1:length(ant41_red_list)) {
@@ -48,9 +184,38 @@ for (i in 1:length(ant41_red_list)) {
   
 }
 
-anom <- anomalous_networks(networks,alpha = 0.1, fast = T)
+anom <- anomalous_networks(networks,alpha = 0.1)
 anom
-?anomalous_networks
+
+# Tema personalizado
+mitema <- theme(
+  plot.title = element_text(family = "sans", face = "bold", size = 18, vjust = 0.5, hjust = 0.5, color = "black"),
+  axis.title.x = element_text(family = "sans", face = "bold", size = 14, vjust = 0.5, hjust = 0.5, color = "gray23"),
+  axis.title.y = element_text(family = "sans", face = "bold", size = 14, vjust = 0.5, hjust = 0.5, color = "gray23"),
+  axis.text.x = element_text(family = "sans", face = "italic", size = 12, vjust = 0.5, hjust = 0.5, color = "gray22"),
+  axis.text.y = element_text(family = "sans", face = "italic", size = 12, vjust = 0.5, hjust = 0.5, color = "gray22"),
+  panel.background = element_rect(fill = "gray95"),
+  panel.grid.major = element_line(color = "gray85", size = 1),
+  panel.grid.minor = element_line(color = "gray85", size = 0.5),
+  legend.title = element_text(family = "sans", face = "bold", size = 12, color = "Black"),
+  legend.text = element_text(family = "sans", face = "italic", size = 10, color = "gray25")
+)
+
+# Crear el gráfico
+ggplot(data = NULL, aes(x = 1:41, y = prob_outlier)) +
+  geom_point(color = "darkblue", size = 3.5, shape = 16) +
+  geom_line(color = "navy", size = 0.7, linetype = 2) +
+  geom_hline(yintercept = 0.05, linetype = "dashed", color = "red", size=1) +
+  labs(
+    title = "Probabilidad Condicional de Outliers en la Red",
+    x = "Tiempo (días)",
+    y = "Probabilidad de Outlier"
+  ) +
+  mitema +
+  scale_x_continuous(breaks = seq(1, 41, 2)) +
+  scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, 0.1)) +
+  theme(plot.title = element_text(hjust = 0.5))
+
 
 
 plot(anom$outlier_probability)
@@ -59,149 +224,3 @@ plot(anom$lookde)
 plot(anom$outlier_scores)
 plot(anom$bandwidth)
 plot(anom$data)
-
-
-# intento de color
-
-
-
-### intento animacion 
-
-# Leer los datos de las categorías de los nodos
-Datos_Grupos_Colonia4 <- read_excel("Datos_Grupos_Colonia4.xlsx")
-
-# Asegurarnos de que la columna de nodos y la de categorías estén correctamente nombradas
-# Supongamos que las columnas son 'node' y 'category'
-Datos_Grupos_Colonia4 <- Datos_Grupos_Colonia4 %>%
-  rename(name = tag_id, category = Grupo)
-
-# Verificar los nombres de los nodos en la lista de aristas
-unique_nodes_in_edges <- unique(c(unlist(lapply(ant41_red_list, function(df) df$V1)), 
-                                  unlist(lapply(ant41_red_list, function(df) df$V2))))
-
-# Verificar los nombres de los nodos en el data frame de nodos
-unique_nodes_in_vertices <- unique(Datos_Grupos_Colonia4$name)
-
-# Verificar que todos los nodos en las aristas estén en el data frame de nodos
-missing_nodes <- setdiff(unique_nodes_in_edges, unique_nodes_in_vertices)
-
-# Añadir nodos faltantes con una categoría predeterminada
-if (length(missing_nodes) > 0) {
-  missing_nodes_df <- data.frame(name = missing_nodes, category = "unknown")
-  Datos_Grupos_Colonia4 <- bind_rows(Datos_Grupos_Colonia4, missing_nodes_df)
-}
-
-library(igraph)
-
-# Crear una lista para almacenar las redes en diferentes días
-networks <- list()
-edges_list <- list()
-
-for (i in 1:length(ant41_red_list)) {
-  # Crear el gráfico para el día i
-  gr <- graph_from_data_frame(ant41_red_list[[i]], directed = FALSE, vertices = Datos_Grupos_Colonia4)
-  # Guardar el gráfico en la lista
-  networks[[i]] <- gr
-  # Convertir el gráfico a data frame y añadir la información de tiempo
-  edges_list[[i]] <- igraph::as_data_frame(gr, what = "edges") %>%
-    mutate(time = unique(ant41_red_list[[i]]$day))
-}
-
-# Unir todos los data frames de enlaces en uno solo
-edges_df <- bind_rows(edges_list)
-
-# Crear el data frame de nodos con categorías
-nodes <- igraph::as_data_frame(networks[[1]], what = "vertices")
-# Asegurarnos de que el data frame de nodos tiene la columna de categoría
-# Convertir la columna 'name' en 'nodes' a tipo 'character'
-nodes <- nodes %>%
-  mutate(name = as.character(name))
-
-# Convertir la columna 'name' en 'Datos_Grupos_Colonia4' a tipo 'character'
-Datos_Grupos_Colonia4 <- Datos_Grupos_Colonia4 %>%
-  mutate(name = as.character(name))
-
-# Realizar la unión de datos
-nodes <- nodes %>%
-  left_join(Datos_Grupos_Colonia4, by = "name")
-
-library(ggraph)
-library(gganimate)
-library(tidygraph)
-library(ggplot2)
-
-# Convertir edges_df en un grafo para ggraph
-graph_tbl <- as_tbl_graph(edges_df, directed = FALSE)
-
-# Asegurarnos de que el data frame de nodos esté integrado en el grafo
-graph_tbl <- graph_tbl %>%
-  activate(nodes) %>%
-  left_join(Datos_Grupos_Colonia4, by = "name")
-
-# Crear el gráfico animado
-p <- ggraph(graph_tbl, layout = 'fr') + 
-  geom_edge_link(aes(frame = time), alpha = 0.8, color = 'grey') + 
-  geom_node_point(aes(color = category), size = 5) + 
-  scale_color_manual(values = c("F" = "red", "N" = "blue", "C" = "green", "unknown" = "grey")) + 
-  theme_void()
-
-# Añadir animación
-animated_plot <- p + 
-  transition_time(time) + 
-  labs(title = "Día: {frame_time}")
-
-# Guardar la animación como gif
-animate(animated_plot, renderer = gifski_renderer("network_animation_2.gif"))
-
-
-
-
-# Asegúrate de que el data frame `edges_df` tiene una columna de tiempo y selecciona solo 10 tiempos únicos
-selected_times <- unique(edges_df$time) %>% head(10)
-
-# Filtrar los datos de aristas para los 10 tiempos seleccionados
-edges_df_subset <- edges_df %>%
-  filter(time %in% selected_times)
-
-# También asegúrate de que el data frame de nodos esté actualizado para los tiempos seleccionados
-nodes_subset <- nodes %>%
-  filter(name %in% unique(c(edges_df_subset$from, edges_df_subset$to)))
-
-library(ggraph)
-library(gganimate)
-library(tidygraph)
-library(ggplot2)
-
-# Convertir el data frame filtrado en un grafo
-graph_tbl_subset <- as_tbl_graph(edges_df_subset, directed = FALSE)
-
-# Asegurarnos de que el data frame de nodos esté integrado en el grafo
-graph_tbl_subset <- graph_tbl_subset %>%
-  activate(nodes) %>%
-  left_join(nodes_subset, by = "name")
-
-library(ggraph)
-library(gganimate)
-library(tidygraph)
-library(ggplot2)
-
-# Verifica que el grafo tiene la columna 'category' en los nodos
-graph_tbl_subset %>%
-  activate(nodes) %>%
-  head()
-
-# Crear el gráfico animado con el subconjunto de datos
-p_subset <- ggraph(graph_tbl_subset, layout = 'fr') + 
-  geom_edge_link(aes(frame = time), alpha = 0.8, color = 'grey') + 
-  geom_node_point(aes(color = category.x), size = 5) + 
-  scale_color_manual(values = c("N" = "red", "F" = "blue", "C" = "green", "unknown" = "grey4")) + 
-  theme_void()
-
-# Añadir animación
-animated_plot_subset <- p_subset + 
-  transition_time(time) + 
-  labs(title = "Día: {frame_time}")
-
-# Guardar la animación como gif
-animate(animated_plot_subset, renderer = gifski_renderer("network_animation_subset.gif"))
-

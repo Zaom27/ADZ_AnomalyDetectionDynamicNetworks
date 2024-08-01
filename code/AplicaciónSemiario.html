@@ -8,7 +8,7 @@
 <link href="AplicaciónSemiario_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="AplicaciónSemiario_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="AplicaciónSemiario_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.550">
+  <meta name="generator" content="quarto-1.5.54">
 
   <meta name="author" content="Andreina Alamo, Zaith Moreno, Diego Useche">
   <title>Anomaly detection in dynamic networks</title>
@@ -42,7 +42,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -70,7 +70,7 @@
     code span.at { color: #657422; } /* Attribute */
     code span.bn { color: #ad0000; } /* BaseN */
     code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
     code span.ch { color: #20794d; } /* Char */
     code span.cn { color: #8f5902; } /* Constant */
     code span.co { color: #5e5e5e; } /* Comment */
@@ -84,7 +84,7 @@
     code span.fu { color: #4758ab; } /* Function */
     code span.im { color: #00769e; } /* Import */
     code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; } /* Keyword */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
     code span.op { color: #5e5e5e; } /* Operator */
     code span.ot { color: #003b4f; } /* Other */
     code span.pp { color: #ad0000; } /* Preprocessor */
@@ -424,10 +424,10 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 </section>
 <section id="datos-insecta-ant-colony4" class="slide level2 center">
 <h2>Datos (insecta-ant-colony4)</h2>
-<table>
+<table class="caption-top">
 <colgroup>
-<col style="width: 23%">
-<col style="width: 76%">
+<col style="width: 26%">
+<col style="width: 73%">
 </colgroup>
 <tbody>
 <tr class="odd">
@@ -465,57 +465,49 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a>trescol <span class="ot">&lt;-</span> datcol4 <span class="sc">|&gt;</span></span>
+<span id="cb1-2"><a href=""></a>  <span class="fu">select</span>(<span class="sc">-</span>X3) <span class="sc">|&gt;</span></span>
+<span id="cb1-3"><a href=""></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">day =</span> X4)</span>
+<span id="cb1-4"><a href=""></a></span>
+<span id="cb1-5"><a href=""></a><span class="co">#Datos originales, pero agrupados</span></span>
+<span id="cb1-6"><a href=""></a>ant41_red_df <span class="ot">&lt;-</span> trescol <span class="sc">|&gt;</span> <span class="fu">group_by</span>(day)</span>
+<span id="cb1-7"><a href=""></a><span class="co"># Separados por dias (41)</span></span>
+<span id="cb1-8"><a href=""></a>ant41_red_list <span class="ot">&lt;-</span>  <span class="fu">group_split</span>(ant41_red_df)</span>
+<span id="cb1-9"><a href=""></a></span>
+<span id="cb1-10"><a href=""></a>networks <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb1-11"><a href=""></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(ant41_red_list)) {</span>
+<span id="cb1-12"><a href=""></a>  gr <span class="ot">&lt;-</span> <span class="fu">graph_from_data_frame</span>(ant41_red_list[[i]])</span>
+<span id="cb1-13"><a href=""></a>  networks[[i]] <span class="ot">&lt;-</span> <span class="fu">as_adjacency_matrix</span>(gr)</span>
+<span id="cb1-14"><a href=""></a>}</span>
+<span id="cb1-15"><a href=""></a><span class="co">#edges_df &lt;- bind_rows(edges_list)</span></span>
+<span id="cb1-16"><a href=""></a>anom <span class="ot">&lt;-</span> <span class="fu">anomalous_networks</span>(networks,<span class="at">alpha =</span> <span class="fl">0.05</span>, <span class="at">fast =</span> T)</span>
+<span id="cb1-17"><a href=""></a>anom</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "C:/Users/diego/Documents/ADZ_AnomalyDetectionDynamicNetworks/code"</code></pre>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a>datcol4 <span class="ot">&lt;-</span> <span class="fu">read_table</span>(<span class="st">"C:/Users/diego/Documents//ADZ_AnomalyDetectionDynamicNetworks/data/insecta-ant-colony4.edges"</span>, <span class="at">col_names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb3-2"><a href=""></a></span>
-<span id="cb3-3"><a href=""></a>trescol <span class="ot">&lt;-</span> datcol4 <span class="sc">|&gt;</span></span>
-<span id="cb3-4"><a href=""></a>  <span class="fu">select</span>(<span class="sc">-</span>X3) <span class="sc">|&gt;</span></span>
-<span id="cb3-5"><a href=""></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">day =</span> X4)</span>
-<span id="cb3-6"><a href=""></a></span>
-<span id="cb3-7"><a href=""></a><span class="co">#Datos originales, pero agrupados</span></span>
-<span id="cb3-8"><a href=""></a>ant41_red_df <span class="ot">&lt;-</span> trescol <span class="sc">|&gt;</span> <span class="fu">group_by</span>(day)</span>
-<span id="cb3-9"><a href=""></a><span class="co"># Separados por dias (41)</span></span>
-<span id="cb3-10"><a href=""></a>ant41_red_list <span class="ot">&lt;-</span>  <span class="fu">group_split</span>(ant41_red_df)</span>
-<span id="cb3-11"><a href=""></a></span>
-<span id="cb3-12"><a href=""></a>networks <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb3-13"><a href=""></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(ant41_red_list)) {</span>
-<span id="cb3-14"><a href=""></a>  gr <span class="ot">&lt;-</span> <span class="fu">graph_from_data_frame</span>(ant41_red_list[[i]])</span>
-<span id="cb3-15"><a href=""></a>  networks[[i]] <span class="ot">&lt;-</span> <span class="fu">as_adjacency_matrix</span>(gr)</span>
-<span id="cb3-16"><a href=""></a>}</span>
-<span id="cb3-17"><a href=""></a>anom <span class="ot">&lt;-</span> <span class="fu">anomalous_networks</span>(networks,<span class="at">alpha =</span> <span class="fl">0.05</span>, <span class="at">fast =</span> T)</span>
-<span id="cb3-18"><a href=""></a>anom</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Leave-out-out KDE outliers using lookout algorithm
-
-Call: lookout::lookout(X = dfpca[, 1:dd], alpha = alpha)
-
-  Outliers Probability
-1       12           0</code></pre>
-</div>
 </div>
 </section>
 <section id="red-dinamica" class="slide level2 center">
 <h2>Red dinamica</h2>
-<p>Grafick de las redes en el tiempo <img data-src="network_animation_2.gif"></p>
+<p>Grafica de las redes en el tiempo <img data-src="network_animation_2.gif"></p>
 </section>
 <section id="gráfica-de-probabilidad-de-outliers" class="slide level2 center">
 <h2>Gráfica de probabilidad de outliers</h2>
 
-<img data-src="AplicaciónSemiario_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
+<img data-src="AplicaciónSemiario_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
+<section id="tiempos-anómalos" class="slide level2 center">
+<h2>Tiempos anómalos</h2>
+
+<img data-src="AplicaciónSemiario_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
+<section id="tiempos-a" class="slide level2 center">
+<h2>Tiempos a</h2>
+</section>
 <section id="bibliografía" class="slide level2 center">
 <h2>Bibliografía</h2>
 <ul>
-<li>Akoglu, L., Tong, H. &amp; Koutra, D. (2015), ‘Graph based anomaly detection and description: A survey’, <em>Data Mining and Knowledge Discovery</em> 29(3), 626–688.</li>
-<li>Albert, R. &amp; Barabasi, A.-L. (2002), ‘Statistical mechanics of complex networks’, <em>Reviews of modern physics</em> 74(1), 47.</li>
-<li>Almquist, Z. W. &amp; Butts, C. T. (2013), ‘Dynamic network logistic regression: A logistic choice analysis of inter- and intra-group blog citation dynamics in the 2004 US presidential election’, <em>Political Analysis</em> 21(4), 430–448.</li>
-<li>Barabasi, A.-L. &amp; Albert, R. (1999), ‘Emergence of scaling in random networks’, <em>Science</em> 286(5439), 509–512.</li>
+<li><p>Mersch, D., Crespi A., Keller,L. Tracking Individuals Shows Spatial Fidelity Is a Key Regulator of Ant Social Organization, <em>Science</em> 340(6136).</p></li>
+<li><p>Akoglu, L., Tong, H. &amp; Koutra, D. (2015), ‘Graph based anomaly detection and description: A survey’, <em>Data Mining and Knowledge Discovery</em> 29(3), 626–688.</p></li>
+<li><p>Albert, R. &amp; Barabasi, A.-L. (2002), ‘Statistical mechanics of complex networks’, <em>Reviews of modern physics</em> 74(1), 47.</p></li>
+<li><p>Almquist, Z. W. &amp; Butts, C. T. (2013), ‘Dynamic network logistic regression: A logistic choice analysis of inter- and intra-group blog citation dynamics in the 2004 US presidential election’, <em>Political Analysis</em> 21(4), 430–448.</p></li>
+<li><p>Barabasi, A.-L. &amp; Albert, R. (1999), ‘Emergence of scaling in random networks’, <em>Science</em> 286(5439), 509–512.</p></li>
 </ul>
 </section>
 <section id="gracias" class="title-slide slide level1 center">
@@ -740,42 +732,80 @@ Call: lookout::lookout(X = dfpca[, 1:dd], alpha = alpha)
       });
     </script>
     
+
     <script>
+
       // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
       // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
       // slide changes (different for each slide format).
+
       (function () {
+
         // dispatch for htmlwidgets
+
         function fireSlideEnter() {
+
           const event = window.document.createEvent("Event");
+
           event.initEvent("slideenter", true, true);
+
           window.document.dispatchEvent(event);
+
         }
+
+    
 
         function fireSlideChanged(previousSlide, currentSlide) {
+
           fireSlideEnter();
 
+    
+
           // dispatch for shiny
+
           if (window.jQuery) {
+
             if (previousSlide) {
+
               window.jQuery(previousSlide).trigger("hidden");
+
             }
+
             if (currentSlide) {
+
               window.jQuery(currentSlide).trigger("shown");
+
             }
+
           }
+
         }
+
+    
 
         // hookup for slidy
+
         if (window.w3c_slidy) {
+
           window.w3c_slidy.add_observer(function (slide_num) {
+
             // slide_num starts at position 1
+
             fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
           });
+
         }
 
+    
+
       })();
+
     </script>
+
+    
 
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -809,18 +839,7 @@ Call: lookout::lookout(X = dfpca[, 1:dd], alpha = alpha)
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -852,7 +871,47 @@ Call: lookout::lookout(X = dfpca[, 1:dd], alpha = alpha)
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
       function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
@@ -889,7 +948,11 @@ Call: lookout::lookout(X = dfpca[, 1:dd], alpha = alpha)
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {

@@ -50,8 +50,6 @@ La red dinámica representa una colonia de hormigas. Los autores registraron la 
 ## Grafica de red
 
 ```{r}
-
-  
 library(igraph)
 library(dplyr)
 library(oddnet)
@@ -68,12 +66,13 @@ graficas
 ## Aplicación a las redes de hormigas
 
 ```{r}
+
+datcol4 <- read_table("~/../Desktop/ADZ_AnomalyDetectionDynamicNetworks/data/insecta-ant-colony4.edges",col_names = F)
+#datcol4 <- read_table("C:/Users/diego/Documents//ADZ_AnomalyDetectionDynamicNetworks/data/insecta-ant-colony4.edges", col_names = FALSE)
+```
+
+```{r}
 #| echo: true
-#| output: true
-
-getwd()
-datcol4 <- read_table("C:/Users/diego/Documents//ADZ_AnomalyDetectionDynamicNetworks/data/insecta-ant-colony4.edges", col_names = FALSE)
-
 trescol <- datcol4 |>
   select(-X3) |>
   dplyr::rename(day = X4)
@@ -102,11 +101,14 @@ library(igraph)
 library(ggplot2)
 
 # Importar los datos de aristas
-datcol4 <- read.table("C:/Users/diego/Documents//ADZ_AnomalyDetectionDynamicNetworks/data/insecta-ant-colony4.edges", header = FALSE)
+#datcol4 <- read.table("C:/Users/diego/Documents//ADZ_AnomalyDetectionDynamicNetworks/data/insecta-ant-colony4.edges", header = FALSE)
+datcol4 <- read.table("~/../Desktop/ADZ_AnomalyDetectionDynamicNetworks/data/insecta-ant-colony4.edges", header = FALSE)
+
+
 colnames(datcol4) <- c("from", "to", "weight", "day")
 
 # Importar los datos de nodos
-Datos_Grupos_Colonia4 <- read_excel("C:/Users/diego/Documents//ADZ_AnomalyDetectionDynamicNetworks/data/Datos_Grupos_Colonia4.xlsx")
+Datos_Grupos_Colonia4 <- read_excel("~/../Desktop/ADZ_AnomalyDetectionDynamicNetworks/data/Datos_Grupos_Colonia4.xlsx")
 
 
 # Convertir las columnas from y to a character
@@ -171,7 +173,8 @@ edges_df <- datcol4 %>%
 
 ```
 
-```{r eval=FALSE}
+```{r }
+
 library(igraph)
 
 # Crear una lista vacía para almacenar las redes
@@ -240,9 +243,9 @@ p <- ggraph(graph_tbl, layout = 'fr') +
   theme_void()
 
 # Añadir animación
-animated_plot <- p + transition_time(time) + labs(title = "Día: {frame_time}")
+#animated_plot <- p + transition_time(time) + labs(title = "Día: {frame_time}")
 
-animate(animated_plot, renderer = gifski_renderer("network_animation_2.gif"))
+#animate(animated_plot, renderer = gifski_renderer("network_animation_2.gif"))
 
 
 ```
@@ -282,18 +285,17 @@ ggplot() + geom_point(aes(x=1:41,y=prob_outlier), color="darkblue", size=2, shap
 
 ```
 
-hacer plots de los tiempos
+## Tiempos anómalos
 
 ```{r}
-#| echo: false
-library(dplyr)
+#| output: true
 
 # Especificar el tiempo que deseas graficar
 selected_time <- 12
 
 # Filtrar los datos de aristas para el tiempo seleccionado
 edges_df_time <- edges_df %>%
-  filter(time == selected_time)
+  dplyr::filter(time == selected_time)
 
 # Filtrar los datos de nodos para los nodos que aparecen en el tiempo seleccionado
 nodes_time <- nodes %>%
@@ -330,6 +332,11 @@ p_time <- ggraph(graph_tbl_time, layout = 'fr') +
 
 # Mostrar el gráfico
 print(p_time)
+```
+## Tiempos a
+```{r}
+
+
 
 library(ggplot2)
 library(igraph)
@@ -350,7 +357,7 @@ nodes_pos <- nodes_time %>%
   left_join(layout_df, by = "name")
 
 # Preparar los datos de aristas para ggplot2
-edges_df_time <- edges_df_time %>%
+edges_df_time <- edges_df_time %>% distinct() |> 
   left_join(layout_df, by = c("from" = "name")) %>%
   rename(x_from = x, y_from = y) %>%
   left_join(layout_df, by = c("to" = "name")) %>%
@@ -391,6 +398,8 @@ plot(anom$data)
 ```
 
 ## Bibliografía
+
+- Mersch, D., Crespi A., Keller,L.  Tracking Individuals Shows Spatial Fidelity Is a Key Regulator of Ant Social Organization, *Science* 340(6136).
 
 -   Akoglu, L., Tong, H. & Koutra, D. (2015), ‘Graph based anomaly detection and description: A survey’, *Data Mining and Knowledge Discovery* 29(3), 626–688.
 -   Albert, R. & Barabasi, A.-L. (2002), ‘Statistical mechanics of complex networks’, *Reviews of modern physics* 74(1), 47.

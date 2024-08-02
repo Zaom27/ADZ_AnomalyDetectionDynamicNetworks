@@ -25,6 +25,16 @@ with:
    path: AplicacionSeminario.qmd
 ---
 
+## Introducción 
+
+En este estudio se analizan datos sobre interacciones entre hormigas mediante el algoritmo de detección de anomalías en redes dinámicas denominado _oddnet_. 
+
+El conjunto de datos consiste en registros de interacciones entre individuos de una colonia a lo largo del tiempo, se construye una red dinámica donde los nodos representan hormigas y las aristas sus interacciones. Nuestro objetivo es identificar comportamientos anómalos que puedan indicar eventos significativos como enfermedades o cambios en la estructura social.
+
+## Algoritmo _oddnet_
+
+![](algoritmo.png){width="700"}
+
 ## Aplicación
 
 ::: panel-tabset

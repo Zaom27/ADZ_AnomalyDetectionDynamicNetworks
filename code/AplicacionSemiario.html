@@ -408,6 +408,15 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 </div>
 
 </section>
+<section id="introducción" class="slide level2 center">
+<h2>Introducción</h2>
+<p>En este estudio se analizan datos sobre interacciones entre hormigas mediante el algoritmo de detección de anomalías en redes dinámicas denominado <em>oddnet</em>.</p>
+<p>El conjunto de datos consiste en registros de interacciones entre individuos de una colonia a lo largo del tiempo, se construye una red dinámica donde los nodos representan hormigas y las aristas sus interacciones. Nuestro objetivo es identificar comportamientos anómalos que puedan indicar eventos significativos como enfermedades o cambios en la estructura social.</p>
+</section>
+<section id="algoritmo-oddnet" class="slide level2 center">
+<h2>Algoritmo <em>oddnet</em></h2>
+
+<img data-src="algoritmo.png" width="599" class="r-stretch"></section>
 <section id="aplicación" class="slide level2 center">
 <h2>Aplicación</h2>
 <div class="panel-tabset">
@@ -478,7 +487,7 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 </div>
 <div id="tabset-2-4">
 <ol start="11" type="1">
-<li><strong>fabletools::model(arima)</strong> Ajuste automático de los modelos ARIMA a cada serie.</li>
+<li><strong>fabletools::model(arima = fable::ARIMA(value))</strong> Ajuste automático de los modelos ARIMA a cada serie.</li>
 <li><strong>pcaPP::PCAproj</strong> PCA robusto para reducir la dimensión a dos componentes.</li>
 <li><strong>lookout::lookout</strong> Algoritmo Lookout para detectar anomalías en datos bidimensionales.</li>
 </ol>

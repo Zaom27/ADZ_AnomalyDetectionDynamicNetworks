@@ -40,7 +40,7 @@ La red dinámica representa una colonia de hormigas. Los autores registraron la 
 ## Datos (insecta-ant-colony4)
 
 |                   |                                                                                                                                 |
-|-------------------|---------------------------------------------------------------------------------------------------------------------------------|
+|--------------|---------------------------------------------------------|
 | *Tipo*            | Conjuntos de datos de redes del mundo real procedentes de estudios publicados sobre animales salvajes, cautivos y domesticados. |
 | *Nodos y enlaces* | 102 y 81.6K                                                                                                                     |
 | *Enlace*          | Interacción                                                                                                                     |
@@ -74,7 +74,7 @@ La red dinámica representa una colonia de hormigas. Los autores registraron la 
 
 ## Detección de anomalías
 
-11. **fabletools::model(arima)** Ajuste automático de los modelos ARIMA a cada serie.
+11. **fabletools::model(arima = fable::ARIMA(value))** Ajuste automático de los modelos ARIMA a cada serie.
 12. **pcaPP::PCAproj** PCA robusto para reducir la dimensión a dos componentes.
 13. **lookout::lookout** Algoritmo Lookout para detectar anomalías en datos bidimensionales.
 :::

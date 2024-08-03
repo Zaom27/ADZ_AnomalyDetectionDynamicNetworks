@@ -416,7 +416,7 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 <section id="algoritmo-oddnet" class="slide level2 center">
 <h2>Algoritmo <em>oddnet</em></h2>
 
-<img data-src="algoritmo.png" width="599" class="r-stretch"></section>
+<img data-src="algoritmo.png" width="700" class="r-stretch"></section>
 <section id="aplicación" class="slide level2 center">
 <h2>Aplicación</h2>
 <div class="panel-tabset">
@@ -461,7 +461,7 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 <section id="algunas-funciones-detrás-del-código" class="slide level2 center">
 <h2>Algunas funciones detrás del código</h2>
 <div class="panel-tabset">
-<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Redes 1</a></li><li><a href="#tabset-2-2">Redes 2</a></li><li><a href="#tabset-2-3">Redes 3</a></li><li><a href="#tabset-2-4">Detección de anomalías</a></li></ul>
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Redes 1</a></li><li><a href="#tabset-2-2">Redes 2</a></li><li><a href="#tabset-2-3">Redes 3</a></li><li><a href="#tabset-2-4">Anomalías</a></li><li><a href="#tabset-2-5">Visualización</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1">
 <ol type="1">
@@ -484,12 +484,19 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 <li><p><strong>igraph::page_rank</strong> Se calcula el PageRank de todos los vértices y se toma el cuantil <span class="math inline">\(99^ {th }\)</span>.</p></li>
 <li><p><strong>igraph::coreness</strong> El núcleo <span class="math inline">\(k\)</span> de un grafo: subgrafo máximo con un grado mínimo de al menos <span class="math inline">\(k\)</span>. Es decir, cada vértice de un núcleo <span class="math inline">\(k\)</span> tiene un grado mayor que <span class="math inline">\(k\)</span>. Se calcula <strong>coreness</strong> para todos los vértices y se incluye el cuantil <span class="math inline">\(99\)</span>.</p></li>
 </ol>
+<p><strong>Otras funciones de igraph:</strong> closeness, clusters, global_efficiency, cohesion, betweenness, hub_score y authority_score.</p>
 </div>
 <div id="tabset-2-4">
 <ol start="11" type="1">
 <li><strong>fabletools::model(arima = fable::ARIMA(value))</strong> Ajuste automático de los modelos ARIMA a cada serie.</li>
 <li><strong>pcaPP::PCAproj</strong> PCA robusto para reducir la dimensión a dos componentes.</li>
 <li><strong>lookout::lookout</strong> Algoritmo Lookout para detectar anomalías en datos bidimensionales.</li>
+</ol>
+</div>
+<div id="tabset-2-5">
+<ol start="14" type="1">
+<li><p><strong>igraph:plot.graph:</strong> Función para graficar redes con la librería base de R.</p></li>
+<li><p><strong>ggraph:ggraph:</strong> Función para graficar redes con la librería ggplot2.</p></li>
 </ol>
 </div>
 </div>
@@ -511,13 +518,15 @@ Andreina Alamo, Zaith Moreno, Diego Useche
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a>networks <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb1-2"><a href=""></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(ant41_red_list)) {</span>
-<span id="cb1-3"><a href=""></a>  gr <span class="ot">&lt;-</span> <span class="fu">graph_from_data_frame</span>(ant41_red_list[[i]])</span>
-<span id="cb1-4"><a href=""></a>  networks[[i]] <span class="ot">&lt;-</span> <span class="fu">as_adjacency_matrix</span>(gr)</span>
-<span id="cb1-5"><a href=""></a>}</span>
-<span id="cb1-6"><a href=""></a></span>
-<span id="cb1-7"><a href=""></a>anom <span class="ot">&lt;-</span> <span class="fu">anomalous_networks</span>(networks,<span class="at">alpha =</span> <span class="fl">0.05</span>, <span class="at">fast =</span> T)</span>
-<span id="cb1-8"><a href=""></a>anom</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href=""></a>graphs <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb1-3"><a href=""></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(ant41_red_list)) {</span>
+<span id="cb1-4"><a href=""></a>  gr <span class="ot">&lt;-</span> <span class="fu">graph_from_data_frame</span>(ant41_red_list[[i]])</span>
+<span id="cb1-5"><a href=""></a>  graphs[[i]] <span class="ot">&lt;-</span> gr</span>
+<span id="cb1-6"><a href=""></a>  networks[[i]] <span class="ot">&lt;-</span> <span class="fu">as_adjacency_matrix</span>(gr)</span>
+<span id="cb1-7"><a href=""></a>}</span>
+<span id="cb1-8"><a href=""></a></span>
+<span id="cb1-9"><a href=""></a>anom <span class="ot">&lt;-</span> <span class="fu">anomalous_networks</span>(networks,<span class="at">alpha =</span> <span class="fl">0.05</span>, <span class="at">fast =</span> T)</span>
+<span id="cb1-10"><a href=""></a>anom</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Leave-out-out KDE outliers using lookout algorithm
@@ -537,6 +546,12 @@ Call: lookout::lookout(X = dfpca[, 1:dd], alpha = alpha)
 <h2>Red anómala día 12</h2>
 <div style="text-align: center;">
 <p><img src="anomalous_network_12.png" style="width:75%;"></p>
+</div>
+</section>
+<section id="gráfico-de-las-series-de-tiempo" class="slide level2 center">
+<h2>Gráfico de las series de tiempo</h2>
+<div style="text-align: center;">
+<p><img src="series_plot.png" style="width:75%;"></p>
 </div>
 </section>
 <section id="bibliografía" class="slide level2 smaller center">

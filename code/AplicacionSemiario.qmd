@@ -74,7 +74,7 @@ La red dinámica representa una colonia de hormigas. Los autores registraron la 
 
 7.  **igraph::mean_distance** calcula la media de todos los caminos entre diferentes nodos.
 
-## Redes 3
+## Redes 3{.smaller}
 
 8.  **igraph::diameter** Distancia más grande del grafo.
 
@@ -82,11 +82,20 @@ La red dinámica representa una colonia de hormigas. Los autores registraron la 
 
 10. **igraph::coreness** El núcleo $k$ de un grafo: subgrafo máximo con un grado mínimo de al menos $k$. Es decir, cada vértice de un núcleo $k$ tiene un grado mayor que $k$. Se calcula **coreness** para todos los vértices y se incluye el cuantil $99$.
 
-## Detección de anomalías
+**Otras funciones de igraph:** closeness, clusters, global_efficiency, cohesion, betweenness, hub_score y authority_score.
+
+## Anomalías
 
 11. **fabletools::model(arima = fable::ARIMA(value))** Ajuste automático de los modelos ARIMA a cada serie.
 12. **pcaPP::PCAproj** PCA robusto para reducir la dimensión a dos componentes.
 13. **lookout::lookout** Algoritmo Lookout para detectar anomalías en datos bidimensionales.
+
+## Visualización
+
+14. **igraph:plot.graph:** Función para graficar redes con la librería base de R.
+
+15. **ggraph:ggraph:** Función para graficar redes con la librería ggplot2.
+
 :::
 
 ## Interacción
@@ -133,8 +142,10 @@ ant41_red_list <-  group_split(ant41_red_df)
 #| output: true
 
 networks <- list()
+graphs <- list()
 for (i in 1:length(ant41_red_list)) {
   gr <- graph_from_data_frame(ant41_red_list[[i]])
+  graphs[[i]] <- gr
   networks[[i]] <- as_adjacency_matrix(gr)
 }
 
@@ -333,38 +344,102 @@ ggplot() + geom_point(aes(x=1:41,y=prob_outlier), color="darkblue", size=2, shap
 <img src="anomalous_network_12.png" style="width:75%;"/>
 :::
 
+## Gráfico de las series de tiempo
+
+::: {style="text-align: center;"}
+<img src="series_plot.png" style="width:85%;"/>
+:::
+
+```{r gr_series}
+# library(tsibble)
+# library(tidyr)
+# 
+# triangles_99 <- function(gr){
+#   triangles <- igraph::count_triangles(gr)
+#   return(quantile(triangles, probs = 0.99))
+# }
+# 
+# degree_99 <- function(gr){
+#   degree_obj <- igraph::degree(gr)
+#   return(quantile(degree_obj, probs = 0.99))
+# }
+# 
+# isolated <- function(gr){
+#   degobj <- igraph::degree(gr)
+#   return(sum(degobj == 0)/length(degobj))
+# }
+# 
+# between <- function(gr){
+#   between_obj <- igraph::betweenness(gr)
+#   return(quantile(between_obj, probs = 0.99))
+# }
+# 
+# hub_sc <- function(gr){
+#   hubs_obj <- igraph::hub_score(gr, scale = FALSE)
+#   return(hubs_obj$value)
+# }
+# 
+# closeness_99 <- function(gr){
+#   close_obj <- igraph::closeness(gr)
+#   return(sum(close_obj >= 0.8, na.rm = TRUE)/length(close_obj))
+# }
+# 
+# df_graphs <- data.frame(time = 1:41,
+#                         triangles_99 = sapply(networks,triangles_99),
+#                         gsize = sapply(networks,gsize),
+#                         degree_99 = sapply(networks,degree_99),
+#                         isolated =  sapply(networks,isolated)
+#                         )
+# 
+# ts_graphs <- df_graphs |>
+#   as_tsibble(index=time)
+# 
+# ts_graphs |>
+#   pivot_longer(cols=2:5,names_to = "caracteristicas",values_to="valor") |>
+#   ggplot(aes(time,valor,color=caracteristicas)) +
+#   geom_line() +
+#   geom_vline(xintercept = 12, linetype = "dashed", color = "red") +
+#   facet_grid(caracteristicas ~.,scales="free_y") +
+#   theme_light()  +
+#   theme(legend.position = "none") +
+#   labs(y="Características")
+# 
+# ggsave("series_plot.png",width=10,height=6)
+```
+
+
 ```{r anomaly_plot}
 #| echo: false
  library(dplyr)
-#  
+# 
 #  # Especificar el tiempo que deseas graficar
-#  # selected_time <- 12
-#  
+#  selected_time <- 12
+# 
 #  # Filtrar los datos de aristas para el tiempo seleccionado
 #  edges_df_time <- edges_df[edges_df$time==12,]
-#  
+# 
 #  # Filtrar los datos de nodos para los nodos que aparecen en el tiempo seleccionado
 #  nodes_time <- nodes %>%
 #    filter(name %in% unique(c(edges_df_time$from, edges_df_time$to)))
-#  
+# 
 #  library(ggraph)
 #  library(tidygraph)
 #  library(ggplot2)
-#  
+# 
 #  # Convertir el data frame filtrado en un grafo
 #  graph_tbl_time <- as_tbl_graph(edges_df_time, directed = FALSE)
-#  
+# 
 #  # Asegurarnos de que el data frame de nodos esté integrado en el grafo
 #  graph_tbl_time <- graph_tbl_time %>%
 #    activate(nodes) %>%
 #    left_join(nodes_time, by = "name")
-#  
+# 
 #  # Crear el gráfico para el tiempo específico con ajustes estéticos
-#  p_time <- ggraph(graph_tbl_time, layout = 'fr') + 
-#  geom_edge_link(aes(), alpha = 0.8, color = 'grey88') + 
-#    geom_node_point(aes(color = category.x), size = 5) + 
-#    scale_color_manual(values = c("F" = "indianred", "N" = "navy", "C" = "gold3", "unknown" = "grey20")) + 
-#    theme_void() + 
+#  p_time <- ggraph(graph_tbl_time, layout = 'fr') +
+#  geom_edge_link(aes(), alpha = 0.8, color = 'grey88') +
+#    geom_node_point(aes(color = category.x), size = 5) +
+#    scale_color_manual(values = c("F" = "indianred", "N" = "navy", "C" = "gold3", "unknown" = "grey20")) +
+#    theme_void() +
 #    theme(
 #      legend.position = "right",
 #      plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
@@ -375,35 +450,35 @@ ggplot() + geom_point(aes(x=1:41,y=prob_outlier), color="darkblue", size=2, shap
 #      subtitle = paste("Day:", selected_time),
 #      color = "Category"
 #    )
-#  
+# 
 #  # Mostrar el gráfico
 #  print(p_time)
-#  
+# 
 #  library(ggplot2)
 #  library(igraph)
-#  
+# 
 #  # Crear el grafo usando igraph
 #  graph_time <- graph_from_data_frame(d = edges_df_time, vertices = nodes_time, directed = FALSE)
-#  
+# 
 #  # Obtener las posiciones de los nodos usando el algoritmo Fruchterman-Reingold
 #  layout <- layout_with_fr(graph_time)
-#  
+# 
 #  # Convertir el layout a un data frame
 #  layout_df <- as.data.frame(layout)
 #  colnames(layout_df) <- c("x", "y")
 #  layout_df$name <- V(graph_time)$name
-#  
+# 
 #  # Unir las posiciones de los nodos con los datos de nodos
 #  nodes_pos <- nodes_time %>%
 #    left_join(layout_df, by = "name")
-#  
+# 
 #  # Preparar los datos de aristas para ggplot2
 #  edges_df_time <- edges_df_time %>%
 #    left_join(layout_df, by = c("from" = "name")) %>%
 #    rename(x_from = x, y_from = y) %>%
 #    left_join(layout_df, by = c("to" = "name")) %>%
 #    rename(x_to = x, y_to = y)
-#  
+# 
 #  # Crear el gráfico con ggplot2
 #  p_time_ggplot <- ggplot() +
 #    geom_segment(data = edges_df_time, aes(x = x_from, y = y_from, xend = x_to, yend = y_to), color = "grey88", alpha = 0.8) +
@@ -420,7 +495,7 @@ ggplot() + geom_point(aes(x=1:41,y=prob_outlier), color="darkblue", size=2, shap
 #      subtitle = paste("Day:", selected_time),
 #      color = "Category"
 #    )
-#  
+# 
 #  # Mostrar el gráfico
 #  print(p_time_ggplot)
 # 
